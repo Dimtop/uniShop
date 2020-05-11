@@ -28,7 +28,6 @@ public class UserController {
                     + email + "'," + premium + "," + "''," + preferences + "," + tier + ",''," + "''" + ");"
 
             );
-            this.dbConnection.close();
             return "success";
         } catch (Exception e) {
             System.out.println(e);
@@ -39,21 +38,34 @@ public class UserController {
 
     public int authenticateUser(String username, String password) {
 
-  
         try {
             ResultSet usersCollection = this.dbStatement.executeQuery("SELECT * FROM Users");
 
-            while(usersCollection.next()){
-                if(usersCollection.getString("username").equals(username) && usersCollection.getString("passwrd").equals(password)){
+            while (usersCollection.next()) {
+                if (usersCollection.getString("username").equals(username)
+                        && usersCollection.getString("passwrd").equals(password)) {
                     return 1;
-                }
-                else{
+                } else {
                     return 0;
                 }
             }
             return 0;
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+        
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
+
+    public int updateUsername(int userID, String usernameToSet) {
+
+        try {
+            this.dbStatement
+                    .executeUpdate("UPDATE User SET username='" + usernameToSet + "' WHERE userID=" + userID + ";");
+            return 1;
+        } catch (SQLException e) {
+            
             e.printStackTrace();
             return 0;
         }
