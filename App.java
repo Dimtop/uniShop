@@ -1,16 +1,30 @@
 package dbconnector;
 
+import java.util.Scanner;
 
 public class App 
 {
     public static void main(String args[]){
-        try{
-            DatabaseConnector db = new DatabaseConnector();
-            db.connect();
+
+        UserController uc = new UserController();
+
+        Scanner usernameInput = new Scanner(System.in);
+        System.out.println("Username: ");
+        String username = usernameInput.nextLine();
+
+        Scanner passwordInput = new Scanner(System.in);
+        System.out.println("Password: ");
+        String password = passwordInput.nextLine();
+
+        int result = uc.authenticateUser(username, password);
+
+
+        if(result == 0){
+            System.out.println("Login failed.");
         }
-        catch(Exception e){
-            System.out.println(e);
+        else{
+            System.out.println("Loged in.");
         }
-        
+     
     }
 }
