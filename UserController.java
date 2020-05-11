@@ -62,7 +62,6 @@ public class UserController {
             ResultSet usersCollection = this.dbStatement.executeQuery("SELECT * FROM Users");
 
             while (usersCollection.next()) {
-                System.out.println(usersCollection.getString("username") + usersCollection.getString("passwrd"));
                 if (usersCollection.getString("username").equals(username)
                         && usersCollection.getString("passwrd").equals(password)) {
                         userFound = 1;
@@ -82,6 +81,20 @@ public class UserController {
         try {
             this.dbStatement
                     .executeUpdate("UPDATE Users SET username='" + usernameToSet + "' WHERE userID=" + userID + ";");
+            return 1;
+        } catch (SQLException e) {
+            
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
+
+    public int updatePassword(int userID, String passwordToSet) {
+
+        try {
+            this.dbStatement
+                    .executeUpdate("UPDATE Users SET passwrd='" + passwordToSet + "' WHERE userID=" + userID + ";");
             return 1;
         } catch (SQLException e) {
             

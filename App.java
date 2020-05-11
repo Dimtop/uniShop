@@ -9,9 +9,12 @@ public class App {
         UserController uc = new UserController();
 
 
+        //REGISTER
         String registerResult = uc.registerUser("tsirpanis", "123456", "tsirp@gmail.com", 0, "''", 2);
         System.out.println(registerResult);
 
+
+        //LOGIN
         Scanner usernameInput = new Scanner(System.in);
         System.out.println("Username: ");
         String username = usernameInput.nextLine();
@@ -28,13 +31,7 @@ public class App {
             System.out.println("Loged in.");
         }
 
-        try {
-            uc.getDBConnection().close();
-        } catch (SQLException e) {
-           
-            e.printStackTrace();
-        }
-        
+        //USERNAME UPDATE
         int usernameUpdateResult =  uc.updateUsername(2, "stampoulidisGeorgios");
         
         if(usernameUpdateResult == 0){
@@ -43,5 +40,26 @@ public class App {
         else{
             System.out.println("Updated.");
         }
+
+        //PASSWORD UPDATE 
+        int passwordUpdateResult =  uc.updatePassword(2, "stamp12");
+        
+        if(passwordUpdateResult == 0){
+            System.out.println("Update failed.");
+        }
+        else{
+            System.out.println("Updated.");
+        }
+
+
+        //CLOSING CONNECTION
+        try {
+            uc.getDBConnection().close();
+        } catch (SQLException e) {
+           
+            e.printStackTrace();
+        }
+
+
     }
 }
