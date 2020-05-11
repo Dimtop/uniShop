@@ -16,6 +16,16 @@ public class User {
 		this.username = username;
 		this.email = email;
 	}
+
+
+	public ArrayList<String> getPreferences() {
+		return preferences;
+	}
+
+
+	public void setPreferences(ArrayList<String> preferences) {
+		this.preferences = preferences;
+	}
 	
 	
 	
