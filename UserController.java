@@ -3,7 +3,10 @@ package dbconnector;
 import java.sql.*;
 import java.util.ArrayList;
 
+
+//THIS IS THE USER CONTROLLER
 public class UserController {
+
 
     private Connection dbConnection;
     private Statement dbStatement;
