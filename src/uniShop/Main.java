@@ -10,7 +10,7 @@ public class Main {
 		
 		User u1 = new Guest(id,username,email);
 		
-		System.out.println("hello");
+		
 		
 		Guest g1 = new Guest(id,username,email);
 		g1.filter();

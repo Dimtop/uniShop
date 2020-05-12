@@ -47,7 +47,7 @@ public class Ad implements Comparable {
 		this.tags = tags;
 	}
 
-	public int compareTo(Object o) {
+	public int compareTo(Object o) {  //compare με βαση τα promotion
 		if(o instanceof Ad) {
 			Ad a = (Ad) o;
 			return a.promotion.ordinal()- this.promotion.ordinal();
