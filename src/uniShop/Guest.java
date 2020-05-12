@@ -71,18 +71,28 @@ public class Guest extends User{
 		
 		if(find == true) {
 			Collections.sort(foundAds);
-			for(Ad ad: foundAds)
-				System.out.println(ad.getName());
+			/*for(Ad ad: foundAds)
+				System.out.println(ad.getName());*/
 			return foundAds;
 		}
 		
 		if(find == false) {
 			Collections.sort(Ads);
-			for(Ad ad: Ads) {
+			/*for(Ad ad: Ads) {
 				System.out.println(ad.getName());
-			}
+			}*/
 		}
 		return Ads;
+		
+	}
+	
+	public static void viewAds(ArrayList<Ad> ads) {
+		
+		
+		for(Ad ad: ads)
+			System.out.println(ad.getName());
+		
+		//HomeScreen_Guest g = new HomeScreen_Guest(ads);
 		
 	}
 	
