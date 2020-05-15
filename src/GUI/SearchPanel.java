@@ -24,6 +24,7 @@ public class SearchPanel extends JPanel {
 	private JTextField searchBar = new JTextField("Type your product");
 	private JPanel tagsPanel = new JPanel(); 
 	private JButton searchButton = new JButton("Search");
+	private ArrayList<JCheckBox> tagsCheckBoxes = new ArrayList<>();
 	
 	private int gap;
 	
@@ -31,8 +32,6 @@ public class SearchPanel extends JPanel {
 	public SearchPanel(int gap, ArrayList<String> tags) {
 	
 		this.gap = gap;
-		
-		ArrayList<JCheckBox> tagsCheckBoxes = new ArrayList<>();
 		
 		//Panel Properties
 		this.setLayout(null);
@@ -49,7 +48,7 @@ public class SearchPanel extends JPanel {
 		this.add(searchBar);
 		
 		//Tags' Panel Setup
-		setupTagsPanel(tags,tagsCheckBoxes);
+		setupTagsPanel(tags);
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("===========");
@@ -71,7 +70,7 @@ public class SearchPanel extends JPanel {
 
 	}
 	
-	private void setupTagsPanel(ArrayList<String> tags, ArrayList<JCheckBox> tagsCheckBoxes) {
+	private void setupTagsPanel(ArrayList<String> tags) {
 		
 		JScrollPane scrollPane = new JScrollPane();		
 		
@@ -106,5 +105,10 @@ public class SearchPanel extends JPanel {
 		scrollPane.setViewportView(tagsPanel);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16); //increases the scroll speed
 		this.add(scrollPane);
+	}
+	
+	//returning list with tags's check boxes
+	public ArrayList<JCheckBox> getTagsCheckBoxes(){
+		return this.tagsCheckBoxes;
 	}
 }

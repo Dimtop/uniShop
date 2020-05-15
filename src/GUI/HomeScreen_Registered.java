@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JSeparator;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /*	User Interface of the system's home screen
  * 	displayed on a Registered User 
@@ -75,6 +77,11 @@ public class HomeScreen_Registered extends HomeScreen {
 		myProfileButton.setSize(100, 20);
 		myProfileButton.setLocation(logoutButton.getX()-myProfileButton.getWidth()-gap, gap);
 		this.getContentPane().add(myProfileButton);
+		myProfileButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new MyProfile(false);
+			}
+		});
 		
 		//Upgrade Premium Plan Button Section
 		upgradePremiumPlanButton.setSize(170, 20);
