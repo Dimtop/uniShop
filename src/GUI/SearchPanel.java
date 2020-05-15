@@ -12,6 +12,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+/*	Panel with the search components 
+ * 	of our system's home screens
+ * 	Input : int gap for the gap between panle's components
+ * 			ArrayList<String> with the system's tags 
+ */
+
 public class SearchPanel extends JPanel {
 
 	private JButton homeButton = new JButton("Home");

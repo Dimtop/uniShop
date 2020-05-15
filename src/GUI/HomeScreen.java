@@ -10,6 +10,8 @@ import javax.swing.JScrollPane;
 
 /*	Common objects of
  * 	different home screens
+ * 	Input : ArrayList of String with the server's tags of the system
+ * 			ArrayList of Ads given by the system for display on the screen
  */
 
 public abstract class HomeScreen extends JFrame {

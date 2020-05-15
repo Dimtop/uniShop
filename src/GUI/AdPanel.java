@@ -6,6 +6,9 @@ import java.awt.Font;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
+/*	Unfinished : Waiting for the Ad class 
+ */
+
 public class AdPanel extends JPanel {
 
 	private JLabel tempLabel = new JLabel();
