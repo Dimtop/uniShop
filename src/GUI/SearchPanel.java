@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 /*	Panel with the search components 
  * 	of our system's home screens
- * 	Input : int gap for the gap between panle's components
+ * 	Input : int gap for the gap between panel's components
  * 			ArrayList<String> with the system's tags 
  */
 

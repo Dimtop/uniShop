@@ -3,14 +3,16 @@ package GUI;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class MyProfile extends JFrame {
 
@@ -69,6 +71,14 @@ public class MyProfile extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				new MyProfile(false);
+				int i = 0;
+				for(JCheckBox checkbox : profileInfoPanel.getCheckBoxList()) {
+					if(checkbox.isSelected()) {
+						System.out.println(profileInfoPanel.getTable().get(i)); //testing
+						//adding the values to the user's preferences
+					}
+					i++;
+				}
 			}
 		});
 		mainPanel.add(confirmButton);
@@ -92,6 +102,20 @@ public class MyProfile extends JFrame {
 		
 		//Delete Profile Button Section
 		deleteProfileButton.setBounds(380, 345, 120, 20);
+		deleteProfileButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(mainPanel,"Are you sure you want to delete your profile?", 
+						"DELETING PROFILE", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				if(result == JOptionPane.YES_OPTION) {
+					//to do
+					System.out.println("Yes");
+				}
+				else {
+					//to do
+					System.out.println("No");
+				}
+			}
+		});
 		mainPanel.add(deleteProfileButton);
 		
 	}

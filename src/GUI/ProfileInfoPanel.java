@@ -1,7 +1,10 @@
 package GUI;
 
+import java.awt.Dimension;
 import java.awt.Font;
+import java.util.ArrayList;
 
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -24,6 +27,10 @@ public class ProfileInfoPanel extends JPanel {
 	
 	private JLabel preferencesLabel = new JLabel("Preferences");
 	private JScrollPane prefScroll = new JScrollPane();
+	private JPanel preferencesPanel = new JPanel();
+	private ArrayList<String> preferences = new ArrayList<>();
+	private ArrayList<JCheckBox> checkboxList = new ArrayList<>();
+	private ArrayList<String> string = new ArrayList<>(); //testing
 	
 	private boolean editable;
 	
@@ -122,11 +129,85 @@ public class ProfileInfoPanel extends JPanel {
 		preferencesLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		this.add(preferencesLabel);
 		
+		//Preferences Scroll Pane
+		prefScroll.setBounds(130, 180, 210, 150);
+		prefScroll.getVerticalScrollBar().setUnitIncrement(16); //increases the scroll speed
+		this.add(prefScroll);
+		
+		//Testing
+		preferences.add("something");
+		preferences.add("something else");
+		preferences.add("something else");
+		preferences.add("something else");
+		preferences.add("something else");
+		preferences.add("something else");
+		preferences.add("something else");
+				
+		string.add("something");
+		
+		//Preferences Panel
+		preferencesPanel.setLocation(5, 5);
+		preferencesPanel.setLayout(null);
+		prefScroll.setViewportView(preferencesPanel);
+		
 		//Preferences Field
+		if(editable) {
+			preferencesPanel.setPreferredSize(new Dimension(190, preferences.size()*30));
+			
+			//preferences = server.getPreferences;
+			JCheckBox checkbox;
+			JLabel label;
+			int height = 0;
+			for(String str : preferences) {
+				checkbox = new JCheckBox();
+				checkbox.setSize(20, 20);
+				checkbox.setLocation(0, height);
+				//if(user.getPreferences().contains(str)) {
+				if(string.contains(str)) {
+					checkbox.setSelected(true);
+				}
+				checkboxList.add(checkbox);
+				preferencesPanel.add(checkbox);
+				
+				label = new JLabel(str);
+				label.setSize(190, 20);
+				label.setLocation(30, height);
+				preferencesPanel.add(label);
+				
+				height+= 30;
+			}
+			
+		}
+		else {
+			preferencesPanel.setPreferredSize(new Dimension(190, string.size()*30));
+			
+			//preferences = user.getPreferences();
+			JLabel label;
+			int height = 0;
+			//for(String str : preferences) {
+			for(String str : string) {
+				label = new JLabel(str);
+				label.setSize(190, 20);
+				label.setLocation(10, height);
+				preferencesPanel.add(label);
+				
+				height+= 30;
+			}
+		}
 	}
 	
 	private void setupPanelProperties() {
 		this.setSize(360, 350);
 		this.setLayout(null);
+	}
+	
+	//returning list of check boxes from preferences
+	public ArrayList<JCheckBox> getCheckBoxList(){
+		return this.checkboxList;
+	}
+	
+	//for testing
+	public ArrayList<String> getTable() {
+		return preferences;
 	}
 }

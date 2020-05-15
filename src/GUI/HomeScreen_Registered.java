@@ -62,6 +62,11 @@ public class HomeScreen_Registered extends HomeScreen {
 		//My Messages Button Section
 		myMessages.setSize(searchPanel.getWidth()-10, 45);
 		myMessages.setLocation(5, 70);
+		myMessages.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new MyMessages();
+			}
+		});
 		leftButtonsPanel.add(myMessages);
 	}
 
@@ -76,12 +81,12 @@ public class HomeScreen_Registered extends HomeScreen {
 		//My Profile Button Section
 		myProfileButton.setSize(100, 20);
 		myProfileButton.setLocation(logoutButton.getX()-myProfileButton.getWidth()-gap, gap);
-		this.getContentPane().add(myProfileButton);
 		myProfileButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new MyProfile(false);
 			}
 		});
+		this.getContentPane().add(myProfileButton);
 		
 		//Upgrade Premium Plan Button Section
 		upgradePremiumPlanButton.setSize(170, 20);
