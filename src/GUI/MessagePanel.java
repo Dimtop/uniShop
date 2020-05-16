@@ -1,20 +1,22 @@
 package GUI;
 
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import java.awt.Font;
 import javax.swing.border.EtchedBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MessagePanel extends JPanel {
 
 	private JLabel profileName = new JLabel();
 	private JTextArea textArea = new JTextArea();
-	private JButton replyButton = new JButton("Reply");
-	private JButton readReplyButton = new JButton("Read Reply");
+	private JButton replyButton = new JButton();
 	
-	public MessagePanel(boolean seller, String text) {
+	public MessagePanel(boolean isSeller, String text) {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null)); //input Message message
 		
 		//Profile Name Section
@@ -26,25 +28,35 @@ public class MessagePanel extends JPanel {
 		
 		//Text Area Section
 		textArea.setText(text); //textArea.setText(message.getText());
-		textArea.setSize(380, 75);
+		textArea.setSize(355, 75);
 		textArea.setLocation(5, 30);
 		textArea.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		textArea.setEditable(false);
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
 		this.add(textArea);
-				
-		if(seller) {
+		
+		if(isSeller) {
 			//Reply Button Section
+			replyButton.setText("Reply");
 			replyButton.setSize(87, 20);
-			replyButton.setLocation(368, 85);
-			this.add(replyButton);
+			replyButton.setLocation(374, 85);
 		}
 		else {
 			//Read Reply Button Section
-			readReplyButton.setSize(87, 20);
-			readReplyButton.setLocation(368, 85);
-			this.add(readReplyButton);
+			replyButton.setText("Read Reply");
+			replyButton.setSize(100, 20);
+			replyButton.setLocation(368, 85);
 		}
+		this.add(replyButton);
+		replyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ReplyFrame(isSeller, text);
+			}
+		});
+		
 		//Panel Properties
-		this.setSize(460, 110);
+		this.setSize(473, 110);
 		this.setLayout(null);
 	}
 }

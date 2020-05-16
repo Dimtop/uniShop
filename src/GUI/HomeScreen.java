@@ -80,7 +80,7 @@ public abstract class HomeScreen extends JFrame {
 		
 		adsScrollPane.setBounds(270, 40, 955, 620);
 		adsScrollPane.setViewportView(adsPanel);
-		adsScrollPane.getVerticalScrollBar().setUnitIncrement(16);
+		adsScrollPane.getVerticalScrollBar().setUnitIncrement(16); //increase scroll speed
 		mainPanel.add(adsScrollPane);
 	}
 	
