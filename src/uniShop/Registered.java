@@ -14,5 +14,7 @@ public class Registered extends User {
 	{
 		status = 0; //0 για αποσυνδεδεμένο
 	};
+	
+	public void veiwProfile() {};
 
 }
