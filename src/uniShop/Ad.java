@@ -15,14 +15,33 @@ public class Ad {
 	private ListingState status; //Ad status
 	private ListingPromotionType promotionType;//Type of promoted ad
 	
+	public Ad(int id, String name, String description, String link, Date date, Registered seller, 
+			Registered buyer, ArrayList<String> tags, ListingState status, ListingPromotionType type)
+	{
+		tags = new ArrayList<>();
+		
+		this.ad_id = id;
+		this.name = name;
+		this.description = description;
+		this.photoLink = link;
+		this.date = date;
+		this.seller = seller;
+		this.buyer = buyer;
+		this.tags = tags;
+		this.status = status;
+		this.promotionType = type;
+	}
+	
 	public int getAd_id() 
 	{
 		return ad_id;
 	}
-	public void setAd_id(int ad_id) 
+	
+	public int setAd_id(int id)
 	{
-		this.ad_id = ad_id;
+		this.ad_id = id;
 	}
+	
 	public String getName() 
 	{
 		return name;
@@ -59,10 +78,7 @@ public class Ad {
 	{
 		return seller;
 	}
-	public void setSeller(Registered seller) 
-	{
-		this.seller = seller;
-	}
+	
 	public Registered getBuyer() 
 	{
 		return buyer;
