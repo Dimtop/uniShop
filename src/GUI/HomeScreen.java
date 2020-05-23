@@ -71,7 +71,7 @@ public abstract class HomeScreen extends JFrame {
 		AdPanel adPanel;
 		int height = 0;
 		for(String str : ads) {
-			adPanel = new AdPanel(str);
+			adPanel = new AdPanelRegistered(str);
 			adPanel.setBounds(0, height, adPanel.getWidth(), adPanel.getHeight());
 			adsPanel.add(adPanel);
 			
