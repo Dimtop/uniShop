@@ -32,6 +32,7 @@ public class Main {
 		//new HomeScreen_Guest(tags,tags);
 		new HomeScreen_Registered(tags,tags);
 		//new HomeScreen_Premium(tags,tags);
+		new ViewOtherProfile();
 
 	}
 
