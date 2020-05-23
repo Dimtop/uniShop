@@ -32,7 +32,7 @@ public abstract class HomeScreen extends JFrame {
 		setupSearchPanel(tags);
 		
 		//Ads Panel setup
-		setupAdsPanel(ads);
+		//setupAdsPanel(ads);
 		
 		//Frame Properties setup
 		setupFrameProperties();
@@ -62,7 +62,8 @@ public abstract class HomeScreen extends JFrame {
 	}
 	
 	//setting up ads' panel
-	private void setupAdsPanel(ArrayList<String> ads) {
+	abstract protected void setupAdsPanel(ArrayList<String> ads);
+	/*private void setupAdsPanel(ArrayList<String> ads) {
 		JScrollPane adsScrollPane = new JScrollPane();
 		
 		adsPanel.setPreferredSize(new Dimension(937, ads.size()*(gap+150)-gap));
@@ -82,7 +83,7 @@ public abstract class HomeScreen extends JFrame {
 		adsScrollPane.setViewportView(adsPanel);
 		adsScrollPane.getVerticalScrollBar().setUnitIncrement(16); //increase scroll speed
 		mainPanel.add(adsScrollPane);
-	}
+	}*/
 	
 	//setting up buttons at the top of the frame
 	protected abstract void setupTopButtons();	

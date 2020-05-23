@@ -1,11 +1,13 @@
 package GUI;
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 /*	User Interface of the system's home screen
  * 	displayed on a Guest User 
@@ -29,6 +31,32 @@ public class HomeScreen_Guest extends HomeScreen {
 		
 		//Top Buttons setup
 		setupTopButtons();
+		
+		//Ads Panel setup
+		setupAdsPanel(ads);
+	}
+	
+	@Override
+	protected void setupAdsPanel(ArrayList<String> ads)  {
+		JScrollPane adsScrollPane = new JScrollPane();
+		
+		adsPanel.setPreferredSize(new Dimension(937, ads.size()*(gap+150)-gap));
+		adsPanel.setLayout(null);
+		
+		AdPanel adPanel;
+		int height = 0;
+		for(String str : ads) {
+			adPanel = new AdPanel(str);
+			adPanel.setBounds(0, height, adPanel.getWidth(), adPanel.getHeight());
+			adsPanel.add(adPanel);
+			
+			height += adPanel.getHeight()+gap;
+		}
+		
+		adsScrollPane.setBounds(270, 40, 955, 620);
+		adsScrollPane.setViewportView(adsPanel);
+		adsScrollPane.getVerticalScrollBar().setUnitIncrement(16); //increase scroll speed
+		mainPanel.add(adsScrollPane);
 	}
 
 	@Override

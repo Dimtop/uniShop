@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JSeparator;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -36,6 +38,9 @@ public class HomeScreen_Registered extends HomeScreen {
 		
 		//Top Buttons setup
 		setupTopButtons();
+		
+		//Ads Panel setup
+		setupAdsPanel(ads);
 		
 		//Left Buttons setup
 		setupLeftButtons();
@@ -68,6 +73,29 @@ public class HomeScreen_Registered extends HomeScreen {
 			}
 		});
 		leftButtonsPanel.add(myMessages);
+	}
+	
+	@Override
+	protected void setupAdsPanel(ArrayList<String> ads) {
+		JScrollPane adsScrollPane = new JScrollPane();
+		
+		adsPanel.setPreferredSize(new Dimension(937, ads.size()*(gap+150)-gap));
+		adsPanel.setLayout(null);
+		
+		AdPanel adPanel;
+		int height = 0;
+		for(String str : ads) {
+			adPanel = new AdPanelRegistered(str);
+			adPanel.setBounds(0, height, adPanel.getWidth(), adPanel.getHeight());
+			adsPanel.add(adPanel);
+			
+			height += adPanel.getHeight()+gap;
+		}
+		
+		adsScrollPane.setBounds(270, 40, 955, 620);
+		adsScrollPane.setViewportView(adsPanel);
+		adsScrollPane.getVerticalScrollBar().setUnitIncrement(16); //increase scroll speed
+		mainPanel.add(adsScrollPane);
 	}
 
 	@Override
