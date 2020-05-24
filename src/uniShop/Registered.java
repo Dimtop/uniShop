@@ -2,6 +2,9 @@ package uniShop;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.sun.xml.internal.ws.api.message.Message;
+
 import java.util.*; 
 
 public class Registered extends User {
@@ -26,7 +29,7 @@ public class Registered extends User {
 	
 	public void viewProfile() 
 	{
-		
+		//γραφικα
 	}
 		
 		
@@ -60,6 +63,20 @@ public class Registered extends User {
 	{
 		return myMessages;
 	}//απο void την εκανα ArrayList<Message>
+	
+	
+	public replyMessages(Message aMessage)
+	{
+		Message reply = new Message();
+		//υλοποιείται απάντηση στα γραφικά
+		myMessages.add(reply);
+	}
+	
+	public deleteMessages(Message aMessage)
+	{
+		myMessages.remove(aMessage);
+	}
+	
 	
 	
 
