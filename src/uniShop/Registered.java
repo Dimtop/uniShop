@@ -65,14 +65,14 @@ public class Registered extends User {
 	}//απο void την εκανα ArrayList<Message>
 	
 	
-	public replyMessages(Message aMessage)
+	public void replyMessages(Message aMessage)
 	{
 		Message reply = new Message();
 		//υλοποιείται απάντηση στα γραφικά
 		myMessages.add(reply);
 	}
 	
-	public deleteMessages(Message aMessage)
+	public void deleteMessages(Message aMessage)
 	{
 		myMessages.remove(aMessage);
 	}
