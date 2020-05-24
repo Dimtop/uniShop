@@ -28,7 +28,7 @@ public class Registered extends User {
 	
 	ArrayList<Ad> aDataBase = new ArrayList<Ad>(Arrays.asList(ad1, ad2, ad3));
 
-	//τέλος δημιουργίας βάσης
+	//τέλος δημιουργίας υποθετικής βάσης
 	
 	
 	
@@ -58,14 +58,17 @@ public class Registered extends User {
 	};
 	
 	
-	public void deleteAd(Ad anAd)
+	public void deleteAd(Ad aAd)
 	{
 		
-		anAd = ad1; //θεωρώ οτι υπάρχει ηδη στην βάση 
-		aDataBase.remove(anAd);
+		aAd = ad1; //θεωρώ οτι υπάρχει ηδη στην βάση 
+		aDataBase.remove(aAd);
 	};
 	
 	
-	
+	public void readAd(Ad aAd)
+	{
+		//αυτη δεν θα πρέπει να υλοποιηθει κατευθειαν στα γραφικά; χελπ μι
+	};
 	
 }
