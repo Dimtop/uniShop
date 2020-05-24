@@ -114,7 +114,7 @@ public class Registered extends User {
 		
 	}
 	
-	public void reviewSeller(Registered aUser)//
+	public void reviewSeller(Registered aUser)//ViewOtherProfiles GUI and review in database??
 	{
 		
 	}
@@ -124,7 +124,7 @@ public class Registered extends User {
 		this.wishlist.add(aProduct);
 	}
 	
-	public void viewWishlist()//
+	public void viewWishlist()//Registered HP GUI wishList button
 	{
 		
 	}
