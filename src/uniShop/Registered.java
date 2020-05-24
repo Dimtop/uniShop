@@ -6,35 +6,15 @@ import java.util.*;
 
 public class Registered extends User {
 	
-	int status=1; //κατασταση χρήστη, συνδεδεμένος/μη συνδεδεμένος
-	
-	
-	//παρακάτω φτιάχνω μια τοπική βάση απο ads
-	
-	ArrayList<String> tags1 = 
-			new ArrayList<>(Arrays.asList("iphone", "phone", "6s"));
-	
-	ArrayList<String> tags2 = 
-			new ArrayList<>(Arrays.asList("hp", "laptop", "pc"));
-	
-	ArrayList<String> tags3 = 
-			new ArrayList<>(Arrays.asList("chair", "new", "confortable"));
-	
-	
-	
-	Ad ad1 = new Ad(22, "iphone 6s", tags1);
-	Ad ad2 = new Ad(13, "Laptop HP", tags2);
-	Ad ad3 = new Ad(222, "new chair", tags3);
-	
-	ArrayList<Ad> aDataBase = new ArrayList<Ad>(Arrays.asList(ad1, ad2, ad3));
-
-	//τέλος δημιουργίας υποθετικής βάσης
+	private int status=1; //κατασταση χρήστη, συνδεδεμένος/μη συνδεδεμένος
+	private ArrayList<Ad> myAds = new ArrayList<Ad>();
+	private ArrayList<Message> myMessages;
+	private ArrayList<Ad> wishlist;
 	
 	
 	
 	public Registered(int userId, String username, String email) {
-		super(userId, username, email);
-		
+		super(userId, username, email);	
 	}
 	
 	
@@ -42,11 +22,12 @@ public class Registered extends User {
 	{
 		status = 0; //0 για αποσυνδεδεμένο
 		new Guest(userId, username, email); 
-	};
+	}
 	
-	public void viewProfile() {};
-	
-	
+	public void viewProfile() 
+	{
+		
+	}
 		
 		
 	public void createAd()
@@ -54,21 +35,33 @@ public class Registered extends User {
 		ArrayList<String> tags = 
 				new ArrayList<>(Arrays.asList("phone", "samsung", "galaxy"));
 		Ad anAd = new Ad(555, "samsung galaxy", tags);
-		aDataBase.add(anAd);
-	};
+		myAds.add(anAd);
+	}
 	
 	
 	public void deleteAd(Ad aAd)
 	{
-		
-		aAd = ad1; //θεωρώ οτι υπάρχει ηδη στην βάση 
-		aDataBase.remove(aAd);
-	};
+		myAds.remove(aAd);
+	}
 	
 	
 	public void readAd(Ad aAd)
 	{
 		//αυτη δεν θα πρέπει να υλοποιηθει κατευθειαν στα γραφικά; χελπ μι
-	};
+	}
+	
+	
+	public void updateAd(Ad aAd)
+	{
+		//μηπως θα ηταν καλυτερο να χρησιμοποιηθουν κατευθειαν τα setters της ad?
+	}
+	
+	public ArrayList<Message> viewMessages()
+	{
+		return myMessages;
+	}//απο void την εκανα ArrayList<Message>
+	
+	
+
 	
 }
