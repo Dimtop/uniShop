@@ -2,9 +2,6 @@ package uniShop;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.sun.xml.internal.ws.api.message.Message;
-
 import java.util.*; 
 
 public class Registered extends User {
