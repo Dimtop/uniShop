@@ -6,31 +6,35 @@ import java.util.*;
 
 public class Registered extends User {
 	
-	private int status=1; //κατασταση χρήστη, συνδεδεμένος/μη συνδεδεμένος
-	private ArrayList<Ad> myAds = new ArrayList<Ad>();
-	private ArrayList<Message> myMessages;
-	private ArrayList<Ad> wishlist;
+	protected int status=1; //κατασταση χρήστη, συνδεδεμένος/μη συνδεδεμένος
+	protected ArrayList<Ad> myAds;
+	protected ArrayList<Message> myMessages;
+	protected ArrayList<Ad> wishlist;
 	
 	
 	
-	public Registered(int userId, String username, String email) {
+	public Registered(int userId, String username, String email)
+	{
+		this.myAds = new ArrayList<>();
+		this.myMessages = new ArrayList<>();
+		this.wishlist = new ArrayList<>();
 		super(userId, username, email);	
 	}
 	
 	
-	public void logout()
+	public void logout()//Guest HP GUI 
 	{
 		status = 0; //0 για αποσυνδεδεμένο
 		new Guest(userId, username, email); 
 	}
 	
-	public void viewProfile() 
+	public void viewProfile()//Profile GUI 
 	{
-		//γραφικα
+		
 	}
 		
 		
-	public void createAd()
+	public void createAd()//CreateAd GUI and insert in database
 	{	 
 		ArrayList<String> tags = 
 				new ArrayList<>(Arrays.asList("phone", "samsung", "galaxy"));
@@ -39,40 +43,127 @@ public class Registered extends User {
 	}
 	
 	
-	public void deleteAd(Ad aAd)
+	public void deleteAd(Ad aAd)//??? GUI and delete in database
 	{
 		myAds.remove(aAd);
 	}
 	
 	
-	public void readAd(Ad aAd)
+	public void readAd(Ad aAd)//ProductView GUI
 	{
-		//αυτη δεν θα πρέπει να υλοποιηθει κατευθειαν στα γραφικά; χελπ μι
+		
 	}
 	
 	
-	public void updateAd(Ad aAd)
+	public void updateAd(Ad aAd)//Profile GUI myAds button and update in database
 	{
-		//μηπως θα ηταν καλυτερο να χρησιμοποιηθουν κατευθειαν τα setters της ad?
+		
 	}
 	
-	public ArrayList<Message> viewMessages()
+	public ArrayList<Message> viewMessages()//MyMessages GUI
 	{
 		return myMessages;
-	}//απο void την εκανα ArrayList<Message>
+	}//from void to ArrayList<Message>
 	
 	
-	public void replyMessages(Message aMessage)
+	public void replyMessages(Message aMessage)//MyMessages GUI and insert in database
 	{
 		Message reply = new Message();
-		//υλοποιείται απάντηση στα γραφικά
+		//υλοποιείται απάντηση στα γραφικα
 		myMessages.add(reply);
 	}
 	
-	public void deleteMessages(Message aMessage)
+	public void deleteMessages(Message aMessage)//MyMessages GUI and delete in database
 	{
 		myMessages.remove(aMessage);
 	}
+	
+	public void reviewBuyer(Registered aUser)//MyMessages GUI?? review for buyer in database??
+	{
+		
+	}
+	
+	public void upgradePremiumPlan()//Registered HP GUI and change at database
+	{
+		//change this.premium
+		//Create Premium object and create Premium HP GUI
+	}
+	
+	public ArrayList<Ad> searchAds()//Registered HP GUI and database search
+	{
+		
+	}
+	
+	public ArrayList<Ad> filterRegistered()//Registered HP GUI and database search 
+	{
+		
+	}
+	
+	public void viewProducts(Ad aProduct)//Product view GUI and search database
+	{
+		
+	}
+	
+	public void viewOtherProfiles(Registered aUser)//ViewOtherProfiles GUI and search database
+	{
+		
+	}
+	
+	public void sendMessages(Registered aUser)//Registered HP GUI and insert in database
+	{
+		
+	}
+	
+	public void reviewSeller(Registered aUser)//
+	{
+		
+	}
+	
+	public void addToWishlist(Ad aProduct)//Registered HP GUI and insert to database
+	{
+		this.wishlist.add(aProduct);
+	}
+	
+	public void viewWishlist()//
+	{
+		
+	}
+	
+	public void removeFromWishlist(Ad aProduct)//Registered HP GUI and delete from database
+	{
+		this.wishlist.remove(aProduct);
+	}
+	
+	public void addPreferences(String aPreference)//Profile GUI and insert in the database
+	{
+		this.preferences.add(aPreference);
+	}
+	
+	public void removePreferences(String aPreference)//Profile GUI and delete from the database
+	{
+		this.preferences.remove(aPreference);
+	}
+	
+	public void updateProfile()//Profile GUI and change in the database
+	{
+		
+	}
+	
+	public void deleteProfile()//Profile GUI and delete in the database
+	{
+		
+	}
+	
+	public void viewAdsHistory()//Profile GUI and search in database
+	{
+		
+	}
+	
+	public void matchPreferences()//Search in database
+	{
+		
+	}
+	
 	
 	
 	
