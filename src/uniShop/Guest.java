@@ -54,7 +54,10 @@ public class Guest extends User{
 		
 		User u = new User(99,"stampou","stampou@gmail.com");
 		u.setPreferences(preferences1); // get preferences from database
-		
+		/* anti gia user prepei na pairnei apo ta grafika tis epiloges tou guest
+		 * kai na sygkrinei aytes tis epiloges me to ArrayList apo ads ths kathe diafhmishs
+		 * de kserw ti paizei me grafika gia ayto exw kanei enan user wste na blepw oti douleuei  
+		 */
 		
 		ArrayList<Ad> foundAds = new ArrayList<Ad>();
 		
