@@ -51,7 +51,7 @@ public class Registered extends User {
 	
 	public void readAd(Ad aAd)//ProductView GUI
 	{
-		
+		//dokimi
 	}
 	
 	
