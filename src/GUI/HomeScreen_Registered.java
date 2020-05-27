@@ -1,19 +1,16 @@
 package GUI;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
 import javax.swing.JSeparator;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 /*	User Interface of the system's home screen
  * 	displayed on a Registered User 
@@ -38,9 +35,6 @@ public class HomeScreen_Registered extends HomeScreen {
 		
 		//Top Buttons setup
 		setupTopButtons();
-		
-		//Ads Panel setup
-		setupAdsPanel(ads);
 		
 		//Left Buttons setup
 		setupLeftButtons();
@@ -76,8 +70,7 @@ public class HomeScreen_Registered extends HomeScreen {
 	}
 	
 	@Override
-	protected void setupAdsPanel(ArrayList<String> ads) {
-		JScrollPane adsScrollPane = new JScrollPane();
+	protected void creatingAdsPanel(ArrayList<String> ads) {
 		
 		adsPanel.setPreferredSize(new Dimension(937, ads.size()*(gap+150)-gap));
 		adsPanel.setLayout(null);
@@ -91,11 +84,6 @@ public class HomeScreen_Registered extends HomeScreen {
 			
 			height += adPanel.getHeight()+gap;
 		}
-		
-		adsScrollPane.setBounds(270, 40, 955, 620);
-		adsScrollPane.setViewportView(adsPanel);
-		adsScrollPane.getVerticalScrollBar().setUnitIncrement(16); //increase scroll speed
-		mainPanel.add(adsScrollPane);
 	}
 
 	@Override
@@ -125,5 +113,13 @@ public class HomeScreen_Registered extends HomeScreen {
 		wishListButton.setSize(90, 20);
 		wishListButton.setLocation(upgradePremiumPlanButton.getX()-wishListButton.getWidth()-gap, gap);
 		this.getContentPane().add(wishListButton);		
+	}
+	
+	@Override
+	public void refreshAdsPanel(ArrayList<String> newAds) {
+		
+		creatingAdsPanel(newAds);
+		
+		adsScrollPane.setViewportView(adsPanel);
 	}
 }

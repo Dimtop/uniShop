@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,12 +27,14 @@ public class SearchPanel extends JPanel {
 	private JButton searchButton = new JButton("Search");
 	private ArrayList<JCheckBox> tagsCheckBoxes = new ArrayList<>();
 	
-	private int gap;
+	private int gap;	
 	
+	private JFrame parent;
 	
-	public SearchPanel(int gap, ArrayList<String> tags) {
+	public SearchPanel(int gap, ArrayList<String> tags, HomeScreen parent) {
 	
 		this.gap = gap;
+		this.parent = parent;
 		
 		//Panel Properties
 		this.setLayout(null);
@@ -40,6 +43,12 @@ public class SearchPanel extends JPanel {
 		//Home Button Setup
 		homeButton.setSize(70, 20);
 		homeButton.setLocation(0,0);
+		homeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Refreshing
+				parent.refreshAdsPanel(tags);
+			}
+		});
 		this.add(homeButton);
 		
 		//Search Bar Setup

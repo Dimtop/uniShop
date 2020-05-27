@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,6 +17,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /*	Panel appearing on the HomeScreen multiply times that
  * 	contains informations about an Ad
@@ -106,6 +109,13 @@ public class AdPanel extends JPanel {
 		sellerName.setSize(225, 20);
 		sellerName.setLocation(700, 5);
 		sellerName.setHorizontalAlignment(SwingConstants.RIGHT);
+		sellerName.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+		sellerName.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(sellerName.getText());
+			}
+		});
 		this.add(sellerName);
 	}
 	

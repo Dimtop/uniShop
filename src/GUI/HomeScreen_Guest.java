@@ -31,14 +31,10 @@ public class HomeScreen_Guest extends HomeScreen {
 		
 		//Top Buttons setup
 		setupTopButtons();
-		
-		//Ads Panel setup
-		setupAdsPanel(ads);
 	}
 	
 	@Override
-	protected void setupAdsPanel(ArrayList<String> ads)  {
-		JScrollPane adsScrollPane = new JScrollPane();
+	protected void creatingAdsPanel(ArrayList<String> ads) {
 		
 		adsPanel.setPreferredSize(new Dimension(937, ads.size()*(gap+150)-gap));
 		adsPanel.setLayout(null);
@@ -52,12 +48,8 @@ public class HomeScreen_Guest extends HomeScreen {
 			
 			height += adPanel.getHeight()+gap;
 		}
-		
-		adsScrollPane.setBounds(270, 40, 955, 620);
-		adsScrollPane.setViewportView(adsPanel);
-		adsScrollPane.getVerticalScrollBar().setUnitIncrement(16); //increase scroll speed
-		mainPanel.add(adsScrollPane);
 	}
+
 
 	@Override
 	protected void setupTopButtons() {
@@ -84,5 +76,13 @@ public class HomeScreen_Guest extends HomeScreen {
 		});
 		this.getContentPane().add(registerButton);
 		
+	}
+
+	@Override
+	public void refreshAdsPanel(ArrayList<String> newAds) {
+		
+		creatingAdsPanel(newAds);
+		
+		adsScrollPane.setViewportView(adsPanel);
 	}
 }

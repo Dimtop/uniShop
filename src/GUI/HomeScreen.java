@@ -21,6 +21,8 @@ public abstract class HomeScreen extends JFrame {
 	protected JPanel topButtonsPanel = new JPanel();
 	protected JPanel adsPanel = new JPanel();
 	
+	protected JScrollPane adsScrollPane = new JScrollPane();
+	
 	protected int gap = 10; //gap between subjects
 	
 	public HomeScreen(ArrayList<String> tags, ArrayList<String> ads) {
@@ -32,7 +34,7 @@ public abstract class HomeScreen extends JFrame {
 		setupSearchPanel(tags);
 		
 		//Ads Panel setup
-		//setupAdsPanel(ads);
+		setupAdsPanel(ads);
 		
 		//Frame Properties setup
 		setupFrameProperties();
@@ -46,9 +48,20 @@ public abstract class HomeScreen extends JFrame {
 	
 	//setting up search panel
 	private void setupSearchPanel(ArrayList<String> tags) {
-		searchPanel = new SearchPanel(gap, tags);
+		searchPanel = new SearchPanel(gap, tags, this);
 		searchPanel.setLocation(gap, gap);
 		mainPanel.add(searchPanel);
+	}
+	
+	//setting up ads' panel
+	protected void setupAdsPanel(ArrayList<String> ads) {
+
+		creatingAdsPanel(ads);
+		
+		adsScrollPane.setBounds(270, 40, 955, 620);
+		adsScrollPane.setViewportView(adsPanel);
+		adsScrollPane.getVerticalScrollBar().setUnitIncrement(16); //increase scroll speed
+		mainPanel.add(adsScrollPane);
 	}
 	
 	//setting up frame properties
@@ -61,30 +74,13 @@ public abstract class HomeScreen extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-	//setting up ads' panel
-	abstract protected void setupAdsPanel(ArrayList<String> ads);
-	/*private void setupAdsPanel(ArrayList<String> ads) {
-		JScrollPane adsScrollPane = new JScrollPane();
-		
-		adsPanel.setPreferredSize(new Dimension(937, ads.size()*(gap+150)-gap));
-		adsPanel.setLayout(null);
-		
-		AdPanel adPanel;
-		int height = 0;
-		for(String str : ads) {
-			adPanel = new AdPanelRegistered(str);
-			adPanel.setBounds(0, height, adPanel.getWidth(), adPanel.getHeight());
-			adsPanel.add(adPanel);
-			
-			height += adPanel.getHeight()+gap;
-		}
-		
-		adsScrollPane.setBounds(270, 40, 955, 620);
-		adsScrollPane.setViewportView(adsPanel);
-		adsScrollPane.getVerticalScrollBar().setUnitIncrement(16); //increase scroll speed
-		mainPanel.add(adsScrollPane);
-	}*/
-	
 	//setting up buttons at the top of the frame
 	protected abstract void setupTopButtons();	
+	
+	//creating a panel with ads from list ads
+	protected abstract void creatingAdsPanel(ArrayList<String> ads);
+	
+	//refreshing the ads' panel
+	public abstract void refreshAdsPanel(ArrayList<String> newAds);
+
 }

@@ -12,8 +12,15 @@ public class Main {
 		ArrayList<String> tags = new ArrayList<>();
 		tags.add("1");
 		tags.add("2");
-		new HomeScreen_Guest(tags,tags);
-		//new HomeScreen_Registered(tags,tags);
+		tags.add("2");
+		tags.add("2");
+		tags.add("2");
+		tags.add("2");
+		tags.add("2");
+		tags.add("2");
+		tags.add("2");
+		//new HomeScreen_Guest(tags,tags);
+		new HomeScreen_Registered(tags,tags);
 		//new HomeScreen_Premium(tags,tags);
 
 	}
