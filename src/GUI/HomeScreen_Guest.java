@@ -31,6 +31,10 @@ public class HomeScreen_Guest extends HomeScreen {
 		
 		//Top Buttons setup
 		setupTopButtons();
+		
+		//Adding Ads Panel
+		creatingAdsPanel(ads);
+		adsScrollPane.setViewportView(adsPanel);
 	}
 	
 	@Override
@@ -76,13 +80,5 @@ public class HomeScreen_Guest extends HomeScreen {
 		});
 		this.getContentPane().add(registerButton);
 		
-	}
-
-	@Override
-	public void refreshAdsPanel(ArrayList<String> newAds) {
-		
-		creatingAdsPanel(newAds);
-		
-		adsScrollPane.setViewportView(adsPanel);
 	}
 }

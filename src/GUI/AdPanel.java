@@ -113,7 +113,7 @@ public class AdPanel extends JPanel {
 		sellerName.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println(sellerName.getText());
+				new ViewOtherProfile();
 			}
 		});
 		this.add(sellerName);

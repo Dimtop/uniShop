@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 
 /*	User Interface of the system's home screen
@@ -30,14 +30,23 @@ public class HomeScreen_Registered extends HomeScreen {
 	protected JButton createNewAd = new JButton("Create New Ad");
 	protected JButton myMessages = new JButton("My Messages");
 	
+	protected ArrayList<String> tags = new ArrayList<>();
+	protected ArrayList<String> ads = new ArrayList<>();
+	
 	public HomeScreen_Registered(ArrayList<String> tags, ArrayList<String> ads) {
 		super(tags, ads);
+		this.tags = tags;
+		this.ads = ads;
 		
 		//Top Buttons setup
 		setupTopButtons();
 		
 		//Left Buttons setup
 		setupLeftButtons();
+		
+		//Adding Ads Panel
+		creatingAdsPanel(ads);
+		adsScrollPane.setViewportView(adsPanel);
 	}
 	
 	protected void setupLeftButtons() {
@@ -91,7 +100,16 @@ public class HomeScreen_Registered extends HomeScreen {
 		
 		//Log Out Button Section
 		logoutButton.setSize(75, 20);
-		logoutButton.setLocation(this.getWidth()-logoutButton.getWidth()-30, gap);		
+		logoutButton.setLocation(this.getWidth()-logoutButton.getWidth()-30, gap);	
+		logoutButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(mainPanel,"Are you sure you want to logout?", 
+						"Upgrade to Premium Plan", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				if(result == JOptionPane.YES_OPTION) {
+					dispose();
+				}
+			}
+		});
 		this.getContentPane().add(logoutButton);
 		
 		//My Profile Button Section
@@ -107,19 +125,32 @@ public class HomeScreen_Registered extends HomeScreen {
 		//Upgrade Premium Plan Button Section
 		upgradePremiumPlanButton.setSize(170, 20);
 		upgradePremiumPlanButton.setLocation(myProfileButton.getX()-upgradePremiumPlanButton.getWidth()-gap, gap);
+		JFrame currentFrame = this;
+		upgradePremiumPlanButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(mainPanel,"Are you sure you want to upgrade to Premium Plan?", 
+						"Upgrade to Premium Plan", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				if(result == JOptionPane.YES_OPTION) {
+					upgradeToPremiumPlan(currentFrame);
+				}
+			}
+		});
 		this.getContentPane().add(upgradePremiumPlanButton);
 		
 		//WishList Button Section
 		wishListButton.setSize(90, 20);
 		wishListButton.setLocation(upgradePremiumPlanButton.getX()-wishListButton.getWidth()-gap, gap);
+		wishListButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Wishlist(ads);
+			}
+		});
 		this.getContentPane().add(wishListButton);		
 	}
 	
-	@Override
-	public void refreshAdsPanel(ArrayList<String> newAds) {
+	protected void upgradeToPremiumPlan(JFrame currentFrame) {
+		currentFrame.dispose();
 		
-		creatingAdsPanel(newAds);
-		
-		adsScrollPane.setViewportView(adsPanel);
+		new HomeScreen_Premium(tags, ads);
 	}
 }

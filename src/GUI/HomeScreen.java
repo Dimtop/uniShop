@@ -1,10 +1,13 @@
 package GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -19,13 +22,17 @@ public abstract class HomeScreen extends JFrame {
 	protected JPanel mainPanel = new JPanel();
 	protected SearchPanel searchPanel;
 	protected JPanel topButtonsPanel = new JPanel();
+	protected JPanel loadingPanel = new JPanel();
 	protected JPanel adsPanel = new JPanel();
 	
 	protected JScrollPane adsScrollPane = new JScrollPane();
 	
+	protected ArrayList<String> ads = new ArrayList<>();//testing
+	
 	protected int gap = 10; //gap between subjects
 	
 	public HomeScreen(ArrayList<String> tags, ArrayList<String> ads) {
+		this.ads = ads;
 		
 		//Main Panel setup
 		setupMainPanel();
@@ -53,13 +60,22 @@ public abstract class HomeScreen extends JFrame {
 		mainPanel.add(searchPanel);
 	}
 	
+	//creating loading panel
+	protected void creatingLoadingPanel() {
+		loadingPanel.setPreferredSize(new Dimension(930, 600));
+		loadingPanel.setLayout(new BorderLayout());
+		
+	    ImageIcon loading = new ImageIcon(AdPanelRegistered.class.getResource("/images/ajax-loader.gif"));
+	    loadingPanel.add(new JLabel("loading... ", loading, JLabel.CENTER), BorderLayout.CENTER);	
+	}
+	
 	//setting up ads' panel
 	protected void setupAdsPanel(ArrayList<String> ads) {
 
-		creatingAdsPanel(ads);
+		creatingLoadingPanel();
 		
 		adsScrollPane.setBounds(270, 40, 955, 620);
-		adsScrollPane.setViewportView(adsPanel);
+		adsScrollPane.setViewportView(loadingPanel);
 		adsScrollPane.getVerticalScrollBar().setUnitIncrement(16); //increase scroll speed
 		mainPanel.add(adsScrollPane);
 	}
@@ -71,6 +87,7 @@ public abstract class HomeScreen extends JFrame {
 		this.setSize(1250, 700);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+		this.setTitle("UniShop");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
@@ -81,6 +98,11 @@ public abstract class HomeScreen extends JFrame {
 	protected abstract void creatingAdsPanel(ArrayList<String> ads);
 	
 	//refreshing the ads' panel
-	public abstract void refreshAdsPanel(ArrayList<String> newAds);
+	public void refreshAdsPanel() {
+				
+		adsScrollPane.setViewportView(loadingPanel);
+		creatingAdsPanel(ads); //randomize list with ads
+		adsScrollPane.setViewportView(adsPanel);
+	}
 
 }

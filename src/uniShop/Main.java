@@ -20,8 +20,8 @@ public class Main {
 		tags.add("2");
 		tags.add("2");
 		//new HomeScreen_Guest(tags,tags);
-		new HomeScreen_Registered(tags,tags);
-		//new HomeScreen_Premium(tags,tags);
+		//new HomeScreen_Registered(tags,tags);
+		new HomeScreen_Premium(tags,tags);
 
 	}
 

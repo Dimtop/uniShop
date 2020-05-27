@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 
 /*	Panel with the search components 
  * 	of our system's home screens
- * 	Input : int gap for the gap between panel's components
+ * 	Input : integer gap for the gap between panel's components
  * 			ArrayList<String> with the system's tags 
  */
 
@@ -46,7 +46,7 @@ public class SearchPanel extends JPanel {
 		homeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Refreshing
-				parent.refreshAdsPanel(tags);
+				parent.refreshAdsPanel();
 			}
 		});
 		this.add(homeButton);
