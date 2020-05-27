@@ -2,12 +2,17 @@ package GUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -25,16 +30,9 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.SwingConstants;
 
-import com.sun.jdi.connect.Connector.SelectedArgument;
-
-import javax.swing.JFrame;
-
-import javax.swing.JFrame;
-import javax.swing.JScrollBar;
-import java.awt.GridLayout;
-
-public abstract class CreateNewAd extends JFrame{
+public class CreateNewAd extends JFrame{
 	private JTextField textField;
 	private JLabel lblMaxCharacters;
 	protected JPanel panel;
@@ -44,40 +42,40 @@ public abstract class CreateNewAd extends JFrame{
 	private JTextArea photolinkField;
 	private JFrame frame;
 	private JCheckBox chckbxNewCheckBox_1,chckbxNewCheckBox,chckbxNewCheckBox_2,chckbxNewCheckBox_3,chckbxNewCheckBox_4;
+	private JLabel photodesplayer;
 	
 	private ArrayList<String> ImagePath= new ArrayList<>();
 	private ArrayList<String>checkBoxes=new ArrayList<>();
-	private ArrayList<Boolean>s=new ArrayList<>();
 	
 	public CreateNewAd() {
 		panel();
 		groupLabelCheckboxes();
-		JOptionPane.showMessageDialog(panel,"Dont overwrite to the description! ",
+		JOptionPane.showMessageDialog(panel,"Don't overwrite to the description! ",
 				"Message", JOptionPane.INFORMATION_MESSAGE);
 		
 		panelview();
 	}
 	
-	private void panel() {
+	public void panel() {
 		panel= new JPanel();
 		this.setContentPane(panel);	
 	}	
 	
-	private void panelview()
+	public void panelview()
 	{
 		this.setTitle("Create new add");
 	    this.setVisible(true);
-		this.setSize(485,670);
+		this.setSize(485,700);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dimension.width/2-this.getSize().width/2, dimension.height/2-this.getSize().height/2);
-		this.setIconImage(new ImageIcon(this.getClass().getResource("shopping-bags-512.png")).getImage());
+		//this.setIconImage(new ImageIcon(this.getClass().getResource("shopping-bags-512.png")).getImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	
-	private void groupLabelCheckboxes() {
+	//layout of the window and all addings
+	public void groupLabelCheckboxes() {
 		
-		//labels 
+		//labels.
 		JLabel lblProductname = new JLabel("Product Name");
 		lblProductname.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
@@ -90,7 +88,7 @@ public abstract class CreateNewAd extends JFrame{
 		
 		lblMaxCharacters = new JLabel("Max 200 Characters");
 		
-		//Button
+		//Button.When Pressed creates new ad.
 		btnCreate = new JButton("Create!");
 		btnCreate.setBackground(Color.GREEN);
 		
@@ -99,11 +97,13 @@ public abstract class CreateNewAd extends JFrame{
 		JLabel lblTags = new JLabel("Tags");
 		lblTags.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
+		//Seller describes item's info and details
 		textArea = new JTextArea();
 		textArea.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
 		
+		//total characters used.Dynamic show.
 		lblchrLabel = new JLabel("Characters Used: 0");
 		
 		TextAreaLimit();
@@ -120,45 +120,43 @@ public abstract class CreateNewAd extends JFrame{
 		
 		JPanel panel_1 = new JPanel();
 		
+		photodesplayer= new JLabel("");
+		photodesplayer.setHorizontalAlignment(SwingConstants.CENTER);
+		
 		//layout
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
-									.addComponent(btnPutPhoto)
-									.addGap(10))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(20)
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(lblPhotoLink, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
-											.addGap(31))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-												.addComponent(lblProductname, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-												.addComponent(lblDercription, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
-											.addPreferredGap(ComponentPlacement.RELATED)))
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(textArea, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addGroup(Alignment.TRAILING, groupLayout.createParallelGroup(Alignment.LEADING, false)
-											.addComponent(lblMaxCharacters, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-											.addComponent(lblchrLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
-										.addComponent(photolinkField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-										.addComponent(textField, 207, 207, 207)))))
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+							.addGap(20)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblProductname, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+								.addComponent(lblDercription, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 251, Short.MAX_VALUE)
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+									.addComponent(lblMaxCharacters, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(lblchrLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+								.addComponent(textField, 207, 207, 207)))
+						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(20)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblTags, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-								.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-									.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-									.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)))))
+								.addComponent(lblPhotoLink, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+										.addComponent(btnPutPhoto, Alignment.LEADING)
+										.addComponent(photolinkField, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
+										.addComponent(photodesplayer, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblTags, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -175,19 +173,25 @@ public abstract class CreateNewAd extends JFrame{
 							.addGap(7)
 							.addComponent(lblMaxCharacters)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblchrLabel))
-						.addComponent(lblDercription, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-					.addGap(30)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblPhotoLink)
-						.addComponent(photolinkField, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE))
+							.addComponent(lblchrLabel)
+							.addGap(22))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblDercription, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
+							.addComponent(lblPhotoLink)))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnPutPhoto)
-					.addGap(11)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(photolinkField, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnPutPhoto))
+						.addComponent(photodesplayer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(35)
 					.addComponent(lblTags, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
 							.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())
 						.addGroup(groupLayout.createSequentialGroup()
@@ -197,12 +201,12 @@ public abstract class CreateNewAd extends JFrame{
 		);
 				panel_1.setLayout(new GridLayout(0, 1, 0, 0));
 						
-							//checkBoxes
-								chckbxNewCheckBox = new JCheckBox("Car");
-								panel_1.add(chckbxNewCheckBox);
+				//checkBoxes.Returns a string array with the boxes checked
+				chckbxNewCheckBox = new JCheckBox("Car");
+				panel_1.add(chckbxNewCheckBox);
 						
-						chckbxNewCheckBox_1 = new JCheckBox("SmartPhone");
-						panel_1.add(chckbxNewCheckBox_1);
+				chckbxNewCheckBox_1 = new JCheckBox("SmartPhone");
+				panel_1.add(chckbxNewCheckBox_1);
 				
 				chckbxNewCheckBox_2 = new JCheckBox("Service");
 				panel_1.add(chckbxNewCheckBox_2);
@@ -218,7 +222,8 @@ public abstract class CreateNewAd extends JFrame{
 		getContentPane().setLayout(groupLayout);
 	}
 	
-	private void checkBoxesInitialize() { 
+	//utilization of check boxes
+	public void checkBoxesInitialize() { 
 		
 		ActionListener actionListener = new ActionListener() {
 			
@@ -242,11 +247,13 @@ public abstract class CreateNewAd extends JFrame{
 		chckbxNewCheckBox_4.addActionListener(actionListener);
 	}
 	
+	//method that returns the Tag list
 	protected ArrayList<String> GetTagList(){
 		return checkBoxes;
 	}
 	
-	private void buttonCreateUse(JButton btnCreate) {
+	//button usage when pressed
+	public void buttonCreateUse(JButton btnCreate) {
 		btnCreate.addActionListener(new ActionListener() {
 			 
 			public void actionPerformed(ActionEvent e) {
@@ -262,13 +269,14 @@ public abstract class CreateNewAd extends JFrame{
 		return ProductName;
 	}
 	
-	private void TextAreaLimit() {
+	
+	public void TextAreaLimit() {
 
+		//description limit 
 		textArea.getDocument().addDocumentListener(new DocumentListener() {
 			
 			@Override
-			public void removeUpdate(DocumentEvent e) {
-				// TODO Auto-generated method stub
+			public void removeUpdate(DocumentEvent e) {	
 				if(textArea.getText().length()>0) {
 					lblchrLabel.setText("Characters used: "+ textArea.getText().length());
 				}
@@ -290,7 +298,6 @@ public abstract class CreateNewAd extends JFrame{
 			
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				// TODO Auto-generated method stub
 				if(textArea.getText().length()>0) {
 					lblchrLabel.setText("Characters used: "+ textArea.getText().length());
 				}if(textArea.getText().length()>=200) {
@@ -318,8 +325,8 @@ public abstract class CreateNewAd extends JFrame{
 		
 	}
 	
-	private void PhotoLink() {
-		
+	public void PhotoLink() {
+		//file chooser and path saver
 		final JLabel label = new JLabel();
 		 btnPutPhoto.addActionListener(new ActionListener() {
 	         @Override
@@ -329,10 +336,24 @@ public abstract class CreateNewAd extends JFrame{
 	            fileChooser.setAcceptAllFileFilterUsed(false);
 
 	            int option = fileChooser.showOpenDialog(frame);
-	            if(option == JFileChooser.APPROVE_OPTION){
+	            if(option == JFileChooser.APPROVE_OPTION)
+	            {
 	               File file = fileChooser.getSelectedFile();
 	               label.setText("File Selected: " + file.getName());
-	               photolinkField.append(file.getAbsolutePath()+"\n");	     
+	               photolinkField.append(file.getAbsolutePath()+"\n");
+	               
+	               BufferedImage img = null;
+				try {
+					img = ImageIO.read(new File(file.getAbsolutePath()));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				
+					Image dim=img.getScaledInstance(photodesplayer.getWidth(),photodesplayer.getHeight(), Image.SCALE_SMOOTH);
+					ImageIcon icon=new ImageIcon(dim);	              
+					photodesplayer.setIcon(icon);
+	               
+					//imagePath array used on DB, contains all the paths of the user
 	               ImagePath.add(file.getAbsolutePath());
 	            }else{
 	               label.setText("Open command canceled");
@@ -345,13 +366,17 @@ public abstract class CreateNewAd extends JFrame{
 		return ImagePath;
 	}
 	
-	protected abstract void Promoted();
+	//abstract methods that extends to premium
+	protected void Promoted() {
+	}
 	
-	protected abstract boolean getPromotion();
+	protected boolean getPromotion() {
+		return false;
+	}
 }
 
 
-
+//class use to filter files an choose only images 
 class ImageFilter extends FileFilter {
    public final static String JPEG = "jpeg";
    public final static String JPG = "jpg";
