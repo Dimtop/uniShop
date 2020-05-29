@@ -24,7 +24,7 @@ public class CreateNewAdPrem extends CreateNewAd{
 				.addGap(0, 461, Short.MAX_VALUE)
 		);
 		Promoted();
-		InfoOfNewAd I = new InfoOfNewAd(getProductName(), getDesription(), getAbsolutePath(),GetTagList(),getPromotion());
+		
 	}
 	
 	protected void Promoted() {

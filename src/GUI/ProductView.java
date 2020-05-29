@@ -28,23 +28,18 @@ public class ProductView extends JFrame{
 
 	private Image imageFav;
 	private JTextField textField;
+	private JButton FavButton = new JButton("");
+	private JButton nextBtn = new JButton("Next");
+	private JButton prevBtn = new JButton("Prev.");
 	
 	public ProductView() {
 		
-		imageFav=new ImageIcon(this.getClass().getResource("/Images/heartFav.png")).getImage();
+		imageFav=new ImageIcon(this.getClass().getResource("/Images/star.png")).getImage();
 		getContentPane().setLayout(null);	
-		JButton FavButton = new JButton("");
-		FavButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		FavButton.setFont(new Font("Tahoma", Font.PLAIN, 5));
-		FavButton.setBounds(608, 11, 41, 41);
-		FavButton.setIcon(new ImageIcon(imageFav));
-		getContentPane().add(FavButton);
-		//FavButton.setBorder(new RoundedBorder(10));
-		//FavButton.setBackground(Color.gray);
-
+		
+		FavButtonSetUp();
+		
+		
 		JLabel NameLabel = new JLabel("Product Name\r\n");
 		NameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		NameLabel.setBounds(0, 11, 659, 41);
@@ -81,22 +76,53 @@ public class ProductView extends JFrame{
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		JButton nextBtn = new JButton("Next");
-		nextBtn.setBounds(520, 262, 66, 23);
-		getContentPane().add(nextBtn);
 		
-		JButton btnNewButton = new JButton("Prev.");
-		btnNewButton.setBounds(386, 262, 66, 23);
-		getContentPane().add(btnNewButton);
+		nextNprevButtonsSetup();
 		
+		panelProperties();
+	}
+	
+	public void panelProperties() {
 		this.setVisible(true);
 		this.setTitle("Product View");
 		this.setSize(675,450);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dimension.width/2-this.getSize().width/2, dimension.height/2-this.getSize().height/2);
+		this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+	public void FavButtonSetUp() {
+		getContentPane().add(FavButton);
+		FavButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		FavButton.setFont(new Font("Tahoma", Font.PLAIN, 5));
+		FavButton.setBounds(608, 11, 27, 27);
+		FavButton.setIcon(new ImageIcon(imageFav));
+	}
+	
+	public void nextNprevButtonsSetup() {
+		nextBtn.setBounds(520, 262, 66, 23);
+		getContentPane().add(nextBtn);
+		
+		//next image button
+		nextBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		//prev image button
+		prevBtn.setBounds(386, 262, 66, 23);
+		getContentPane().add(prevBtn);
+		
+		prevBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+	}
+	
 }
 
  class RoundedBorder implements Border {

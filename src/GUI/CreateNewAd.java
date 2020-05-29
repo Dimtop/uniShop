@@ -1,4 +1,5 @@
 package GUI;
+import java.awt.Checkbox;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -13,7 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.AbstractButton;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -27,10 +27,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.SwingConstants;
 
 public class CreateNewAd extends JFrame{
 	private JTextField textField;
@@ -46,6 +46,7 @@ public class CreateNewAd extends JFrame{
 	
 	private ArrayList<String> ImagePath= new ArrayList<>();
 	private ArrayList<String>checkBoxes=new ArrayList<>();
+	private	ArrayList<JCheckBox>tagCheckBox= new ArrayList<>();
 	
 	public CreateNewAd() {
 		panel();
@@ -68,7 +69,7 @@ public class CreateNewAd extends JFrame{
 		this.setSize(485,700);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dimension.width/2-this.getSize().width/2, dimension.height/2-this.getSize().height/2);
-		//this.setIconImage(new ImageIcon(this.getClass().getResource("shopping-bags-512.png")).getImage());
+		this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
@@ -224,27 +225,11 @@ public class CreateNewAd extends JFrame{
 	
 	//utilization of check boxes
 	public void checkBoxesInitialize() { 
-		
-		ActionListener actionListener = new ActionListener() {
-			
-	      public void actionPerformed(ActionEvent actionEvent) {
-	    	  
-	          AbstractButton abstractButton = (AbstractButton) actionEvent.getSource();
-	          String Tag= abstractButton.getText();
-	    
-	          if(!checkBoxes.contains(Tag))
-	          {
-	        	  checkBoxes.add(Tag);
-	        	  abstractButton.setEnabled(false);
-	       	  }
-	        }
-	      };
-	      
-		chckbxNewCheckBox.addActionListener(actionListener);
-		chckbxNewCheckBox_1.addActionListener(actionListener);
-		chckbxNewCheckBox_2.addActionListener(actionListener);
-		chckbxNewCheckBox_3.addActionListener(actionListener);
-		chckbxNewCheckBox_4.addActionListener(actionListener);
+		tagCheckBox.add(chckbxNewCheckBox);
+		tagCheckBox.add(chckbxNewCheckBox_1);
+		tagCheckBox.add(chckbxNewCheckBox_2);
+		tagCheckBox.add(chckbxNewCheckBox_3);
+		tagCheckBox.add(chckbxNewCheckBox_4);
 	}
 	
 	//method that returns the Tag list
@@ -257,8 +242,11 @@ public class CreateNewAd extends JFrame{
 		btnCreate.addActionListener(new ActionListener() {
 			 
 			public void actionPerformed(ActionEvent e) {
-				InfoOfNewAd I = new InfoOfNewAd(getProductName(), getDesription(), getAbsolutePath(),GetTagList(),getPromotion());
-				
+				for(JCheckBox box : tagCheckBox) {
+					if(box.isSelected()) {
+						checkBoxes.add(box.getText());
+					}
+				}
 				setVisible(false);
 				}
 			});

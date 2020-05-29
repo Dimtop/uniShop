@@ -25,6 +25,7 @@ public class LoginWindow extends JFrame{
 	private JTextField usernameField;
 	private JPasswordField pwdPassword;
 	
+	//it should get data from the base
 	public LoginWindow() {
 		jpanel();
 		setimage();
@@ -43,22 +44,21 @@ public class LoginWindow extends JFrame{
 	}	
 	
 	private void panelView() {
-		
+		this.setResizable(false);
 		this.setVisible(true);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setSize(290,300);
+		this.setSize(430,370);
 		this.setLocation(dimension.width/2-this.getSize().width/2, dimension.height/2-this.getSize().height/2);
-		this.setIconImage(new ImageIcon(this.getClass().getResource("shopping-bags-512.png")).getImage());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
 	}
 	
 	//image setup
 	private void setimage(){
-		imageUnishopic=new ImageIcon(this.getClass().getResource("shopping-bags-512.png")).getImage();
+		//imageUnishopic.setIcon(new ImageIcon(AdPanelRegistered.class.getResource("/images/message.png")));
 		panel.setLayout(null);
 		labeliconimage=new JLabel("");
-		labeliconimage.setBounds(89,17, 106,104);
-		labeliconimage.setIcon(new ImageIcon(imageUnishopic));
+		labeliconimage.setBounds(140,11, 140,140);
+		labeliconimage.setIcon(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")));
 		panel.add(labeliconimage);	
 	}		
 	
@@ -67,14 +67,14 @@ public class LoginWindow extends JFrame{
 	private void userInfoField() {
 		
 		usernameField = new JTextField("");
-		usernameField.setBounds(109, 132, 106, 20);
+		usernameField.setBounds(190, 166, 155, 26);
 		panel.add(usernameField);
 		usernameField.setColumns(10);
 		
 		pwdPassword = new JPasswordField();
 		pwdPassword.setToolTipText("Password");
 		pwdPassword.setEchoChar('*');
-		pwdPassword.setBounds(109, 163, 106, 20);
+		pwdPassword.setBounds(190, 203, 155, 26);
 		panel.add(pwdPassword);
 		
 	}
@@ -82,33 +82,41 @@ public class LoginWindow extends JFrame{
 	//button setup
 	private void buttonsetup() {
 		JButton btnLogin = new JButton("Login!");
+		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnLogin.setBackground(new Color(0,255,40));;
-		btnLogin.setBounds(89, 219, 106, 31);
+		btnLogin.setBounds(132, 272, 148, 48);
 		panel.add(btnLogin);
 		
 		JLabel labelmessage = new JLabel("");
 		
-		labelmessage.setBounds(112, 194, 70, 14);
+		labelmessage.setBounds(144, 240, 126, 21);
 		panel.add(labelmessage);
 		
-		JLabel lblUsername = new JLabel("UserName:");
-		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblUsername.setBounds(20, 135, 79, 14);
+		JLabel lblUsername = new JLabel("UserName");
+		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblUsername.setBounds(69, 159, 111, 39);
 		panel.add(lblUsername);
 		
-		JLabel lblPassword = new JLabel("Password:");
-		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblPassword.setBounds(20, 166, 69, 14);
+		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblPassword.setBounds(69, 196, 111, 36);
 		panel.add(lblPassword);
 		
 		btnLogin.addActionListener(new ActionListener() {
-				 
+			
+			//when the login button pressed it should do the check with data base if the password and the username are correct
 			public void actionPerformed(ActionEvent e) {
-				String text=usernameField.getText();
-				if(text.equals("Username")) {
+				String username=usernameField.getText();
+				String password=String.valueOf(pwdPassword.getPassword());
+				System.out.println(password);
+				//if the username and the password dont match then print failed else change homescreen to premium
+				if() {
 					labelmessage.setText("Login failed!");
 					labelmessage.setForeground(Color.RED);
-					//setVisible(false);
+				}
+				else {
+					new HomeScreen_Premium();
+					setVisible(false);
 				}
 			}});
 			
