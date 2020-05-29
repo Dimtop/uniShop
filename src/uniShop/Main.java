@@ -12,11 +12,16 @@ public class Main {
 		
 		User u1 = new Guest(id,username,email);
 		ArrayList<Ad> ads = new ArrayList<Ad>();
+		ArrayList<Ad> ads2 = new ArrayList<Ad>();
 		
-		
+
 		Guest g1 = new Guest(id,username,email);
-		ads = g1.filter();
+		Registered r1 = new Registered(id,username,email);
+		
+		ads2 = r1.filterRegistered();
+		ads = g1.filter();		
 		g1.viewAds(ads);
+		g1.viewAds(ads2);
 	}
 
 }
