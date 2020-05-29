@@ -1,5 +1,7 @@
 package uniShop;
 
+import java.util.ArrayList;
+
 public class Premium extends Registered {
 
 	private int tier;
@@ -18,12 +20,12 @@ public class Premium extends Registered {
 		
 	}
 	
-	public void updatePremiumPlan()//Premium Plan GUI update in database
+	public void updatePremiumPlan()//Premium Plan GUI and update in database
 	{
 		this.tier++;
 	}
 	
-	public void deletePremiumPlan()//Premium Plan GUI delete in database
+	public void deletePremiumPlan()//Premium Plan GUI and delete in database
 	{
 		this.premium = 0;
 	}
