@@ -169,9 +169,12 @@ public class Registered extends User {
 			
 	}	
 	
-	public void viewProducts(Ad aProduct)//Product view GUI and search database
+	public void viewProducts(ArrayList<Ad> ads)//Product view GUI and search database
 	{
+		for(Ad ad: ads)
+			System.out.println(ad.getName());
 		
+		//HomeScreenRegistered g = new HomeScreenRegistered(ads); ???
 	}
 	
 	public void viewOtherProfiles(Registered aUser)//ViewOtherProfiles GUI and search database

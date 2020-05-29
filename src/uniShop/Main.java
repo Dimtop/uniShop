@@ -21,7 +21,7 @@ public class Main {
 		ads2 = r1.filterRegistered();
 		ads = g1.filter();		
 		g1.viewAds(ads);
-		g1.viewAds(ads2);
+		r1.viewProducts(ads2);
 	}
 
 }
