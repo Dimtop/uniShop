@@ -14,7 +14,7 @@ public class Guest extends User{
 	}
 	
 	
-	public static ArrayList<Ad> filter(){
+	public ArrayList<Ad> filter(){
 		
 		boolean find = false;
 		
@@ -91,7 +91,7 @@ public class Guest extends User{
 		return Ads;
 		
 	}
-public static ArrayList<Ad> SearchAds(){
+	public ArrayList<Ad> SearchAds(){
 		
 		Scanner in = new Scanner(System.in);
 		
@@ -135,7 +135,7 @@ public static ArrayList<Ad> SearchAds(){
 		ArrayList<Ad> foundAds = new ArrayList<Ad>();
 		for(Ad ad: Ads) {
 			
-			if(ad.getName().equals(Search)) {
+			if(ad.getName().contains(Search)) {
 				foundAds.add(ad);
 				find = true;
 			}
@@ -151,7 +151,7 @@ public static ArrayList<Ad> SearchAds(){
 		return Ads;
 	}
 	
-	public static void viewAds(ArrayList<Ad> ads) {
+	public void viewAds(ArrayList<Ad> ads) {
 		
 		
 		for(Ad ad: ads)
