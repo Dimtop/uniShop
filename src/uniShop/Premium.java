@@ -30,4 +30,15 @@ public class Premium extends Registered {
 		this.premium = 0;
 	}
 
+	public int getTier() {
+		return tier;
+	}
+
+	public void setTier(int tier) {
+		this.tier = tier;
+	}
+	
+	
+	
+
 }

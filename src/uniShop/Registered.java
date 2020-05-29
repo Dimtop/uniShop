@@ -88,6 +88,15 @@ public class Registered extends User {
 	{
 		//change this.premium
 		//Create Premium object and create Premium HP GUI
+		if(this.premium == 0) {
+			new Premium(this.userId, this.username, this.email,1,this.preferences,0);
+			//Premium_Gui
+		}
+		else if(this.premium==1) {
+			//updatePremiumPlan();
+		}
+			
+			
 	}
 	
 	public ArrayList<Ad> searchAds()//Registered HP GUI and database search
