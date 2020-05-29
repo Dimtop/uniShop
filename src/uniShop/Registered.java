@@ -15,10 +15,11 @@ public class Registered extends User {
 	
 	public Registered(int userId, String username, String email)
 	{
+		super(userId, username, email);	
 		this.myAds = new ArrayList<>();
 		this.myMessages = new ArrayList<>();
 		this.wishlist = new ArrayList<>();
-		super(userId, username, email);	
+		
 	}
 	
 	
