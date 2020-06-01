@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class LoginWindow extends JFrame{
 	
@@ -88,6 +89,7 @@ public class LoginWindow extends JFrame{
 		panel.add(btnLogin);
 		
 		JLabel labelmessage = new JLabel("");
+		labelmessage.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		labelmessage.setBounds(144, 240, 126, 21);
 		panel.add(labelmessage);
@@ -110,12 +112,12 @@ public class LoginWindow extends JFrame{
 				String password=String.valueOf(pwdPassword.getPassword());
 				System.out.println(password);
 				//if the username and the password dont match then print failed else change homescreen to premium
-				if() {
+				if(true) {
 					labelmessage.setText("Login failed!");
 					labelmessage.setForeground(Color.RED);
 				}
 				else {
-					new HomeScreen_Premium();
+					//new HomeScreen_Premium();
 					setVisible(false);
 				}
 			}});
