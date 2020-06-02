@@ -67,7 +67,7 @@ public class ProductView extends JFrame{
 		
 		PhotoOfTheProduct.setHorizontalAlignment(SwingConstants.CENTER);
 		PhotoOfTheProduct.setBounds(364, 121, 272, 194);
-		try {
+		/*try {
 			img=ImageIO.read(new File(imagepath.get(0)));	
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -78,7 +78,7 @@ public class ProductView extends JFrame{
 		ImageIcon icon=new ImageIcon(dim);
 		PhotoOfTheProduct.setIcon(icon);
 		
-		getContentPane().add(PhotoOfTheProduct);
+		getContentPane().add(PhotoOfTheProduct);*/
 		favlabel.setFont(new Font("Tahoma", Font.ITALIC, 9));
 		
 		favlabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -110,8 +110,7 @@ public class ProductView extends JFrame{
 		this.setSize(675,415);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dimension.width/2-this.getSize().width/2, dimension.height/2-this.getSize().height/2);
-		this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
 	}
 
 	public void FavButtonSetUp() {

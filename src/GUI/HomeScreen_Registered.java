@@ -65,6 +65,7 @@ public class HomeScreen_Registered extends HomeScreen {
 		//Create New Ad Button Section
 		createNewAd.setSize(searchPanel.getWidth()-10, 45);
 		createNewAd.setLocation(5, 5);
+		creatingNewAdListener();
 		leftButtonsPanel.add(createNewAd);
 		
 		//My Messages Button Section
@@ -76,6 +77,14 @@ public class HomeScreen_Registered extends HomeScreen {
 			}
 		});
 		leftButtonsPanel.add(myMessages);
+	}
+	
+	protected void creatingNewAdListener() {
+		createNewAd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new CreateNewAd();
+			}
+		});
 	}
 	
 	@Override

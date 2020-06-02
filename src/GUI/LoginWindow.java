@@ -46,11 +46,12 @@ public class LoginWindow extends JFrame{
 	
 	private void panelView() {
 		this.setResizable(false);
+		this.setTitle("LogIn");
 		this.setVisible(true);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setSize(430,370);
 		this.setLocation(dimension.width/2-this.getSize().width/2, dimension.height/2-this.getSize().height/2);
-		this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
+		//this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
 	}
 	
 	//image setup

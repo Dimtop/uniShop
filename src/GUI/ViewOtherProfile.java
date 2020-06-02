@@ -110,9 +110,11 @@ public class ViewOtherProfile extends JFrame {
 	
 	private void setupFrameProperties() {
 		this.setResizable(false);
+		this.setTitle("Profile"); //this.setTitle(user.getName() + "'s Profile");
 		this.setVisible(true);
 		this.setSize(370, 370);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+		//this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
 	}
 }

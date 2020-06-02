@@ -69,8 +69,7 @@ public class CreateNewAd extends JFrame{
 		this.setSize(650,700);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dimension.width/2-this.getSize().width/2, dimension.height/2-this.getSize().height/2);
-		this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
 	}
 	
 	//layout of the window and all addings

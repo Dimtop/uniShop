@@ -75,9 +75,11 @@ public class ReplyFrame extends JFrame {
 	
 	private void setupFrameProperties() {
 		this.setResizable(false);
+		this.setTitle("Reply");
 		this.setVisible(true);
 		this.setSize(620, 360);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+		//this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
 	}
 }

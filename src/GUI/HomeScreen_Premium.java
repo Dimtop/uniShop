@@ -47,6 +47,15 @@ public class HomeScreen_Premium extends HomeScreen_Registered {
 		
 	}
 	
+	@Override
+	protected void creatingNewAdListener() {
+		createNewAd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new CreateNewAdPrem();
+			}
+		});
+	}
+	
 	protected void upgradeToPremiumPlan(JFrame currentFrame) {
 		
 		int tier = 0+1;
