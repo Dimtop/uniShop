@@ -1,11 +1,15 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -16,9 +20,6 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
-import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /*	Panel appearing on the HomeScreen multiply times that
  * 	contains informations about an Ad
@@ -79,6 +80,18 @@ public class AdPanel extends JPanel {
 		nameLabel.setText("Product Name"); //ad.getName();
 		nameLabel.setSize(725, 30);
 		nameLabel.setLocation(160, 30);
+		nameLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//Testing 
+				ArrayList<String> strTest = new ArrayList<>();
+				strTest.add("Test1");
+				strTest.add("Test2");
+				strTest.add("Test3");
+				strTest.add("Test4");
+				new ProductView(strTest);
+			}
+		});
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		this.add(nameLabel);
 	}
