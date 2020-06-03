@@ -2,7 +2,7 @@ package uniShop;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Ad {
+public class Ad implements Comparable{
 
 	private int ad_id;
 	private String name;
@@ -122,4 +122,12 @@ public class Ad {
 		tags.remove(aTag);
 	}
 	
+	public int compareTo(Object o) {  //compare based on promotion
+		if(o instanceof Ad) {
+			Ad a = (Ad) o;
+			return a.promotionType.ordinal()- this.promotionType.ordinal();
+		}
+			
+		return -1;
+	}
 }

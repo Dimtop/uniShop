@@ -121,15 +121,16 @@ public class Registered extends User {
 		ArrayList<String> preferences5 = new ArrayList<String>();
 		preferences5.add("cook");
 		
-		ArrayList<Ad> Ads = new ArrayList<Ad>();
-		Ad a1 = new Ad(1,"shoes sport",preferences3);
-		Ad a2 = new Ad(2,"english lessons",preferences2);
-		Ad a3 = new Ad(3,"art lessons",preferences4);
-		Ad a4 = new Ad(4,"cooking",preferences5);
-		a2.setPromotion(ListingPromotionType.PROMOTION_LEVEL2);
-		a4.setPromotion(ListingPromotionType.PROMOTION_LEVEL1);
-		a3.setPromotion(ListingPromotionType.NOT_PROMOTED);
-		a1.setPromotion(ListingPromotionType.NOT_PROMOTED);
+		
+		ArrayList<Ad> Ads = new ArrayList<Ad>(); // get Ads from database
+		Ad a1 = new Ad(1,"shoes sport",null,null,null,null,null,preferences3,null,ListingPromotionType.NOT_PROMOTED);
+		Ad a2 = new Ad(2,"english lessons",null,null,null,null,null,preferences2,null,ListingPromotionType.PROMOTION_LEVEL2);
+		Ad a3 = new Ad(3,"art lessons",null,null,null,null,null,preferences4,null,ListingPromotionType.NOT_PROMOTED);
+		Ad a4 = new Ad(4,"cooking",null,null,null,null,null,preferences5,null,ListingPromotionType.PROMOTION_LEVEL1);
+		//a2.setPromotionType(ListingPromotionType.PROMOTION_LEVEL2);
+		//a4.setPromotionType(ListingPromotionType.PROMOTION_LEVEL1);
+		//a3.setPromotionType(ListingPromotionType.NOT_PROMOTED);
+		//a1.setPromotionType(ListingPromotionType.NOT_PROMOTED);
 		Ads.add(a1);
 		Ads.add(a2);
 		Ads.add(a3);
@@ -183,15 +184,16 @@ public class Registered extends User {
 		ArrayList<String> preferences5 = new ArrayList<String>();
 		preferences5.add("cook");
 			
+		
 		ArrayList<Ad> Ads = new ArrayList<Ad>(); // get Ads from database
-		Ad a1 = new Ad(1,"shoes sport",preferences3);
-		Ad a2 = new Ad(2,"english lessons",preferences2);
-		Ad a3 = new Ad(3,"art lessons",preferences4);
-		Ad a4 = new Ad(4,"cooking",preferences5);
-		a2.setPromotion(ListingPromotionType.PROMOTION_LEVEL2);
-		a4.setPromotion(ListingPromotionType.PROMOTION_LEVEL1);
-		a3.setPromotion(ListingPromotionType.NOT_PROMOTED);
-		a1.setPromotion(ListingPromotionType.NOT_PROMOTED);
+		Ad a1 = new Ad(1,"shoes sport",null,null,null,null,null,preferences3,null,ListingPromotionType.NOT_PROMOTED);
+		Ad a2 = new Ad(2,"english lessons",null,null,null,null,null,preferences2,null,ListingPromotionType.PROMOTION_LEVEL2);
+		Ad a3 = new Ad(3,"art lessons",null,null,null,null,null,preferences4,null,ListingPromotionType.NOT_PROMOTED);
+		Ad a4 = new Ad(4,"cooking",null,null,null,null,null,preferences5,null,ListingPromotionType.PROMOTION_LEVEL1);
+		//a2.setPromotionType(ListingPromotionType.PROMOTION_LEVEL2);
+		//a4.setPromotionType(ListingPromotionType.PROMOTION_LEVEL1);
+		//a3.setPromotionType(ListingPromotionType.NOT_PROMOTED);
+		//a1.setPromotionType(ListingPromotionType.NOT_PROMOTED);
 		Ads.add(a1);
 		Ads.add(a2);
 		Ads.add(a3);
