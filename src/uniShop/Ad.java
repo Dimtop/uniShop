@@ -121,5 +121,6 @@ public class Ad {
 	{
 		tags.remove(aTag);
 	}
+	//TEST COMMENT
 	
 }
