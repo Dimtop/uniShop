@@ -37,7 +37,7 @@ public class Ad {
 		return ad_id;
 	}
 	
-	public int setAd_id(int id)
+	public void setAd_id(int id)
 	{
 		this.ad_id = id;
 	}
@@ -99,7 +99,7 @@ public class Ad {
 	{
 		return status;
 	}
-	public ListingState changeStatus(ListingState status)
+	public void changeStatus(ListingState status)
 	{
 		this.status = status;
 	}
@@ -121,6 +121,5 @@ public class Ad {
 	{
 		tags.remove(aTag);
 	}
-	//TEST COMMENT
 	
 }
