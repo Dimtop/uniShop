@@ -2,6 +2,8 @@ package uniShop;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
+
 
 
 public class Guest extends User{
@@ -12,7 +14,7 @@ public class Guest extends User{
 	}
 	
 	
-	public static ArrayList<Ad> filter(){
+	public ArrayList<Ad> filter(){
 		
 		boolean find = false;
 		
@@ -58,6 +60,10 @@ public class Guest extends User{
 		 * kai na sygkrinei aytes tis epiloges me to ArrayList apo ads ths kathe diafhmishs
 		 * de kserw ti paizei me grafika gia ayto exw kanei enan user wste na blepw oti douleuei  
 		 */
+<<<<<<< HEAD
+=======
+		
+>>>>>>> origin/User/Guest
 		
 		ArrayList<Ad> foundAds = new ArrayList<Ad>();
 		
@@ -88,8 +94,67 @@ public class Guest extends User{
 		return Ads;
 		
 	}
+	public ArrayList<Ad> SearchAds(){
+		
+		Scanner in = new Scanner(System.in);
+		
+		boolean find = false;
+		String Search;
+		
+		ArrayList<String> preferences1 = new ArrayList<String>();
+		preferences1.add("sport");
+		preferences1.add("art");
+		preferences1.add("lessons");
+		
+		ArrayList<String> preferences2 = new ArrayList<String>();
+		preferences2.add("lessons");
+		
+		ArrayList<String> preferences3 = new ArrayList<String>();
+		preferences3.add("sport");
+		
+		ArrayList<String> preferences4 = new ArrayList<String>();
+		preferences4.add("art");
+		
+		ArrayList<String> preferences5 = new ArrayList<String>();
+		preferences5.add("cook");
+		
+		ArrayList<Ad> Ads = new ArrayList<Ad>();
+		Ad a1 = new Ad(1,"shoes sport",preferences3);
+		Ad a2 = new Ad(2,"english lessons",preferences2);
+		Ad a3 = new Ad(3,"art lessons",preferences4);
+		Ad a4 = new Ad(4,"cooking",preferences5);
+		a2.setPromotion(ListingPromotionType.PROMOTION_LEVEL2);
+		a4.setPromotion(ListingPromotionType.PROMOTION_LEVEL1);
+		a3.setPromotion(ListingPromotionType.NOT_PROMOTED);
+		a1.setPromotion(ListingPromotionType.NOT_PROMOTED);
+		Ads.add(a1);
+		Ads.add(a2);
+		Ads.add(a3);
+		Ads.add(a4);
 	
-	public static void viewAds(ArrayList<Ad> ads) {
+		System.out.print("Search:");
+		Search=in.nextLine();
+		
+		ArrayList<Ad> foundAds = new ArrayList<Ad>();
+		for(Ad ad: Ads) {
+			
+			if(ad.getName().contains(Search)) {
+				foundAds.add(ad);
+				find = true;
+			}
+				
+		}
+		if(find == true) {
+			Collections.sort(foundAds);
+			return foundAds;
+		}
+		if(find == false) {
+			Collections.sort(Ads);
+		}
+		return Ads;
+	}
+	
+	public void viewAds(ArrayList<Ad> ads) {
 		
 		
 		for(Ad ad: ads)
