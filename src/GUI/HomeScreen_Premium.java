@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import uniShop.*;
+
 /*	User Interface of the system's home screen
  * 	displayed on a Premium User 
  * 	Input : ArrayList of String with the server's tags of the system
@@ -18,8 +20,11 @@ public class HomeScreen_Premium extends HomeScreen_Registered {
 
 	protected JButton viewPremiumPlanButton;
 	
-	public HomeScreen_Premium(ArrayList<String> tags, ArrayList<String> ads) {
-		super(tags, ads);
+	protected Premium currUser;
+	
+	public HomeScreen_Premium(ArrayList<String> tags, ArrayList<Ad> ads, Premium user) {
+		super(tags, ads, user);
+		this.currUser = user;
 	}
 	
 	protected void setupTopButtons() {

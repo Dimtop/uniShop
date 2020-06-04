@@ -15,6 +15,13 @@ public class Premium extends Registered {
 		
 	}
 	
+	public Premium(Registered user) {
+		super(user.getId(), user.getUsername(), user.getEmail());
+		this.premium = 1; //not sure
+		this.preferences = user.getPreferences();
+		this.tier = 1;
+	}
+	
 	public void  viewPremiumPlan()//Premium Plan GUI 
 	{
 		

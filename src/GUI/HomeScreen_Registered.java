@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
+import uniShop.*;
+
 /*	User Interface of the system's home screen
  * 	displayed on a Registered User 
  * 	Input : ArrayList of String with the server's tags of the system
@@ -31,12 +33,15 @@ public class HomeScreen_Registered extends HomeScreen {
 	protected JButton myMessages = new JButton("My Messages");
 	
 	protected ArrayList<String> tags = new ArrayList<>();
-	protected ArrayList<String> ads = new ArrayList<>();
+	protected ArrayList<Ad> ads = new ArrayList<>();
 	
-	public HomeScreen_Registered(ArrayList<String> tags, ArrayList<String> ads) {
+	protected Registered currUser;
+	
+	public HomeScreen_Registered(ArrayList<String> tags, ArrayList<Ad> ads, Registered user) {
 		super(tags, ads);
 		this.tags = tags;
 		this.ads = ads;
+		this.currUser = user;
 		
 		//Top Buttons setup
 		setupTopButtons();
@@ -73,7 +78,7 @@ public class HomeScreen_Registered extends HomeScreen {
 		myMessages.setLocation(5, 70);
 		myMessages.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new MyMessages();
+				new MyMessages(currUser);
 			}
 		});
 		leftButtonsPanel.add(myMessages);
@@ -88,15 +93,15 @@ public class HomeScreen_Registered extends HomeScreen {
 	}
 	
 	@Override
-	protected void creatingAdsPanel(ArrayList<String> ads) {
+	protected void creatingAdsPanel(ArrayList<Ad> ads) {
 		
 		adsPanel.setPreferredSize(new Dimension(937, ads.size()*(gap+150)-gap));
 		adsPanel.setLayout(null);
 		
 		AdPanel adPanel;
 		int height = 0;
-		for(String str : ads) {
-			adPanel = new AdPanelRegistered(str);
+		for(Ad currAd : ads) {
+			adPanel = new AdPanelRegistered(currAd);
 			adPanel.setBounds(0, height, adPanel.getWidth(), adPanel.getHeight());
 			adsPanel.add(adPanel);
 			
@@ -126,7 +131,7 @@ public class HomeScreen_Registered extends HomeScreen {
 		myProfileButton.setLocation(logoutButton.getX()-myProfileButton.getWidth()-gap, gap);
 		myProfileButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new MyProfile(false);
+				new MyProfile(false, currUser);
 			}
 		});
 		this.getContentPane().add(myProfileButton);
@@ -151,7 +156,7 @@ public class HomeScreen_Registered extends HomeScreen {
 		wishListButton.setLocation(upgradePremiumPlanButton.getX()-wishListButton.getWidth()-gap, gap);
 		wishListButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Wishlist(ads);
+				new AdListFrame(ads, "Wishlist");
 			}
 		});
 		this.getContentPane().add(wishListButton);		
@@ -160,6 +165,8 @@ public class HomeScreen_Registered extends HomeScreen {
 	protected void upgradeToPremiumPlan(JFrame currentFrame) {
 		currentFrame.dispose();
 		
-		new HomeScreen_Premium(tags, ads);
+		Premium premUser = new Premium(currUser);
+		
+		new HomeScreen_Premium(tags, ads, premUser);
 	}
 }

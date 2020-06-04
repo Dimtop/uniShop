@@ -5,8 +5,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -15,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+
+import uniShop.Registered;
 
 public class MyProfile extends JFrame {
 
@@ -29,8 +30,11 @@ public class MyProfile extends JFrame {
 	
 	private boolean editable;
 	
-	public MyProfile(boolean editable) {
+	private Registered currUser;
+	
+	public MyProfile(boolean editable, Registered user) {
 		this.editable = editable;
+		this.currUser = user;
 		
 		//Main Panel
 		setupMainPanel();
@@ -54,7 +58,7 @@ public class MyProfile extends JFrame {
 	}
 	
 	private void setupProfileInfoPanel(){
-		profileInfoPanel = new ProfileInfoPanel(editable);
+		profileInfoPanel = new ProfileInfoPanel(editable, currUser);
 		
 		//Titled Border
 		TitledBorder titledBorder = new TitledBorder(new EtchedBorder(), "Profile Info");
@@ -71,16 +75,9 @@ public class MyProfile extends JFrame {
 		confirmButton.setBounds(380, 345, 120, 20);
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				editProfileInfo();
 				dispose();
-				new MyProfile(false);
-				int i = 0;
-				for(JCheckBox checkbox : profileInfoPanel.getCheckBoxList()) {
-					if(checkbox.isSelected()) {
-						System.out.println(profileInfoPanel.getTable().get(i)); //testing
-						//adding the values to the user's preferences
-					}
-					i++;
-				}
+				new MyProfile(false, currUser);
 			}
 		});
 		mainPanel.add(confirmButton);
@@ -93,13 +90,18 @@ public class MyProfile extends JFrame {
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new MyProfile(true);
+				new MyProfile(true, currUser);
 			}
 		});
 		mainPanel.add(editButton);
 		
 		//My Ads Button Section
 		myAdsButton.setBounds(380, 315, 120, 20);
+		myAdsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AdListFrame(currUser.getMyAds(), "My Ads");
+			}
+		});
 		mainPanel.add(myAdsButton);
 		
 		//Delete Profile Button Section
@@ -131,6 +133,24 @@ public class MyProfile extends JFrame {
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		//this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
 	}
+	
+	//editing preferences on the view profile frame
+	private void editProfileInfo() {
+		int i = 0;
+		ArrayList<String> newPreferences = new ArrayList<>();
+		for(JCheckBox checkbox : profileInfoPanel.getCheckBoxList()) {
+			if(checkbox.isSelected()) {
+				newPreferences.add(profileInfoPanel.getTable().get(i));
+			}
+			i++;
+		}
+		currUser.setPreferences(newPreferences);//adding the values to the user's preferences
+
+		currUser.setUsername(profileInfoPanel.getNewUsername()); //applying new user name
+		currUser.setEmail(profileInfoPanel.getNewEmail()); //applying new e-mail
+		//to do change on the password
+	}
+	
 }
 
 

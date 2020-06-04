@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import uniShop.*;
+
 /*	Common objects of
  * 	different home screens
  * 	Input : ArrayList of String with the server's tags of the system
@@ -27,11 +29,11 @@ public abstract class HomeScreen extends JFrame {
 	
 	protected JScrollPane adsScrollPane = new JScrollPane();
 	
-	protected ArrayList<String> ads = new ArrayList<>();//testing
+	protected ArrayList<Ad> ads = new ArrayList<>();
 	
 	protected int gap = 10; //gap between subjects
 	
-	public HomeScreen(ArrayList<String> tags, ArrayList<String> ads) {
+	public HomeScreen(ArrayList<String> tags, ArrayList<Ad> ads) {
 		this.ads = ads;
 		
 		//Main Panel setup
@@ -70,7 +72,7 @@ public abstract class HomeScreen extends JFrame {
 	}
 	
 	//setting up ads' panel
-	protected void setupAdsPanel(ArrayList<String> ads) {
+	protected void setupAdsPanel(ArrayList<Ad> ads) {
 
 		creatingLoadingPanel();
 		
@@ -96,7 +98,7 @@ public abstract class HomeScreen extends JFrame {
 	protected abstract void setupTopButtons();	
 	
 	//creating a panel with ads from list ads
-	protected abstract void creatingAdsPanel(ArrayList<String> ads);
+	protected abstract void creatingAdsPanel(ArrayList<Ad> ads);
 	
 	//refreshing the ads' panel
 	public void refreshAdsPanel() {

@@ -3,7 +3,9 @@ package GUI;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -13,25 +15,27 @@ import javax.swing.JSeparator;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
+import uniShop.*;
+
 public class MyMessages extends JFrame {
 
 	private JPanel mainPanel = new JPanel();
 	private JSeparator separator = new JSeparator();
 	
-	private ArrayList<String> sellerMessages = new ArrayList<>();
+	private ArrayList<Message> sellerMessages = new ArrayList<>();
 	private JScrollPane sellerScroll = new JScrollPane();
 	private JPanel sellerPanel = new JPanel();
 	
-	private ArrayList<String> buyerMessages = new ArrayList<>();
+	private ArrayList<Message> buyerMessages = new ArrayList<>(); //must change, waiting for Registered.java to add replies
 	private JScrollPane buyerScroll = new JScrollPane();
 	private JPanel buyerPanel = new JPanel();
 	
+	private Registered currUser;
+	
 	//private ArrayList<MessagePanel> messagePanels = new ArrayList<>();
 	
-	public MyMessages() {
-		
-		//testing
-		setupTables();
+	public MyMessages(Registered currUser) {
+		this.currUser = currUser;
 		
 		//Main Panel Section
 		setupMainPanel();
@@ -56,6 +60,7 @@ public class MyMessages extends JFrame {
 	}
 	
 	private void setupSellerMessage() {
+		sellerMessages = currUser.getMessages();
 		
 		//Seller Scroll Pane
 		sellerScroll.setSize(500, 330);
@@ -74,8 +79,8 @@ public class MyMessages extends JFrame {
 		//Messages Panels
 		MessagePanel messagePanel;
 		int height = 0;
-		for(String str : sellerMessages) {
-			messagePanel = new MessagePanel(true, str);
+		for(Message currMsg : sellerMessages) {
+			messagePanel = new MessagePanel(true, currMsg);
 			messagePanel.setLocation(0, height);
 			sellerPanel.add(messagePanel);
 			
@@ -108,10 +113,17 @@ public class MyMessages extends JFrame {
 		buyerPanel.setLocation(10, 10);
 		buyerPanel.setLayout(null);
 		
+		//Testing
+		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+		Date currDate = new Date(System.currentTimeMillis());
+		Ad ad = new Ad(0,"Product1","Description","https://cdn.wccftech.com/wp-content/uploads/2018/10/Intel-X-Series-1-Custom-2060x1375.jpg",
+				currDate,currUser,currUser,new ArrayList<String>(),ListingState.ACTIVE, ListingPromotionType.NOT_PROMOTED);
+		buyerMessages.add(new Message("Text", currUser, currUser, ad));
+		
 		//Messages Panels
 		MessagePanel messagePanel;
 		int height = 0;
-		for(String str : buyerMessages) {
+		for(Message str : buyerMessages) {
 			messagePanel = new MessagePanel(false, str);
 			messagePanel.setLocation(0, height);
 			buyerPanel.add(messagePanel);
@@ -139,24 +151,4 @@ public class MyMessages extends JFrame {
 		//this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
 	}
 	
-	//for testing
-	public void setupTables() {
-		sellerMessages.add("asdasdkjahskdjahksjdhakjsdhkajshdkajshkdjashkdjahksdjhakjsdhaksjdhakhgfjakdgfajksdghafjkdhsgfjkasdghfjkadghsfjkashdgfjkasfajsfjsfsdghafkjsf");
-		sellerMessages.add("asdasdkjahskdjahksjdhakjsdhkajshdkajshkdjashkdjahksdjhakjsdhaksjdhakhgfjakdgfajksdghafjkdhsgfjkasdghfjkadghsfjkashdgfjkasfajsfjsfsdghafkjsf");
-		sellerMessages.add("asdasdkjahskdjahksjdhakjsdhkajshdkajshkdjashkdjahksdjhakjsdhaksjdhakhgfjakdgfajksdghafjkdhsgfjkasdghfjkadghsfjkashdgfjkasfajsfjsfsdghafkjsf");
-		sellerMessages.add("asdasdkjahskdjahksjdhakjsdhkajshdkajshkdjashkdjahksdjhakjsdhaksjdhakhgfjakdgfajksdghafjkdhsgfjkasdghfjkadghsfjkashdgfjkasfajsfjsfsdghafkjsf");
-		sellerMessages.add("asdasdkjahskdjahksjdhakjsdhkajshdkajshkdjashkdjahksdjhakjsdhaksjdhakhgfjakdgfajksdghafjkdhsgfjkasdghfjkadghsfjkashdgfjkasfajsfjsfsdghafkjsf");
-		sellerMessages.add("asdasdkjahskdjahksjdhakjsdhkajshdkajshkdjashkdjahksdjhakjsdhaksjdhakhgfjakdgfajksdghafjkdhsgfjkasdghfjkadghsfjkashdgfjkasfajsfjsfsdghafkjsf");
-		sellerMessages.add("asdasdkjahskdjahksjdhakjsdhkajshdkajshkdjashkdjahksdjhakjsdhaksjdhakhgfjakdgfajksdghafjkdhsgfjkasdghfjkadghsfjkashdgfjkasfajsfjsfsdghafkjsf");
-		sellerMessages.add("asdasdkjahskdjahksjdhakjsdhkajshdkajshkdjashkdjahksdjhakjsdhaksjdhakhgfjakdgfajksdghafjkdhsgfjkasdghfjkadghsfjkashdgfjkasfajsfjsfsdghafkjsf");
-		
-		buyerMessages.add("asdasdkjahskdjahksjdhakjsdhkajshdkajshkdjashkdjahksdjhakjsdhaksjdhakhgfjakdgfajksdghafjkdhsgfjkasdghfjkadghsfjkashdgfjkasfajsfjsfsdghafkjsf");
-		buyerMessages.add("asdasdkjahskdjahksjdhakjsdhkajshdkajshkdjashkdjahksdjhakjsdhaksjdhakhgfjakdgfajksdghafjkdhsgfjkasdghfjkadghsfjkashdgfjkasfajsfjsfsdghafkjsf");
-		buyerMessages.add("asdasdkjahskdjahksjdhakjsdhkajshdkajshkdjashkdjahksdjhakjsdhaksjdhakhgfjakdgfajksdghafjkdhsgfjkasdghfjkadghsfjkashdgfjkasfajsfjsfsdghafkjsf");
-		buyerMessages.add("asdasdkjahskdjahksjdhakjsdhkajshdkajshkdjashkdjahksdjhakjsdhaksjdhakhgfjakdgfajksdghafjkdhsgfjkasdghfjkadghsfjkashdgfjkasfajsfjsfsdghafkjsf");
-		buyerMessages.add("asdasdkjahskdjahksjdhakjsdhkajshdkajshkdjashkdjahksdjhakjsdhaksjdhakhgfjakdgfajksdghafjkdhsgfjkasdghfjkadghsfjkashdgfjkasfajsfjsfsdghafkjsf");
-		buyerMessages.add("asdasdkjahskdjahksjdhakjsdhkajshdkajshkdjashkdjahksdjhakjsdhaksjdhakhgfjakdgfajksdghafjkdhsgfjkasdghfjkadghsfjkashdgfjkasfajsfjsfsdghafkjsf");
-		buyerMessages.add("asdasdkjahskdjahksjdhakjsdhkajshdkajshkdjashkdjahksdjhakjsdhaksjdhakhgfjakdgfajksdghafjkdhsgfjkasdghfjkadghsfjkashdgfjkasfajsfjsfsdghafkjsf");
-		buyerMessages.add("asdasdkjahskdjahksjdhakjsdhkajshdkajshkdjashkdjahksdjhakjsdhaksjdhakhgfjakdgfajksdghafjkdhsgfjkasdghfjkadghsfjkashdgfjkasfajsfjsfsdghafkjsf");
-	}
 }

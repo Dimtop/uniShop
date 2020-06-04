@@ -15,8 +15,12 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import uniShop.*;
+
 public class ViewOtherProfile extends JFrame {
 
+	private Registered myUser;
+	
 	private JPanel mainPanel = new JPanel();
 	
 	private JLabel usernameLabel = new JLabel("Username");
@@ -30,7 +34,8 @@ public class ViewOtherProfile extends JFrame {
 	
 	private JButton reviewButton = new JButton("Review !");
 	
-	public ViewOtherProfile() {
+	public ViewOtherProfile(Registered user) {
+		this.myUser = user;
 		
 		//Profile View Section
 		setupProfileView();
@@ -56,6 +61,7 @@ public class ViewOtherProfile extends JFrame {
 		//User Name Field
 		usernameField.setSize(230, 20);
 		usernameField.setLocation(110, 20);
+		usernameField.setText(myUser.getUsername());
 		usernameField.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		usernameField.setEditable(false);
 		mainPanel.add(usernameField);
@@ -69,6 +75,7 @@ public class ViewOtherProfile extends JFrame {
 		//E-mail Field
 		emailField.setSize(230, 20);
 		emailField.setLocation(110, 60);
+		emailField.setText(myUser.getEmail());
 		emailField.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		emailField.setEditable(false);
 		mainPanel.add(emailField);

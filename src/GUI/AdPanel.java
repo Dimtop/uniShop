@@ -21,6 +21,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
+import uniShop.*;
+
 /*	Panel appearing on the HomeScreen multiply times that
  * 	contains informations about an Ad
  * 	Input : variable ad type Ad
@@ -28,13 +30,16 @@ import javax.swing.border.SoftBevelBorder;
 
 public class AdPanel extends JPanel {
 
+	private Ad myAd;
+	
 	private JLabel photo;
 	private JLabel nameLabel = new JLabel();
 	private JTextArea descText = new JTextArea();
 	private JLabel tierLabel = new JLabel();
 	private JLabel sellerName = new JLabel();
 	
-	public AdPanel(String text) {
+	public AdPanel(Ad ad) {
+		this.myAd = ad;
 		
 		//Photo Section
 		setupPhoto();
@@ -56,11 +61,10 @@ public class AdPanel extends JPanel {
 	}
 	
 	private void setupPhoto() {
-		String testUrl = "https://cdn.wccftech.com/wp-content/uploads/2018/10/Intel-X-Series-1-Custom-2060x1375.jpg";
 		
 		BufferedImage image;
 		try {
-			image = ImageIO.read(new URL(testUrl));  //get url from ad
+			image = ImageIO.read(new URL(myAd.getPhotoLink()));  //get url from ad
 			Image resizedImage = resizeImage(image);
 			photo = new JLabel(new ImageIcon(resizedImage)); 
 		} catch (MalformedURLException e) {
@@ -77,8 +81,8 @@ public class AdPanel extends JPanel {
 	
 	private void setupProductName() {
 		
-		nameLabel.setText("Product Name"); //ad.getName();
-		nameLabel.setSize(725, 30);
+		nameLabel.setText(myAd.getName());
+		nameLabel.setSize(600, 30);
 		nameLabel.setLocation(160, 30);
 		nameLabel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -97,10 +101,10 @@ public class AdPanel extends JPanel {
 	}
 	
 	private void setupProductDescription() {
-		String str = "adadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdadadadadsdasdasdasdadasdasdasdasdad";
-		descText.setText(str); //ad.getDesc();
+		descText.setText(myAd.getDescription());
 		descText.setSize(720, 80);
 		descText.setLocation(160, 65);
+		descText.setBackground(new Color(240, 240, 240));
 		descText.setEditable(false);
 		descText.setLineWrap(true);
 		descText.setWrapStyleWord(true);
@@ -109,8 +113,8 @@ public class AdPanel extends JPanel {
 	}
 	
 	private void setupTier() {
-		tierLabel.setText("Tier #" + "1"); //ad.getTier();
-		tierLabel.setSize(100, 20);
+		tierLabel.setText(myAd.getPromotionType().toString());
+		tierLabel.setSize(350, 20);
 		tierLabel.setLocation(160, 12);
 		tierLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		tierLabel.setForeground(Color.LIGHT_GRAY);
@@ -118,7 +122,7 @@ public class AdPanel extends JPanel {
 	}
 	
 	private void setupSellerName() {
-		sellerName.setText("Seller Name"); //ad.getSellerName();
+		sellerName.setText(myAd.getSeller().getUsername());
 		sellerName.setSize(225, 20);
 		sellerName.setLocation(700, 5);
 		sellerName.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -126,7 +130,7 @@ public class AdPanel extends JPanel {
 		sellerName.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new ViewOtherProfile();
+				new ViewOtherProfile(myAd.getSeller());
 			}
 		});
 		this.add(sellerName);

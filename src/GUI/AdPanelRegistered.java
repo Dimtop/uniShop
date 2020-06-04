@@ -1,21 +1,20 @@
 package GUI;
 
-import java.awt.Image;
-
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import uniShop.*;
+
 public class AdPanelRegistered extends AdPanel {
 
 	private JButton sendMessage = new JButton();
 	private JButton addToWishlist = new JButton();
 	
-	public AdPanelRegistered(String text) {
-		super(text);
+	public AdPanelRegistered(Ad ad) {
+		super(ad);
 		
 		//Registered Buttons about an Ad
 		setupButtons();

@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import uniShop.*;
+
 /*	User Interface of the system's home screen
  * 	displayed on a Guest User 
  * 	Input : ArrayList of String with the server's tags of the system
@@ -23,7 +25,7 @@ public class HomeScreen_Guest extends HomeScreen {
 	
 	protected ArrayList<String> tags = new ArrayList<>(); //testing
 	
-	public HomeScreen_Guest(ArrayList<String> tags, ArrayList<String> ads) {
+	public HomeScreen_Guest(ArrayList<String> tags, ArrayList<Ad> ads) {
 		super(tags,ads);
 		
 		//Testing
@@ -38,15 +40,15 @@ public class HomeScreen_Guest extends HomeScreen {
 	}
 	
 	@Override
-	protected void creatingAdsPanel(ArrayList<String> ads) {
+	protected void creatingAdsPanel(ArrayList<Ad> ads) {
 		
 		adsPanel.setPreferredSize(new Dimension(937, ads.size()*(gap+150)-gap));
 		adsPanel.setLayout(null);
 		
 		AdPanel adPanel;
 		int height = 0;
-		for(String str : ads) {
-			adPanel = new AdPanel(str);
+		for(Ad currAd : ads) {
+			adPanel = new AdPanel(currAd);
 			adPanel.setBounds(0, height, adPanel.getWidth(), adPanel.getHeight());
 			adsPanel.add(adPanel);
 			

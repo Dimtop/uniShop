@@ -4,13 +4,14 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+
+import uniShop.*;
 
 public class ProfileInfoPanel extends JPanel {
 	
@@ -31,12 +32,15 @@ public class ProfileInfoPanel extends JPanel {
 	private JPanel preferencesPanel = new JPanel();
 	private ArrayList<String> preferences = new ArrayList<>();
 	private ArrayList<JCheckBox> checkboxList = new ArrayList<>();
-	private ArrayList<String> string = new ArrayList<>(); //testing
+	private ArrayList<String> userPreferences = new ArrayList<>();
 	
 	private boolean editable;
 	
-	public ProfileInfoPanel(boolean editable) {
+	private Registered currUser;
+	
+	public ProfileInfoPanel(boolean editable, Registered user) {
 		this.editable = editable;
+		this.currUser = user;
 		
 		//User Name Section
 		setupUsername();
@@ -68,6 +72,7 @@ public class ProfileInfoPanel extends JPanel {
 		//User Name Field
 		usernameField.setSize(230, 20);
 		usernameField.setLocation(110, 20);
+		usernameField.setText(currUser.getUsername());
 		usernameField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		usernameField.setEditable(editable);
 		this.add(usernameField);
@@ -101,6 +106,7 @@ public class ProfileInfoPanel extends JPanel {
 		//E-mail Field
 		emailField.setSize(230, 20);
 		emailField.setLocation(110, 100);
+		emailField.setText(currUser.getEmail());
 		emailField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		emailField.setEditable(editable);
 		this.add(emailField);
@@ -117,6 +123,7 @@ public class ProfileInfoPanel extends JPanel {
 		//Premium Field
 		premiumField.setSize(230, 20);
 		premiumField.setLocation(110, 140);
+		premiumField.setText(currUser.premiumToText());
 		premiumField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		premiumField.setEditable(false);
 		this.add(premiumField);
@@ -136,15 +143,12 @@ public class ProfileInfoPanel extends JPanel {
 		this.add(prefScroll);
 		
 		//Testing
-		preferences.add("something");
-		preferences.add("something else");
-		preferences.add("something else");
-		preferences.add("something else");
-		preferences.add("something else");
-		preferences.add("something else");
-		preferences.add("something else");
+		preferences.add("Cars");   
+		preferences.add("Tech");   
+		preferences.add("House");  
+		preferences.add("Clothes");
 				
-		string.add("something");
+		userPreferences = currUser.getPreferences();
 		
 		//Preferences Panel
 		preferencesPanel.setLocation(5, 5);
@@ -163,8 +167,7 @@ public class ProfileInfoPanel extends JPanel {
 				checkbox = new JCheckBox();
 				checkbox.setSize(20, 20);
 				checkbox.setLocation(0, height);
-				//if(user.getPreferences().contains(str)) {
-				if(string.contains(str)) {
+				if(userPreferences.contains(str)) {
 					checkbox.setSelected(true);
 				}
 				checkboxList.add(checkbox);
@@ -180,13 +183,13 @@ public class ProfileInfoPanel extends JPanel {
 			
 		}
 		else {
-			preferencesPanel.setPreferredSize(new Dimension(190, string.size()*30));
+			preferencesPanel.setPreferredSize(new Dimension(190, userPreferences.size()*30));
 			
 			//preferences = user.getPreferences();
 			JLabel label;
 			int height = 0;
 			//for(String str : preferences) {
-			for(String str : string) {
+			for(String str : userPreferences) {
 				label = new JLabel(str);
 				label.setSize(190, 20);
 				label.setLocation(10, height);
@@ -207,8 +210,20 @@ public class ProfileInfoPanel extends JPanel {
 		return this.checkboxList;
 	}
 	
-	//for testing
+	//returns strings with preferences from check boxes
 	public ArrayList<String> getTable() {
 		return preferences;
+	}
+	
+	public String getNewUsername() {
+		return usernameField.getText();
+	}
+	
+	public String getNewPassword() {
+		return passwordField.getText();
+	}
+	
+	public String getNewEmail() {
+		return emailField.getText();
 	}
 }

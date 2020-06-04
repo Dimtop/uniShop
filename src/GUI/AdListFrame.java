@@ -9,17 +9,22 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class Wishlist extends JFrame {
+import uniShop.*;
+
+public class AdListFrame extends JFrame {
 	
 	private JPanel mainPanel = new JPanel();
 	
 	private JPanel adsPanel = new JPanel();
 	private JScrollPane adsScrollPane = new JScrollPane();
 	
-	private ArrayList<String> ads = new ArrayList<>();
+	private ArrayList<Ad> ads = new ArrayList<>();
 	
-	public Wishlist(ArrayList<String> ads) {
+	private String title;
+	
+	public AdListFrame(ArrayList<Ad> ads, String title) {
 		this.ads = ads;
+		this.title = title;
 		
 		//Ads Panel
 		setupAdsPanel();
@@ -48,8 +53,8 @@ public class Wishlist extends JFrame {
 		
 		AdPanel adPanel;
 		int height = 0;
-		for(String str : ads) {
-			adPanel = new AdPanelRegistered(str);
+		for(Ad currAd : ads) {
+			adPanel = new AdPanelRegistered(currAd);
 			adPanel.setBounds(0, height, adPanel.getWidth(), adPanel.getHeight());
 			adsPanel.add(adPanel);
 			
@@ -64,7 +69,7 @@ public class Wishlist extends JFrame {
 	
 	private void setupFrameProperties() {
 		this.setResizable(false);
-		this.setTitle("Wishlist");
+		this.setTitle(this.title);
 		this.setVisible(true);
 		this.setSize(980, 665);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

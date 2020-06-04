@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -123,7 +124,8 @@ public class ProductView extends JFrame{
 			}
 		});
 		FavButton.setFont(new Font("Tahoma", Font.PLAIN, 5));
-		FavButton.setBounds(608, 11, 27, 27);
+		FavButton.setBackground(SystemColor.menu);
+		FavButton.setBounds(608, 11, 30, 30);
 		FavButton.setIcon(new ImageIcon(imageFav));
 	}
 	

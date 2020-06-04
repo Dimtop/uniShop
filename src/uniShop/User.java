@@ -22,13 +22,44 @@ public class User {
 		return preferences;
 	}
 
-
 	public void setPreferences(ArrayList<String> preferences) {
 		this.preferences = preferences;
 	}
 	
+	public String getUsername() {
+		return this.username;
+	}
 	
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	
+	public String getEmail() {
+		return this.email;
+	}
 	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public int getId() {
+		return this.userId;
+	}
+	
+	public void setId(int id) {
+		this.userId = id;
+	}
+	
+	//returns a text about int premium value
+	public String premiumToText() {
+		String text;
+		
+		if(premium==0)
+			text = "Non premium user";
+		else
+			text = "Premium user";
+		
+		return text;
+	}
 
 }

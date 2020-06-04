@@ -33,13 +33,13 @@ public class Registered extends User {
 	}
 		
 		
-	public void createAd()//CreateAd GUI and insert in database
+	/*public void createAd()//CreateAd GUI and insert in database
 	{	 
 		ArrayList<String> tags = 
 				new ArrayList<>(Arrays.asList("phone", "samsung", "galaxy"));
 		Ad anAd = new Ad(555, "samsung galaxy", tags);
 		myAds.add(anAd);
-	}
+	}*/
 	
 	
 	public void deleteAd(Ad aAd)//??? GUI and delete in database
@@ -65,12 +65,12 @@ public class Registered extends User {
 	}//from void to ArrayList<Message>
 	
 	
-	public void replyMessages(Message aMessage)//MyMessages GUI and insert in database
+	/*public void replyMessages(Message aMessage)//MyMessages GUI and insert in database
 	{
 		Message reply = new Message();
 		//υλοποιείται απάντηση στα γραφικα
 		myMessages.add(reply);
-	}
+	}*/
 	
 	public void deleteMessages(Message aMessage)//MyMessages GUI and delete in database
 	{
@@ -300,9 +300,21 @@ public class Registered extends User {
 		
 	}
 	
+	public ArrayList<Message> getMessages(){
+		return this.myMessages;
+	}
 	
+	public ArrayList<Ad> getMyAds(){
+		return this.myAds;
+	}
 	
+	//ads a message to myMessages list
+	public void addMessage(Message msg) {
+		this.myMessages.add(msg);
+	}
 	
-
-	
+	public void addAd(Ad ad) {
+		this.myAds.add(ad);
+	}
+		
 }
