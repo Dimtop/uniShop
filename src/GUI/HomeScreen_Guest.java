@@ -83,4 +83,10 @@ public class HomeScreen_Guest extends HomeScreen {
 		this.getContentPane().add(registerButton);
 		
 	}
+
+	@Override
+	protected User getCurrUser() {
+		Guest user = new Guest();
+		return user;
+	}
 }

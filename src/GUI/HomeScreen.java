@@ -57,7 +57,7 @@ public abstract class HomeScreen extends JFrame {
 	
 	//setting up search panel
 	private void setupSearchPanel(ArrayList<String> tags) {
-		searchPanel = new SearchPanel(gap, tags, this);
+		searchPanel = new SearchPanel(gap, tags, this, this.getCurrUser());
 		searchPanel.setLocation(gap, gap);
 		mainPanel.add(searchPanel);
 	}
@@ -107,5 +107,8 @@ public abstract class HomeScreen extends JFrame {
 		creatingAdsPanel(ads); //randomize list with ads
 		adsScrollPane.setViewportView(adsPanel);
 	}
+	
+	//getting user of current home page
+	protected abstract User getCurrUser();
 
 }

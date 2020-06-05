@@ -169,4 +169,9 @@ public class HomeScreen_Registered extends HomeScreen {
 		
 		new HomeScreen_Premium(tags, ads, premUser);
 	}
+
+	@Override
+	protected User getCurrUser() {
+		return this.currUser;
+	}
 }

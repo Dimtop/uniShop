@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import uniShop.*;
+
 /*	Panel with the search components 
  * 	of our system's home screens
  * 	Input : integer gap for the gap between panel's components
@@ -31,10 +33,13 @@ public class SearchPanel extends JPanel {
 	
 	private JFrame parent;
 	
-	public SearchPanel(int gap, ArrayList<String> tags, HomeScreen parent) {
+	private User currUser;
+	
+	public SearchPanel(int gap, ArrayList<String> tags, HomeScreen parent, User currUser) {
 	
 		this.gap = gap;
 		this.parent = parent;
+		this.currUser = currUser;
 		
 		//Panel Properties
 		this.setLayout(null);
@@ -60,15 +65,23 @@ public class SearchPanel extends JPanel {
 		setupTagsPanel(tags);
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("===========");
+				ArrayList<String> newTags = new ArrayList<>();
 				int i = 0;
 				for(JCheckBox box : tagsCheckBoxes) {
 					if(box.isSelected()) {
-						System.out.println(tags.get(i));					
+						newTags.add(tags.get(i));					
 					}
 					i++;
 				}
-				System.out.println("===========");
+				if(newTags.isEmpty()) {
+					/*ArrayList<Ad> newAds = currUser.searchProducts(searchBar.getText());
+					 * 
+					 * */
+				}
+				else {
+					/*ArrayList<Ad> newAds = currUser.filterRegistered(newTags);
+					 * */
+				}
 			}
 		});
 		

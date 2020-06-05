@@ -68,5 +68,10 @@ public class HomeScreen_Premium extends HomeScreen_Registered {
 		
 		JOptionPane.showMessageDialog(mainPanel, message);
 	}
+	
+	@Override
+	protected User getCurrUser() {
+		return this.currUser;
+	}
 
 }

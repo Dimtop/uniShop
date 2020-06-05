@@ -8,11 +8,10 @@ import java.util.Scanner;
 
 public class Guest extends User{
 
-	public Guest(int userId, String username, String email) {
+	public Guest() {
 		super(9999, "Guest", null);
 		
-	}
-	
+	}	
 	
 	public ArrayList<Ad> filter(){
 		

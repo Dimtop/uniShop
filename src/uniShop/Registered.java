@@ -24,7 +24,7 @@ public class Registered extends User {
 	public void logout()//Guest HP GUI 
 	{
 		status = 0; //0 για αποσυνδεδεμένο
-		new Guest(userId, username, email); 
+		new Guest(); 
 	}
 	
 	public void viewProfile()//Profile GUI 
