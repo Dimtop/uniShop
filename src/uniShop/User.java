@@ -2,7 +2,7 @@ package uniShop;
 
 import java.util.ArrayList;
 
-public class User {
+public abstract class User {
 	
 	protected int userId;
 	protected String username;
@@ -61,5 +61,12 @@ public class User {
 		
 		return text;
 	}
+	
+	//abstract method search
+	public abstract ArrayList<Ad> search(String text);
+	
+	//abstract method filter
+	public abstract ArrayList<Ad> filter(ArrayList<String> tags);
+	
 
 }

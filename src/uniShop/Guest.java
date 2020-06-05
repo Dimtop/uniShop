@@ -13,7 +13,7 @@ public class Guest extends User{
 		
 	}	
 	
-	public ArrayList<Ad> filter(){
+	public ArrayList<Ad> filter(ArrayList<String> tags){
 		
 		boolean find = false;
 		
@@ -53,8 +53,9 @@ public class Guest extends User{
 		Ads.add(a3);
 		Ads.add(a4);
 		
-		User u = new User(99,"stampou","stampou@gmail.com");
-		u.setPreferences(preferences1); // get preferences from database
+		
+		
+		this.setPreferences(tags); // get preferences from SearchPanel
 		/* anti gia user prepei na pairnei apo ta grafika tis epiloges tou guest
 		 * kai na sygkrinei aytes tis epiloges me to ArrayList apo ads ths kathe diafhmishs
 		 * de kserw ti paizei me grafika gia ayto exw kanei enan user wste na blepw oti douleuei  
@@ -65,7 +66,7 @@ public class Guest extends User{
 		outsideloop:
 		for(Ad ad: Ads) {
 			for(String preference: ad.getTags()) {
-				if(u.getPreferences().contains(preference)) {
+				if(this.getPreferences().contains(preference)) {
 					find = true;
 					foundAds.add(ad);
 					continue outsideloop;
@@ -89,12 +90,9 @@ public class Guest extends User{
 		return Ads;
 		
 	}
-	public ArrayList<Ad> SearchAds(){
-		
-		Scanner in = new Scanner(System.in);
+	public ArrayList<Ad> search(String text){
 		
 		boolean find = false;
-		String Search;
 		
 		ArrayList<String> preferences1 = new ArrayList<String>();
 		preferences1.add("sport");
@@ -127,13 +125,11 @@ public class Guest extends User{
 		Ads.add(a3);
 		Ads.add(a4);
 	
-		System.out.print("Search:");
-		Search=in.nextLine();
 		
 		ArrayList<Ad> foundAds = new ArrayList<Ad>();
 		for(Ad ad: Ads) {
 			
-			if(ad.getName().contains(Search)) {
+			if(ad.getName().contains(text)) {
 				foundAds.add(ad);
 				find = true;
 			}

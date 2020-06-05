@@ -75,11 +75,12 @@ public class SearchPanel extends JPanel {
 				}
 				if(newTags.isEmpty()) {
 					/*ArrayList<Ad> newAds = currUser.searchProducts(searchBar.getText());
-					 * 
+					 * (giorgos) ArrayList<Ad> newAds = currUser.search(searchBar.getText());
 					 * */
 				}
 				else {
 					/*ArrayList<Ad> newAds = currUser.filterRegistered(newTags);
+					 * (giorgos) ArrayList<Ad> newAds = currUser.filter(newTags);
 					 * */
 				}
 			}

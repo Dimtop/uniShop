@@ -97,12 +97,12 @@ public class Registered extends User {
 			
 	}
 	
-	public ArrayList<Ad> searchProducts()//Registered HP GUI and database search
+	public ArrayList<Ad> search(String text)//Registered HP GUI and database search
 	{
-		Scanner in = new Scanner(System.in);
+		
 		
 		boolean find = false;
-		String Search;
+		
 		
 		ArrayList<String> preferences1 = new ArrayList<String>();
 		preferences1.add("sport");
@@ -136,12 +136,10 @@ public class Registered extends User {
 		Ads.add(a3);
 		Ads.add(a4);
 	
-		System.out.print("Search:");
-		Search=in.nextLine();
 		
 		ArrayList<Ad> foundAds = new ArrayList<Ad>();
 		for(Ad ad: Ads) {
-			if(ad.getName().contains(Search)) {
+			if(ad.getName().contains(text)) {
 				foundAds.add(ad);
 				find = true;
 			}		
@@ -157,7 +155,7 @@ public class Registered extends User {
 		
 	}
 	
-	public ArrayList<Ad> filterRegistered()//Registered HP GUI and database search 
+	public ArrayList<Ad> filter(ArrayList<String> tags)//Registered HP GUI and database search 
 	{
 		boolean found = false;
 		
@@ -199,8 +197,8 @@ public class Registered extends User {
 		Ads.add(a3);
 		Ads.add(a4);
 			
-		Registered user = new Registered(99,"stampou","stampou@gmail.com");
-		user.setPreferences(preferences1); // get preferences from database
+		
+		this.setPreferences(preferences1); // get preferences from database
 		/* anti gia user prepei na pairnei apo ta grafika tis epiloges tou registered
 		* kai na sygkrinei aytes tis epiloges me to ArrayList apo ads ths kathe diafhmishs
 		* de kserw ti paizei me grafika gia ayto exw kanei enan user wste na blepw oti douleuei  
@@ -212,7 +210,7 @@ public class Registered extends User {
 		outsideloop:
 		for(Ad ad: Ads) {
 			for(String preference: ad.getTags()) {
-				if(user.getPreferences().contains(preference)) {
+				if(this.getPreferences().contains(preference)) {
 					found = true;
 					foundAds.add(ad);
 					continue outsideloop;
