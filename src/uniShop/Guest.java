@@ -2,7 +2,7 @@ package uniShop;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
+
 
 
 
@@ -44,29 +44,19 @@ public class Guest extends User{
 		Ad a2 = new Ad(2,"english lessons",null,null,null,null,null,preferences2,null,ListingPromotionType.PROMOTION_LEVEL2);
 		Ad a3 = new Ad(3,"art lessons",null,null,null,null,null,preferences4,null,ListingPromotionType.NOT_PROMOTED);
 		Ad a4 = new Ad(4,"cooking",null,null,null,null,null,preferences5,null,ListingPromotionType.PROMOTION_LEVEL1);
-		//a2.setPromotionType(ListingPromotionType.PROMOTION_LEVEL2);
-		//a4.setPromotionType(ListingPromotionType.PROMOTION_LEVEL1);
-		//a3.setPromotionType(ListingPromotionType.NOT_PROMOTED);
-		//a1.setPromotionType(ListingPromotionType.NOT_PROMOTED);
+		
 		Ads.add(a1);
 		Ads.add(a2);
 		Ads.add(a3);
 		Ads.add(a4);
 		
 		
-		
-		this.setPreferences(tags); // get preferences from SearchPanel
-		/* anti gia user prepei na pairnei apo ta grafika tis epiloges tou guest
-		 * kai na sygkrinei aytes tis epiloges me to ArrayList apo ads ths kathe diafhmishs
-		 * de kserw ti paizei me grafika gia ayto exw kanei enan user wste na blepw oti douleuei  
-		 */
-		
 		ArrayList<Ad> foundAds = new ArrayList<Ad>();
 		
 		outsideloop:
 		for(Ad ad: Ads) {
 			for(String preference: ad.getTags()) {
-				if(this.getPreferences().contains(preference)) {
+				if(tags.contains(preference)) {
 					find = true;
 					foundAds.add(ad);
 					continue outsideloop;
@@ -76,16 +66,11 @@ public class Guest extends User{
 		
 		if(find == true) {
 			Collections.sort(foundAds);
-			/*for(Ad ad: foundAds)
-				System.out.println(ad.getName());*/
 			return foundAds;
 		}
 		
 		if(find == false) {
 			Collections.sort(Ads);
-			/*for(Ad ad: Ads) {
-				System.out.println(ad.getName());
-			}*/
 		}
 		return Ads;
 		
@@ -116,10 +101,7 @@ public class Guest extends User{
 		Ad a2 = new Ad(2,"english lessons",null,null,null,null,null,preferences2,null,ListingPromotionType.PROMOTION_LEVEL2);
 		Ad a3 = new Ad(3,"art lessons",null,null,null,null,null,preferences4,null,ListingPromotionType.NOT_PROMOTED);
 		Ad a4 = new Ad(4,"cooking",null,null,null,null,null,preferences5,null,ListingPromotionType.PROMOTION_LEVEL1);
-		//a2.setPromotionType(ListingPromotionType.PROMOTION_LEVEL2);
-		//a4.setPromotionType(ListingPromotionType.PROMOTION_LEVEL1);
-		//a3.setPromotionType(ListingPromotionType.NOT_PROMOTED);
-		//a1.setPromotionType(ListingPromotionType.NOT_PROMOTED);
+	
 		Ads.add(a1);
 		Ads.add(a2);
 		Ads.add(a3);
