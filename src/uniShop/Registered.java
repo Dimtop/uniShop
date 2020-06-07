@@ -228,6 +228,18 @@ public class Registered extends User {
 	
 	public void viewOtherProfiles(Registered aUser)//ViewOtherProfiles GUI and search database
 	{
+		ArrayList<Registered> profiles = new ArrayList<Registered>(); //υποθετική βάση
+		
+		Registered R1 = new Registered(11, "george", "ge@gmail.com");
+		Registered R2 = new Registered(5, "Mike9", "mike@gmail.com");
+		Registered R3 = new Registered(999, "helen99", "helen9@gmail.com");
+		
+		profiles.add(R1);
+		profiles.add(R2);
+		profiles.add(R3);
+		
+		//for(Registered R: profiles) if aUser is connected with R return R
+		
 		
 	}
 	
