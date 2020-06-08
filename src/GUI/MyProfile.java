@@ -99,7 +99,7 @@ public class MyProfile extends JFrame {
 		myAdsButton.setBounds(380, 315, 120, 20);
 		myAdsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new AdListFrame(currUser.getMyAds(), "My Ads");
+				new AdListFrame(currUser.getMyAds(), "My Ads", currUser);
 			}
 		});
 		mainPanel.add(myAdsButton);

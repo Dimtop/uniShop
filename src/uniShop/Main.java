@@ -36,12 +36,14 @@ public class Main {
 		ads.add(ad2);
 		ads.add(ad3);
 		
+		//currUser Properties
 		ArrayList<String> currPref = new ArrayList<>();
 		currPref.add("Cars");
 		currPref.add("Clothes");
 		currUser.addMessage(new Message("Something", user1, currUser, ad1));
 		currUser.setPreferences(currPref);
 		currUser.addAd(ad3);
+		currUser.addToWishlist(ad2);
 		
 		new HomeScreen_Registered(tags,ads,currUser);
 		//new HomeScreen_Guest(tags,ads);

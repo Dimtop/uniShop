@@ -1,20 +1,33 @@
 package GUI;
 
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.SystemColor;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
 
-import uniShop.*;
+import uniShop.Ad;
+import uniShop.Registered;
 
 public class AdPanelRegistered extends AdPanel {
 
 	private JButton sendMessage = new JButton();
 	private JButton addToWishlist = new JButton();
 	
-	public AdPanelRegistered(Ad ad) {
+	private boolean onWishlist;
+	private Ad myAd;
+	private Registered currUser;
+	
+	private JPanel currPanel;
+	
+	public AdPanelRegistered(Ad ad, Registered user) {
 		super(ad);
+		this.myAd = ad;
+		this.currUser = user;
+		this.onWishlist = currUser.getWishlist().contains(this.myAd);
+		this.currPanel = this;
 		
 		//Registered Buttons about an Ad
 		setupButtons();
@@ -29,7 +42,7 @@ public class AdPanelRegistered extends AdPanel {
 		sendMessage.setBackground(SystemColor.menu);
 		sendMessage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Send Message");
+				new ViewOtherProfile(myAd.getSeller());
 			}
 		});
 		this.add(sendMessage);
@@ -37,11 +50,24 @@ public class AdPanelRegistered extends AdPanel {
 		//Add to Wish List Button
 		addToWishlist.setSize(30, 30);
 		addToWishlist.setLocation(892, 30);
-		addToWishlist.setIcon(new ImageIcon(AdPanelRegistered.class.getResource("/images/star.png")));
+		if(this.onWishlist)
+			addToWishlist.setIcon(new ImageIcon(AdPanelRegistered.class.getResource("/images/star_disable.png")));
+		else
+			addToWishlist.setIcon(new ImageIcon(AdPanelRegistered.class.getResource("/images/star.png")));
 		addToWishlist.setBackground(SystemColor.menu);
 		addToWishlist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Add to Wishlist");
+				if(onWishlist) {
+					currUser.removeFromWishlist(myAd);
+					addToWishlist.setIcon(new ImageIcon(AdPanelRegistered.class.getResource("/images/star.png")));
+					onWishlist = false;
+				}
+				else {
+					currUser.addToWishlist(myAd);
+					addToWishlist.setIcon(new ImageIcon(AdPanelRegistered.class.getResource("/images/star_disable.png")));
+					onWishlist = true;
+				}
+				currPanel.revalidate();
 			}
 		});
 		this.add(addToWishlist);

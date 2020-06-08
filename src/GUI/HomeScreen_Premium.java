@@ -42,8 +42,7 @@ public class HomeScreen_Premium extends HomeScreen_Registered {
 		viewPremiumPlanButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				int tier = 0+1;
-				String message = "You are on tier: " + tier; 
+				String message = "You are on tier: " + currUser.getTier(); 
 				
 				JOptionPane.showMessageDialog(mainPanel, message);
 			}
@@ -63,10 +62,16 @@ public class HomeScreen_Premium extends HomeScreen_Registered {
 	
 	protected void upgradeToPremiumPlan(JFrame currentFrame) {
 		
-		int tier = 0+1;
-		String message = "Your premium plan has update on tier " + tier; 
+		currUser.setTier(currUser.getTier()+1);
+		String message = "Your premium plan has update on tier " + currUser.getTier(); 
+		//update db
 		
 		JOptionPane.showMessageDialog(mainPanel, message);
+		
+		if(currUser.getTier() == 3) {
+			this.upgradePremiumPlanButton.setEnabled(false);
+			currentFrame.revalidate();
+		}
 	}
 	
 	@Override

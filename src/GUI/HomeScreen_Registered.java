@@ -51,7 +51,7 @@ public class HomeScreen_Registered extends HomeScreen {
 		
 		//Adding Ads Panel
 		creatingAdsPanel(ads);
-		adsScrollPane.setViewportView(adsPanel);
+		//adsScrollPane.setViewportView(adsPanel);
 	}
 	
 	protected void setupLeftButtons() {
@@ -97,16 +97,19 @@ public class HomeScreen_Registered extends HomeScreen {
 		
 		adsPanel.setPreferredSize(new Dimension(937, ads.size()*(gap+150)-gap));
 		adsPanel.setLayout(null);
+		adsPanel.removeAll();
 		
 		AdPanel adPanel;
 		int height = 0;
 		for(Ad currAd : ads) {
-			adPanel = new AdPanelRegistered(currAd);
+			adPanel = new AdPanelRegistered(currAd, currUser);
 			adPanel.setBounds(0, height, adPanel.getWidth(), adPanel.getHeight());
 			adsPanel.add(adPanel);
 			
 			height += adPanel.getHeight()+gap;
 		}
+		
+		adsScrollPane.setViewportView(adsPanel);
 	}
 
 	@Override
@@ -120,7 +123,9 @@ public class HomeScreen_Registered extends HomeScreen {
 				int result = JOptionPane.showConfirmDialog(mainPanel,"Are you sure you want to logout?", 
 						"Upgrade to Premium Plan", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if(result == JOptionPane.YES_OPTION) {
+					//new Ads from db
 					dispose();
+					new HomeScreen_Guest(tags,ads);
 				}
 			}
 		});
@@ -146,6 +151,7 @@ public class HomeScreen_Registered extends HomeScreen {
 						"Upgrade to Premium Plan", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if(result == JOptionPane.YES_OPTION) {
 					upgradeToPremiumPlan(currentFrame);
+					//update db
 				}
 			}
 		});
@@ -156,7 +162,7 @@ public class HomeScreen_Registered extends HomeScreen {
 		wishListButton.setLocation(upgradePremiumPlanButton.getX()-wishListButton.getWidth()-gap, gap);
 		wishListButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new AdListFrame(ads, "Wishlist");
+				new AdListFrame(currUser.getWishlist(), "Wishlist", currUser);
 			}
 		});
 		this.getContentPane().add(wishListButton);		

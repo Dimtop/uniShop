@@ -263,6 +263,10 @@ public class Registered extends User {
 		
 	}
 	
+	public ArrayList<Ad> getWishlist(){
+		return this.wishlist;
+	}
+	
 	public void removeFromWishlist(Ad aProduct)//Registered HP GUI and delete from database
 	{
 		this.wishlist.remove(aProduct);
