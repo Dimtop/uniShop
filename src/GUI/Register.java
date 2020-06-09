@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -7,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -16,9 +16,20 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+
+import uniShop.Ad;
+import uniShop.Registered;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Register extends JFrame {
-
+	
+	private JFrame parentFrame;
+	
 	private JPanel mainPanel = new JPanel();
 	
 	private JLabel usernameLabel = new JLabel("Username");
@@ -30,6 +41,8 @@ public class Register extends JFrame {
 	private JLabel emailLabel = new JLabel("E-mail");
 	private JTextField emailField = new JTextField();
 	
+	private JLabel errorLabel = new JLabel("");
+	
 	private JLabel preferencesLabel = new JLabel("Preferences");
 	private JScrollPane prefScroll = new JScrollPane();
 	private JPanel preferencesPanel = new JPanel();
@@ -38,7 +51,10 @@ public class Register extends JFrame {
 	
 	private JButton createAccButton = new JButton("Create Account!");
 	
-	public Register(ArrayList<String> pref) {
+	private Border defaultBorder;
+	
+	public Register(ArrayList<String> pref, JFrame parentFrame) {
+		this.parentFrame = parentFrame;
 		this.preferences = pref;
 		
 		//User Name Section
@@ -69,12 +85,21 @@ public class Register extends JFrame {
 		usernameLabel.setSize(90, 20);
 		usernameLabel.setLocation(10, 20);
 		usernameLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+	
 		mainPanel.add(usernameLabel);
+		
+		defaultBorder = usernameField.getBorder();
 		
 		//User Name Field
 		usernameField.setSize(230, 20);
 		usernameField.setLocation(110, 20);
 		usernameField.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		usernameField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				usernameField.setBorder(defaultBorder);
+			}
+		});		
 		mainPanel.add(usernameField);
 	}
 	
@@ -90,6 +115,12 @@ public class Register extends JFrame {
 		passwordField.setSize(230, 20);
 		passwordField.setLocation(110, 60);
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		passwordField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				passwordField.setBorder(defaultBorder);
+			}
+		});	
 		mainPanel.add(passwordField);
 	}
 	
@@ -105,6 +136,12 @@ public class Register extends JFrame {
 		emailField.setSize(230, 20);
 		emailField.setLocation(110, 100);
 		emailField.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		emailField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				emailField.setBorder(defaultBorder);
+			}
+		});	
 		mainPanel.add(emailField);
 	}
 	
@@ -119,6 +156,12 @@ public class Register extends JFrame {
 		//Preferences Scroll Pane
 		prefScroll.setBounds(130, 140, 210, 150);
 		prefScroll.getVerticalScrollBar().setUnitIncrement(16); //increases the scroll speed
+		prefScroll.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				prefScroll.setBorder(defaultBorder);
+			}
+		});
 		mainPanel.add(prefScroll);
 		
 		//Preferences Panel
@@ -127,7 +170,7 @@ public class Register extends JFrame {
 		prefScroll.setViewportView(preferencesPanel);
 		
 		//Preferences Field
-		preferencesPanel.setPreferredSize(new Dimension(190, preferences.size()*30-10));
+		preferencesPanel.setPreferredSize(new Dimension(180, preferences.size()*30-10));
 		
 		JCheckBox checkbox;
 		JLabel label;
@@ -149,14 +192,120 @@ public class Register extends JFrame {
 	}
 	
 	private void setupCreateAccountButton(){
+		
+		//Error label
+		errorLabel.setSize(300, 20);
+		errorLabel.setLocation(20, 310);
+		errorLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		
+		mainPanel.add(errorLabel);
+		
+		//Create Button
 		createAccButton.setSize(130, 20);
 		createAccButton.setLocation(210, 310);
 		createAccButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				if(formValidation())
+					registerButtonClicked();
+				else {
+					errorLabel.setForeground(Color.RED);
+					errorLabel.setText("Complete all the forms");
+				}
 			}
 		});
-		mainPanel.add(createAccButton);
+		mainPanel.add(createAccButton);		
+		
+	}
+	
+	//Checking if the from is empty
+	private boolean formValidation() {
+		
+		
+		boolean flag = true;
+		
+		if(usernameField.getText().equals("")) {
+			
+			usernameField.setBorder(new LineBorder(Color.RED, 1));
+			
+			flag = false;
+		}
+		if(passwordField.getText().equals("")) {
+			
+			passwordField.setBorder(new LineBorder(Color.RED, 1));
+			
+			flag = false;
+		}
+		if(emailField.getText().equals("")) {
+			
+			emailField.setBorder(new LineBorder(Color.RED, 1));
+			
+			flag = false;
+			
+		}
+		if(isCheckBoxesListEmpty()) {
+			
+			prefScroll.setBorder(new LineBorder(Color.RED, 1));
+			
+			flag = false;			
+			
+		}
+		
+		return flag;
+	}
+	
+	private boolean isCheckBoxesListEmpty() {
+		boolean flag = true;
+		
+		for(JCheckBox box : checkboxList) {
+			if(box.isSelected())
+				flag = false;
+		}
+		
+		return flag;
+	}
+	
+	private void registerButtonClicked() {
+		//check if there is a user with the same user name on the db
+		if(usernameField.getText().equals("test")) {	
+			//if there is not
+			int id = 0; //id will be on the db, int id = db.getId() + 1;
+			Registered newUser = new Registered(id, usernameField.getText(), passwordField.getText());
+			newUser.setPreferences(getCheckBoxesText());
+			//update the db with the new user, db.addUser(newUser);
+			
+			ArrayList<Ad> ads = new ArrayList<>(); //from the db on the last version
+			ArrayList<String> tags = new ArrayList<>(); //tags from the db
+			tags.add("Cars");
+			tags.add("Tech");
+			tags.add("House");
+			tags.add("Clothes");
+			
+			dispose();
+			parentFrame.dispose();
+			
+			new HomeScreen_Registered(tags, ads, newUser);
+		}
+		else {
+			//if there is not
+			errorLabel.setForeground(Color.RED);
+			errorLabel.setText("Username already taken");
+		}
+	}
+	
+	private ArrayList<String> getCheckBoxesText(){
+		ArrayList<String> list = new ArrayList<>();
+		
+		int counter = 0;
+		for(JCheckBox box : checkboxList) {
+			if(box.isSelected()) {
+				list.add(preferences.get(counter));
+				counter++;
+			}
+		}
+		
+		System.out.println(list);
+		
+		return list;
 	}
 	
 	private void setupMainPanel() {

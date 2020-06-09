@@ -6,10 +6,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
-import uniShop.*;
+import uniShop.Ad;
+import uniShop.Guest;
+import uniShop.User;
 
 /*	User Interface of the system's home screen
  * 	displayed on a Guest User 
@@ -66,7 +68,6 @@ public class HomeScreen_Guest extends HomeScreen {
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new LoginWindow();
-				System.out.println("test");
 			}
 		});
 		this.getContentPane().add(loginButton);
@@ -74,9 +75,10 @@ public class HomeScreen_Guest extends HomeScreen {
 		//Register Button Section
 		registerButton.setSize(100, 20);
 		registerButton.setLocation(loginButton.getX()-registerButton.getWidth()-gap, gap);
+		JFrame currFrame = this;
 		registerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Register(tags);
+				new Register(tags, currFrame);
 				System.out.println("test");
 			}
 		});

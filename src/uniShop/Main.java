@@ -17,6 +17,9 @@ public class Main {
 		tags.add("Tech");
 		tags.add("House");
 		tags.add("Clothes");
+		tags.add("Example 1");
+		tags.add("Example 2");
+		tags.add("Example 3");
 		//Creating Users
 		Registered currUser = new Registered(10, "Current User", "currUser@gmail.com");
 		Registered user1 = new Registered(0, "User1", "user1@gmail.com");
@@ -45,8 +48,8 @@ public class Main {
 		currUser.addAd(ad3);
 		currUser.addToWishlist(ad2);
 		
-		new HomeScreen_Registered(tags,ads,currUser);
-		//new HomeScreen_Guest(tags,ads);
+		//new HomeScreen_Registered(tags,ads,currUser);
+		new HomeScreen_Guest(tags,ads);
  
 	}
 
