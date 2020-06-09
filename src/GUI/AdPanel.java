@@ -68,7 +68,7 @@ public class AdPanel extends JPanel {
 			Image resizedImage = resizeImage(image);
 			photo = new JLabel(new ImageIcon(resizedImage)); 
 		} catch (MalformedURLException e) {
-			photo = new JLabel("No Photo found");
+			photo = new JLabel(new ImageIcon(this.getClass().getResource("/images/no_image_found.png")));
 		} catch (IOException e) {
 			photo = new JLabel("No Photo found");
 		}
@@ -122,7 +122,7 @@ public class AdPanel extends JPanel {
 	}
 	
 	private void setupSellerName() {
-		sellerName.setText(myAd.getSeller().getUsername());
+		//sellerName.setText(myAd.getSeller().getUsername());
 		sellerName.setSize(225, 20);
 		sellerName.setLocation(700, 5);
 		sellerName.setHorizontalAlignment(SwingConstants.RIGHT);

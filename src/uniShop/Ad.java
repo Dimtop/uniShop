@@ -130,4 +130,13 @@ public class Ad implements Comparable{
 			
 		return -1;
 	}
+	
+	 @Override
+	 public boolean equals(Object obj) {
+		 Ad ad = (Ad)obj;
+		 if(this.ad_id == ad.ad_id)
+	    	 return true;
+	     else
+	    	 return false;
+	 }
 }

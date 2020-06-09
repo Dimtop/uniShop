@@ -148,6 +148,7 @@ public class Registered extends User {
 		if(find == false) {
 			Collections.sort(Ads);
 		}
+		
 		return Ads;	
 		
 	}

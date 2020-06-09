@@ -46,6 +46,7 @@ public class HomeScreen_Guest extends HomeScreen {
 		
 		adsPanel.setPreferredSize(new Dimension(937, ads.size()*(gap+150)-gap));
 		adsPanel.setLayout(null);
+		adsPanel.removeAll();
 		
 		AdPanel adPanel;
 		int height = 0;

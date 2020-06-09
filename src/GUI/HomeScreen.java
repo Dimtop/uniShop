@@ -101,12 +101,7 @@ public abstract class HomeScreen extends JFrame {
 	protected abstract void creatingAdsPanel(ArrayList<Ad> ads);
 	
 	//refreshing the ads' panel
-	public void refreshAdsPanel() {
-		
-		ArrayList<Ad> newAds = new ArrayList<>();
-		newAds.add(ads.get(2));
-		newAds.add(ads.get(1));
-		newAds.add(ads.get(0));
+	public void refreshAdsPanel(ArrayList<Ad> newAds) {
 		
 		creatingAdsPanel(newAds); //randomize list with ads
 		adsScrollPane.setViewportView(adsPanel);

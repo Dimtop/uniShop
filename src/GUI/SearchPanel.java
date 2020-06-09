@@ -1,9 +1,14 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -12,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 import uniShop.*;
 
@@ -50,15 +57,41 @@ public class SearchPanel extends JPanel {
 		homeButton.setLocation(0,0);
 		homeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//get random Ads from db
+				ArrayList<Ad> newAds = new ArrayList<>();
+				
 				//Refreshing
-				parent.refreshAdsPanel();
+				parent.refreshAdsPanel(newAds);
 			}
 		});
 		this.add(homeButton);
 		
+		
 		//Search Bar Setup
 		searchBar.setSize(170,20);
 		searchBar.setLocation(homeButton.getWidth()+gap, 0);
+		searchBar.setForeground(SystemColor.scrollbar);
+		Border searchBarBorder = searchBar.getBorder();
+		searchBar.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(searchBar.getText().isEmpty()) {
+					searchBar.setText("Type your product");
+					searchBar.setForeground(SystemColor.scrollbar);
+				}
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				if(searchBar.getText().equals("Type your product")) {
+					searchBar.setText("");
+					searchBar.setForeground(new Color(0, 0, 0));
+					searchBar.setBorder(searchBarBorder);
+				}				
+			}
+		});
 		this.add(searchBar);
 		
 		//Tags' Panel Setup
@@ -73,15 +106,36 @@ public class SearchPanel extends JPanel {
 					}
 					i++;
 				}
-				if(newTags.isEmpty()) {
-					/*ArrayList<Ad> newAds = currUser.searchProducts(searchBar.getText());
-					 * (giorgos) ArrayList<Ad> newAds = currUser.search(searchBar.getText());
-					 * */
+				if(!searchBar.getText().equals("Type your product")) {
+					if(newTags.isEmpty()) {
+						//Product Name YES, Tags NO
+						ArrayList<Ad> newAds = currUser.search(searchBar.getText());
+						parent.refreshAdsPanel(newAds);
+					}
+					else {
+						//Product Name YES, Tags YES
+						ArrayList<Ad> productNameAds = currUser.search(searchBar.getText());
+						ArrayList<Ad> tagsAds = currUser.filter(newTags);
+						ArrayList<Ad> newAds = new ArrayList<>();
+						newAds.addAll(productNameAds);
+						for(Ad ad : tagsAds) {
+							if(!newAds.contains(ad))
+								newAds.add(ad);
+						}
+						Collections.shuffle(newAds);
+						parent.refreshAdsPanel(newAds);
+					}
 				}
 				else {
-					/*ArrayList<Ad> newAds = currUser.filterRegistered(newTags);
-					 * (giorgos) ArrayList<Ad> newAds = currUser.filter(newTags);
-					 * */
+					if(newTags.isEmpty()) {
+						//Product Name NO, Tags NO
+						searchBar.setBorder(new LineBorder(Color.RED, 1));
+					}
+					else {
+						//Product Name NO, Tags YES
+						ArrayList<Ad> newAds = currUser.filter(newTags);
+						parent.refreshAdsPanel(newAds);
+					}
 				}
 			}
 		});
@@ -91,6 +145,15 @@ public class SearchPanel extends JPanel {
 		searchButton.setLocation((this.getWidth()-searchButton.getWidth())/2, this.getHeight()-searchButton.getHeight());
 		this.add(searchButton);
 
+	}
+	
+	//testing
+	private void testPrinter(ArrayList<Ad> list) {
+		System.out.println("==========");
+		for(Ad ad : list) {
+			System.out.println(ad.getName());
+		}
+		System.out.println("==========");
 	}
 	
 	private void setupTagsPanel(ArrayList<String> tags) {
