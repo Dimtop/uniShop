@@ -67,7 +67,7 @@ public class AdPanelRegistered extends AdPanel {
 					addToWishlist.setIcon(new ImageIcon(AdPanelRegistered.class.getResource("/images/star_disable.png")));
 					onWishlist = true;
 				}
-				currPanel.revalidate();
+				addToWishlist.revalidate();
 			}
 		});
 		this.add(addToWishlist);
