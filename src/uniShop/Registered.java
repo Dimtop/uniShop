@@ -301,6 +301,32 @@ public class Registered extends User {
 	public void matchPreferences()//Search in database
 	{
 		
+		
+		ArrayList<Ad> ads = new ArrayList<>(); // needs ads from db
+		ArrayList<Ad> prefAds = new ArrayList<>(); //preferred ads 
+		boolean found = false;
+		
+		outsideloop:
+		for(Ad ad: ads) {
+			for(String pref: this.preferences) {
+				if(ad.getTags().contains(pref)){
+					prefAds.add(ad);
+					found = true;
+					continue outsideloop;
+				}
+			}
+		}
+		
+		if(found==true) {
+			Collections.sort(prefAds);
+			//return prefAds; ?????????
+		}
+		else {
+			Collections.sort(ads);
+			//return ads; ???????
+		}
+			
+		
 	}
 	
 	public ArrayList<Message> getMessages(){
