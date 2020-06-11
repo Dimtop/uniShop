@@ -36,45 +36,45 @@ public class LocalDataBase {
 	private void setupSystemUsers() {
 		
 		//Registered users
-		Registered user1 = new Registered(nextUserId, "User 1", "user1@unishop.com");
+		Registered user1 = new Registered(nextUserId, "User 1", "user1@unishop.com", this);
 		user1.setPreferences(getSomePreferences(1));
 		user1.setPassword("user1");
 		this.nextUserId++;
-		Registered user2 = new Registered(nextUserId, "User 2", "user2@unishop.com");
+		Registered user2 = new Registered(nextUserId, "User 2", "user2@unishop.com", this);
 		user2.setPreferences(getSomePreferences(2));
 		user2.setPassword("user2");
 		this.nextUserId++;
-		Registered user3 = new Registered(nextUserId, "User 3", "user3@unishop.com");
+		Registered user3 = new Registered(nextUserId, "User 3", "user3@unishop.com", this);
 		user3.setPreferences(getSomePreferences(3));
-		user1.setPassword("user3");
+		user3.setPassword("user3");
 		this.nextUserId++;
-		Registered user4 = new Registered(nextUserId, "User 4", "user4@unishop.com");
+		Registered user4 = new Registered(nextUserId, "User 4", "user4@unishop.com", this);
 		user4.setPreferences(getSomePreferences(4));
-		user1.setPassword("user4");
+		user4.setPassword("user4");
 		this.nextUserId++;
-		Registered user5 = new Registered(nextUserId, "User 5", "user5@unishop.com");
+		Registered user5 = new Registered(nextUserId, "User 5", "user5@unishop.com", this);
 		user5.setPreferences(getSomePreferences(5));
-		user1.setPassword("user5");
+		user5.setPassword("user5");
 		this.nextUserId++;
 		
 		//Premium users
-		Registered user6 = new Premium(nextUserId, "User 6", "user6@unishop.com", this.getSomePreferences(6), 1);
-		user1.setPassword("user6");
+		Registered user6 = new Premium(nextUserId, "User 6", "user6@unishop.com", this.getSomePreferences(6), 1, this);
+		user6.setPassword("user6");
 		this.nextUserId++;
-		Registered user7 = new Premium(nextUserId, "User 6", "user6@unishop.com", this.getSomePreferences(7), 1);
-		user1.setPassword("user7");
+		Registered user7 = new Premium(nextUserId, "User 7", "user7@unishop.com", this.getSomePreferences(7), 1, this);
+		user7.setPassword("user7");
 		this.nextUserId++;
-		Registered user8 = new Premium(nextUserId, "User 6", "user6@unishop.com", this.getSomePreferences(8), 1);
-		user1.setPassword("user8");
+		Registered user8 = new Premium(nextUserId, "User 8", "user8@unishop.com", this.getSomePreferences(8), 1, this);
+		user8.setPassword("user8");
 		this.nextUserId++;
-		Registered user9 = new Premium(nextUserId, "User 6", "user6@unishop.com", this.getSomePreferences(9), 2);
-		user1.setPassword("user9");
+		Registered user9 = new Premium(nextUserId, "User 9", "user9@unishop.com", this.getSomePreferences(9), 2, this);
+		user9.setPassword("user9");
 		this.nextUserId++;
-		Registered user10 = new Premium(nextUserId, "User 6", "user6@unishop.com", this.getSomePreferences(10), 2);
-		user1.setPassword("user10");
+		Registered user10 = new Premium(nextUserId, "User 10", "user10@unishop.com", this.getSomePreferences(10), 2, this);
+		user10.setPassword("user10");
 		this.nextUserId++;
-		Registered user11 = new Premium(nextUserId, "User 6", "user6@unishop.com", this.getSomePreferences(11), 2);
-		user1.setPassword("user11");
+		Registered user11 = new Premium(nextUserId, "User 11", "user11@unishop.com", this.getSomePreferences(11), 2, this);
+		user11.setPassword("user11");
 		this.nextUserId++;
 		
 		//Adding Users on database
@@ -281,6 +281,20 @@ public class LocalDataBase {
 		}
 		
 		return adList;
+	}
+	
+	public Registered login(String username, String password) {
+		Registered currUser = null;
+		
+		System.out.println("Searching: username: " + username + " password: " + password);
+		for(Registered user : this.systemUsers) {
+			System.out.println("|| username: " + user.getUsername() + " password: " + user.getPassword());
+			if(user.getUsername().equals(username) && user.getPassword().equals(password)) {
+				currUser = user;
+			}
+		}
+		
+		return currUser;
 	}
 	
 	//Adding an Ad into the database
