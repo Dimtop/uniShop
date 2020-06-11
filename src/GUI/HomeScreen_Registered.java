@@ -93,7 +93,7 @@ public class HomeScreen_Registered extends HomeScreen {
 	protected void creatingNewAdListener() {
 		createNewAd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CreateNewAd();
+				new CreateNewAd(db,currUser);
 			}
 		});
 	}

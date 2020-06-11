@@ -7,13 +7,16 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JToggleButton;
 
+import uniShop.LocalDataBase;
+import uniShop.Registered;
+
 public class CreateNewAdPrem extends CreateNewAd{
 
 	private JToggleButton PromoButton=new JToggleButton("Promote!");
 	private boolean booleanpromo=false;
 	
-	public CreateNewAdPrem() {
-		
+	public CreateNewAdPrem(LocalDataBase db,Registered register) {
+		super(db,register);
 		GroupLayout groupLayout = (GroupLayout) getContentPane().getLayout();
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

@@ -93,7 +93,7 @@ public class AdPanel extends JPanel {
 				strTest.add("Test2");
 				strTest.add("Test3");
 				strTest.add("Test4");
-				new ProductView(strTest);
+				//new ProductView(strTest);
 			}
 		});
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));

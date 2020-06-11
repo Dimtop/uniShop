@@ -16,6 +16,7 @@ public class LocalDataBase {
 	
 	private int adsTier2;
 	private int adsTier1;
+	private String ProductName;
 	
 	public LocalDataBase() {
 		
@@ -26,6 +27,7 @@ public class LocalDataBase {
 		this.systemPreferences = new ArrayList<>();
 		this.adsTier1 = 0;
 		this.adsTier2 = 0;
+		this.ProductName="Product Name";
 		
 		setupSystemPreferences();
 		setupSystemUsers();
@@ -359,6 +361,10 @@ public class LocalDataBase {
 	
 	public void increaseAdId() {
 		this.nextAdId++;
+	}
+	
+	public String getProductName() {
+		return ProductName;
 	}
 
 }

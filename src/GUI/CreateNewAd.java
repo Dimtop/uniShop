@@ -1,4 +1,5 @@
 package GUI;
+
 import java.awt.Checkbox;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,7 +12,10 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
@@ -32,6 +36,11 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileFilter;
 
+import uniShop.Ad;
+import uniShop.ListingState;
+import uniShop.LocalDataBase;
+import uniShop.Registered;
+
 public class CreateNewAd extends JFrame{
 	private JTextField textField;
 	private JLabel lblMaxCharacters;
@@ -48,7 +57,14 @@ public class CreateNewAd extends JFrame{
 	private ArrayList<String>checkBoxes=new ArrayList<>();
 	private	ArrayList<JCheckBox>tagCheckBox= new ArrayList<>();
 	
-	public CreateNewAd() {
+
+	private LocalDataBase db;
+	private Registered register;
+	
+	public CreateNewAd(LocalDataBase db,Registered register) {
+		this.db = db;
+		this.register=register;
+		
 		panel();
 		groupLabelCheckboxes();
 		JOptionPane.showMessageDialog(panel,"Don't overwrite to the description! ",
@@ -69,7 +85,7 @@ public class CreateNewAd extends JFrame{
 		this.setSize(650,700);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dimension.width/2-this.getSize().width/2, dimension.height/2-this.getSize().height/2);
-		//this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
+		this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
 	}
 	
 	//layout of the window and all addings
@@ -258,6 +274,10 @@ public class CreateNewAd extends JFrame{
 						checkBoxes.add(box.getText());
 					}
 				}
+				Date currDate = new Date(System.currentTimeMillis());
+				
+				Ad ad=new Ad(register.getId(), getProductName(), getDesription(),"https://images-na.ssl-images-amazon.com/images/I/51EJdvzHJeL._AC_US160_.jpg", currDate,register,register, checkBoxes, ListingState.ACTIVE);
+				db.addAd(ad);
 				setVisible(false);
 				}
 			});
@@ -276,7 +296,7 @@ public class CreateNewAd extends JFrame{
 			
 			@Override
 			public void removeUpdate(DocumentEvent e) {	
-				if(textArea.getText().length()>0) {
+				if(textArea.getText().length()>=0) {
 					lblchrLabel.setText("Characters used: "+ textArea.getText().length());
 				}
 				if(textArea.getText().length()>=200) {
@@ -286,7 +306,7 @@ public class CreateNewAd extends JFrame{
 			
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				if(textArea.getText().length()>0) {
+				if(textArea.getText().length()>=0) {
 					lblchrLabel.setText("Characters used: "+ textArea.getText().length());
 				}
 				if(textArea.getText().length()>=200) {
@@ -297,7 +317,7 @@ public class CreateNewAd extends JFrame{
 			
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				if(textArea.getText().length()>0) {
+				if(textArea.getText().length()>=0) {
 					lblchrLabel.setText("Characters used: "+ textArea.getText().length());
 				}if(textArea.getText().length()>=200) {
 					textArea.disable();
@@ -319,7 +339,6 @@ public class CreateNewAd extends JFrame{
 			ch[i]=Description.charAt(i);
 		}
 		
-		Description = new String(ch);
 		return Description;
 		
 	}

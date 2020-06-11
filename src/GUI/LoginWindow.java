@@ -59,7 +59,7 @@ public class LoginWindow extends JFrame{
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setSize(430,370);
 		this.setLocation(dimension.width/2-this.getSize().width/2, dimension.height/2-this.getSize().height/2);
-		//this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
+		this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
 	}
 	
 	//image setup
@@ -116,6 +116,7 @@ public class LoginWindow extends JFrame{
 			
 			//when the login button pressed it should do the check with data base if the password and the username are correct
 			public void actionPerformed(ActionEvent e) {
+				labelmessage.setText("");
 				String username=usernameField.getText();
 				String password=String.valueOf(pwdPassword.getPassword());
 				Registered currUser = db.login(username, password);

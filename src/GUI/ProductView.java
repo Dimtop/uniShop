@@ -26,6 +26,8 @@ import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
+import uniShop.LocalDataBase;
+
 public class ProductView extends JFrame{
 
 	private Image imageFav;
@@ -38,14 +40,18 @@ public class ProductView extends JFrame{
 	private int nextTP=0,PrevTP=0;
 	private JLabel favlabel = new JLabel("");
 	
-	public ProductView(ArrayList<String>imagepath) {
+	private LocalDataBase db;
+	
+	public ProductView(LocalDataBase db) {
+		
+		this.db=db;
 		
 		imageFav=new ImageIcon(this.getClass().getResource("/Images/star.png")).getImage();
 		getContentPane().setLayout(null);	
 		
 		FavButtonSetUp();
 		
-		JLabel NameLabel = new JLabel("Product Name\r\n");
+		JLabel NameLabel = new JLabel(db.getProductName());
 		NameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		NameLabel.setBounds(0, 11, 659, 41);
 		NameLabel.setFont(new Font("Arial", Font.PLAIN, 25));
@@ -99,7 +105,7 @@ public class ProductView extends JFrame{
 		
 		FavButtonSetUp();
 		
-		nextNprevButtonsSetup(imagepath);
+		//nextNprevButtonsSetup(imagepath);
 		
 		panelProperties();
 	}
@@ -111,7 +117,7 @@ public class ProductView extends JFrame{
 		this.setSize(675,415);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dimension.width/2-this.getSize().width/2, dimension.height/2-this.getSize().height/2);
-		//this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
+		this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
 	}
 
 	public void FavButtonSetUp() {
