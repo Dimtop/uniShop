@@ -21,6 +21,8 @@ import uniShop.*;
 
 public abstract class HomeScreen extends JFrame {
 
+	protected LocalDataBase db;
+	
 	protected JPanel mainPanel = new JPanel();
 	protected SearchPanel searchPanel;
 	protected JPanel topButtonsPanel = new JPanel();
@@ -33,14 +35,15 @@ public abstract class HomeScreen extends JFrame {
 	
 	protected int gap = 10; //gap between subjects
 	
-	public HomeScreen(ArrayList<String> tags, ArrayList<Ad> ads) {
-		this.ads = ads;
+	public HomeScreen(LocalDataBase db) {
+		this.db = db;
+		this.ads = this.db.randomizeAds();
 		
 		//Main Panel setup
 		setupMainPanel();
 		
 		//Search Panel setup
-		setupSearchPanel(tags);
+		setupSearchPanel(this.db.getSystemPreferences());
 		
 		//Ads Panel setup
 		setupAdsPanel(ads);

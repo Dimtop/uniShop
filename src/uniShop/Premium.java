@@ -1,14 +1,15 @@
 package uniShop;
 
 import java.util.ArrayList;
+import GUI.*;
 
 public class Premium extends Registered {
 
 	private int tier;
 	
-	public Premium(int userId, String username, String email, ArrayList<String> preferences, int tier) 
+	public Premium(int userId, String username, String email, ArrayList<String> preferences, int tier, LocalDataBase db) 
 	{
-		super(userId, username, email);
+		super(userId, username, email, db);
 		this.premium = 1;
 		this.preferences = preferences;
 		this.tier = tier;
@@ -16,7 +17,7 @@ public class Premium extends Registered {
 	}
 	
 	public Premium(Registered user) {
-		super(user.getId(), user.getUsername(), user.getEmail());
+		super(user.getId(), user.getUsername(), user.getEmail(), user.getDb());
 		this.premium = 1; //not sure
 		this.preferences = user.getPreferences();
 		this.tier = 1;
@@ -44,5 +45,10 @@ public class Premium extends Registered {
 	public void setTier(int tier) {
 		this.tier = tier;
 	}	
+	
+	@Override
+	public void callHomePage() {
+		new HomeScreen_Premium(db, this);
+	}
 
 }

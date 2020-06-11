@@ -22,6 +22,8 @@ import uniShop.*;
 
 public class HomeScreen_Registered extends HomeScreen {
 
+	protected LocalDataBase db;
+	
 	protected JButton logoutButton = new JButton("LogOut");
 	protected JButton myProfileButton = new JButton("My Profile");
 	protected JButton upgradePremiumPlanButton = new JButton("Upgrade Premium Plan");
@@ -37,10 +39,11 @@ public class HomeScreen_Registered extends HomeScreen {
 	
 	protected Registered currUser;
 	
-	public HomeScreen_Registered(ArrayList<String> tags, ArrayList<Ad> ads, Registered user) {
-		super(tags, ads);
-		this.tags = tags;
-		this.ads = ads;
+	public HomeScreen_Registered(LocalDataBase db, Registered user) {
+		super(db);
+		this.db = db;
+		this.tags = this.db.getSystemPreferences();
+		this.ads = this.db.randomizeAds();
 		this.currUser = user;
 		
 		//Top Buttons setup
@@ -125,7 +128,7 @@ public class HomeScreen_Registered extends HomeScreen {
 				if(result == JOptionPane.YES_OPTION) {
 					//new Ads from db
 					dispose();
-					new HomeScreen_Guest(tags,ads);
+					new HomeScreen_Guest(db);
 				}
 			}
 		});
@@ -173,7 +176,7 @@ public class HomeScreen_Registered extends HomeScreen {
 		
 		Premium premUser = new Premium(currUser);
 		
-		new HomeScreen_Premium(tags, ads, premUser);
+		new HomeScreen_Premium(this.db, premUser);
 	}
 
 	@Override

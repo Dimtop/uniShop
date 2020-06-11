@@ -1,31 +1,32 @@
 package uniShop;
 
 import java.util.*; 
+import GUI.*;
 
 public class Registered extends User {
 	
 	protected int status=1; //κατασταση χρήστη, συνδεδεμένος/μη συνδεδεμένος
+	protected String password;
 	protected ArrayList<Ad> myAds;
 	protected ArrayList<Message> myMessages;
 	protected ArrayList<Ad> wishlist;
 	
 	
 	
-	public Registered(int userId, String username, String email)
+	public Registered(int userId, String username, String email, LocalDataBase db)
 	{
-		super(userId, username, email);	
+		super(userId, username, email, db);	
 		this.myAds = new ArrayList<>();
 		this.myMessages = new ArrayList<>();
 		this.wishlist = new ArrayList<>();
 		this.premium = 0;
 		
-	}
-	
+	}	
 	
 	public void logout()//Guest HP GUI 
 	{
 		status = 0; //0 για αποσυνδεδεμένο
-		new Guest(); 
+		new Guest(db); 
 	}
 	
 	public void viewProfile()//Profile GUI 
@@ -92,7 +93,7 @@ public class Registered extends User {
 		//change this.premium
 		//Create Premium object and create Premium HP GUI
 		if(this.premium == 0) {
-			new Premium(this.userId, this.username, this.email,this.preferences,0);
+			new Premium(this.userId, this.username, this.email,this.preferences,0, this.db);
 			//Premium_Gui
 		}
 		else if(this.premium==1) {
@@ -236,13 +237,13 @@ public class Registered extends User {
 	{
 		ArrayList<Registered> profiles = new ArrayList<Registered>(); //υποθετική βάση
 		
-		Registered R1 = new Registered(11, "george", "ge@gmail.com");
-		Registered R2 = new Registered(5, "Mike9", "mike@gmail.com");
-		Registered R3 = new Registered(999, "helen99", "helen9@gmail.com");
+		//Registered R1 = new Registered(11, "george", "ge@gmail.com");
+		//Registered R2 = new Registered(5, "Mike9", "mike@gmail.com");
+		//Registered R3 = new Registered(999, "helen99", "helen9@gmail.com");
 		
-		profiles.add(R1);
-		profiles.add(R2);
-		profiles.add(R3);
+		//profiles.add(R1);
+		//profiles.add(R2);
+		//profiles.add(R3);
 		
 		//for(Registered R: profiles) if aUser is connected with R return R
 		
@@ -353,5 +354,23 @@ public class Registered extends User {
 		
 	public int getTier() {
 		return 0;
+	}
+	
+	@Override
+	public void callHomePage() {
+		new HomeScreen_Registered(db, this);
+	}
+	
+	public LocalDataBase getDb() {
+		return this.db;
+	}
+
+
+	public String getPassword() {
+		return this.password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

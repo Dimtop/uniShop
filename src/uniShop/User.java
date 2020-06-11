@@ -4,18 +4,20 @@ import java.util.ArrayList;
 
 public abstract class User {
 	
+	protected LocalDataBase db;
+	
 	protected int userId;
 	protected String username;
 	protected String email;
-	protected String password;
 	protected int premium;
 	protected ArrayList<String> preferences;
 	
 	
-	public User(int userId, String username, String email) {
+	public User(int userId, String username, String email, LocalDataBase db) {
 		this.userId = userId;
 		this.username = username;
 		this.email = email;
+		this.db = db;
 	}
 
 
@@ -51,14 +53,6 @@ public abstract class User {
 		this.userId = id;
 	}
 	
-	public String getPassword() {
-		return this.password;
-	}
-	
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
 	//returns a text about int premium value
 	public String premiumToText() {
 		String text;
@@ -76,6 +70,9 @@ public abstract class User {
 	
 	//abstract method filter
 	public abstract ArrayList<Ad> filter(ArrayList<String> tags);
+	
+	//abstract method call home page
+	public abstract void callHomePage();
 	
 
 }

@@ -3,13 +3,12 @@ package uniShop;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
-
+import GUI.HomeScreen_Guest;
 
 public class Guest extends User{
 
-	public Guest() {
-		super(9999, "Guest", null);
+	public Guest(LocalDataBase db) {
+		super(9999, "Guest", null, db);
 		
 	}	
 	
@@ -135,6 +134,11 @@ public class Guest extends User{
 		
 		//HomeScreen_Guest g = new HomeScreen_Guest(ads);
 		
+	}
+
+	@Override
+	public void callHomePage() {
+		new HomeScreen_Guest(db);
 	}
 	
 	

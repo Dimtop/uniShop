@@ -19,14 +19,16 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
-import uniShop.Ad;
-import uniShop.Registered;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import uniShop.*;
+
 public class Register extends JFrame {
+	
+	private LocalDataBase db;
 	
 	private JFrame parentFrame;
 	
@@ -53,9 +55,10 @@ public class Register extends JFrame {
 	
 	private Border defaultBorder;
 	
-	public Register(ArrayList<String> pref, JFrame parentFrame) {
+	public Register(LocalDataBase db, JFrame parentFrame) {
+		this.db = db;
 		this.parentFrame = parentFrame;
-		this.preferences = pref;
+		this.preferences = db.getSystemPreferences();
 		
 		//User Name Section
 		setupUsername();
@@ -229,7 +232,7 @@ public class Register extends JFrame {
 			
 			flag = false;
 		}
-		if(passwordField.getText().equals("")) {
+		if(String.valueOf(passwordField.getPassword()).equals("")) {
 			
 			passwordField.setBorder(new LineBorder(Color.RED, 1));
 			
@@ -269,7 +272,7 @@ public class Register extends JFrame {
 		if(usernameField.getText().equals("test")) {	
 			//if there is not
 			int id = 0; //id will be on the db, int id = db.getId() + 1;
-			Registered newUser = new Registered(id, usernameField.getText(), passwordField.getText());
+			Registered newUser = new Registered(id, usernameField.getText(), String.valueOf(passwordField.getPassword()), db);
 			newUser.setPreferences(getCheckBoxesText());
 			//update the db with the new user, db.addUser(newUser);
 			
@@ -283,7 +286,7 @@ public class Register extends JFrame {
 			dispose();
 			parentFrame.dispose();
 			
-			new HomeScreen_Registered(tags, ads, newUser);
+			new HomeScreen_Registered(this.db, newUser);
 		}
 		else {
 			//if there is not

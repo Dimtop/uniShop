@@ -9,9 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import uniShop.Ad;
-import uniShop.Guest;
-import uniShop.User;
+import uniShop.*;
 
 /*	User Interface of the system's home screen
  * 	displayed on a Guest User 
@@ -21,17 +19,18 @@ import uniShop.User;
 
 public class HomeScreen_Guest extends HomeScreen {
 
+	protected LocalDataBase db;
+	
 	protected JPanel buttonsPanel = new JPanel();
 	protected JButton loginButton = new JButton("LogIn");
-	protected JButton registerButton = new JButton("Register");	
+	protected JButton registerButton = new JButton("Register");
 	
-	protected ArrayList<String> tags = new ArrayList<>(); //testing
+	protected JFrame currFrame;
 	
-	public HomeScreen_Guest(ArrayList<String> tags, ArrayList<Ad> ads) {
-		super(tags,ads);
-		
-		//Testing
-		this.tags = tags;
+	public HomeScreen_Guest(LocalDataBase db) {
+		super(db);
+		this.db = db;
+		this.currFrame = this;
 		
 		//Top Buttons setup
 		setupTopButtons();
@@ -68,7 +67,7 @@ public class HomeScreen_Guest extends HomeScreen {
 		loginButton.setLocation(this.getWidth()-loginButton.getWidth()-30, gap);
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new LoginWindow();
+				new LoginWindow(db , currFrame);
 			}
 		});
 		this.getContentPane().add(loginButton);
@@ -79,8 +78,7 @@ public class HomeScreen_Guest extends HomeScreen {
 		JFrame currFrame = this;
 		registerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Register(tags, currFrame);
-				System.out.println("test");
+				new Register(db, currFrame);
 			}
 		});
 		this.getContentPane().add(registerButton);
@@ -89,7 +87,7 @@ public class HomeScreen_Guest extends HomeScreen {
 
 	@Override
 	protected User getCurrUser() {
-		Guest user = new Guest();
+		Guest user = new Guest(db);
 		return user;
 	}
 }

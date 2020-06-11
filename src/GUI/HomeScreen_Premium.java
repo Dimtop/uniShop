@@ -2,7 +2,6 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,8 +21,8 @@ public class HomeScreen_Premium extends HomeScreen_Registered {
 	
 	protected Premium currUser;
 	
-	public HomeScreen_Premium(ArrayList<String> tags, ArrayList<Ad> ads, Premium user) {
-		super(tags, ads, user);
+	public HomeScreen_Premium(LocalDataBase db, Premium user) {
+		super(db, user);
 		this.currUser = user;
 	}
 	

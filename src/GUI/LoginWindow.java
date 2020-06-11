@@ -1,7 +1,6 @@
 package GUI;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,21 +12,30 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import uniShop.*;
+
 public class LoginWindow extends JFrame{
 	
+	private LocalDataBase db;
+	
 	private JPanel panel;
-	private Image imageUnishopic;
 	private JLabel labeliconimage;
 	private JTextField usernameField;
 	private JPasswordField pwdPassword;
 	
+	private JFrame currFrame;
+	private JFrame parentFrame;
+	
 	//it should get data from the base
-	public LoginWindow() {
+	public LoginWindow(LocalDataBase db, JFrame parent) {
+		this.db = db;
+		this.currFrame = this;
+		this.parentFrame = parent;
+		
 		jpanel();
 		setimage();
 		userInfoField();
@@ -56,7 +64,6 @@ public class LoginWindow extends JFrame{
 	
 	//image setup
 	private void setimage(){
-		//imageUnishopic.setIcon(new ImageIcon(AdPanelRegistered.class.getResource("/images/message.png")));
 		panel.setLayout(null);
 		labeliconimage=new JLabel("");
 		labeliconimage.setBounds(140,11, 140,140);
@@ -111,15 +118,16 @@ public class LoginWindow extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String username=usernameField.getText();
 				String password=String.valueOf(pwdPassword.getPassword());
-				System.out.println(password);
+				Registered currUser = db.login(username, password);
 				//if the username and the password dont match then print failed else change homescreen to premium
-				if(true) {
+				if(currUser == null) {
 					labelmessage.setText("Login failed!");
 					labelmessage.setForeground(Color.RED);
 				}
 				else {
-					//new HomeScreen_Premium();
-					setVisible(false);
+					currUser.callHomePage();
+					currFrame.dispose();
+					parentFrame.dispose();
 				}
 			}});
 			
