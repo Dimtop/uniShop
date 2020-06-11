@@ -286,9 +286,7 @@ public class LocalDataBase {
 	public Registered login(String username, String password) {
 		Registered currUser = null;
 		
-		System.out.println("Searching: username: " + username + " password: " + password);
 		for(Registered user : this.systemUsers) {
-			System.out.println("|| username: " + user.getUsername() + " password: " + user.getPassword());
 			if(user.getUsername().equals(username) && user.getPassword().equals(password)) {
 				currUser = user;
 			}
@@ -335,6 +333,40 @@ public class LocalDataBase {
 
 	public ArrayList<String> getSystemPreferences() {
 		return systemPreferences;
+	}
+	
+	public boolean containsThisName(String name) {
+		boolean flag = false;
+		
+		for(Registered user : this.systemUsers) {
+			if(user.getUsername().equals(name))
+				flag = true;
+		}
+		
+		return flag;
+	}
+	
+	public int getNextUserId() {
+		return this.nextUserId;
+	}
+	
+	public void increaseUserId() {
+		this.nextUserId++;
+	}
+	
+	public int getNextAdId() {
+		return this.nextAdId;
+	}
+	
+	public void increaseAdId() {
+		this.nextAdId++;
+	}
+	
+	//testing
+	public void printUsers() {
+		for(Registered user : this.systemUsers) {
+			System.out.println(user.getUsername());
+		}
 	}
 
 }

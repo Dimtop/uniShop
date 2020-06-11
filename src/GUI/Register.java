@@ -269,24 +269,19 @@ public class Register extends JFrame {
 	
 	private void registerButtonClicked() {
 		//check if there is a user with the same user name on the db
-		if(usernameField.getText().equals("test")) {	
+		if(!db.containsThisName(usernameField.getText())) {	
 			//if there is not
-			int id = 0; //id will be on the db, int id = db.getId() + 1;
+			int id = db.getNextUserId();
 			Registered newUser = new Registered(id, usernameField.getText(), String.valueOf(passwordField.getPassword()), db);
+			db.increaseUserId();
+			db.addUser(newUser);
 			newUser.setPreferences(getCheckBoxesText());
-			//update the db with the new user, db.addUser(newUser);
-			
-			ArrayList<Ad> ads = new ArrayList<>(); //from the db on the last version
-			ArrayList<String> tags = new ArrayList<>(); //tags from the db
-			tags.add("Cars");
-			tags.add("Tech");
-			tags.add("House");
-			tags.add("Clothes");
 			
 			dispose();
 			parentFrame.dispose();
 			
 			new HomeScreen_Registered(this.db, newUser);
+			db.printUsers();
 		}
 		else {
 			//if there is not
