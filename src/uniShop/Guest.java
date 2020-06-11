@@ -40,10 +40,10 @@ public class Guest extends User{
 		preferences5.add("cook");
 		
 		ArrayList<Ad> Ads = new ArrayList<Ad>(); // get Ads from database
-		Ad a1 = new Ad(1,"shoes sport",null,null,null,null,null,preferences3,null,ListingPromotionType.NOT_PROMOTED);
-		Ad a2 = new Ad(2,"english lessons",null,null,null,null,null,preferences2,null,ListingPromotionType.PROMOTION_LEVEL2);
-		Ad a3 = new Ad(3,"art lessons",null,null,null,null,null,preferences4,null,ListingPromotionType.NOT_PROMOTED);
-		Ad a4 = new Ad(4,"cooking",null,null,null,null,null,preferences5,null,ListingPromotionType.PROMOTION_LEVEL1);
+		Ad a1 = new Ad(1,"shoes sport",null,null,null,null,null,preferences3,null);
+		Ad a2 = new Ad(2,"english lessons",null,null,null,null,null,preferences2,null);
+		Ad a3 = new Ad(3,"art lessons",null,null,null,null,null,preferences4,null);
+		Ad a4 = new Ad(4,"cooking",null,null,null,null,null,preferences5,null);
 		
 		Ads.add(a1);
 		Ads.add(a2);
@@ -97,10 +97,10 @@ public class Guest extends User{
 		preferences5.add("cook");
 		
 		ArrayList<Ad> Ads = new ArrayList<Ad>(); // get Ads from database
-		Ad a1 = new Ad(1,"shoes sport",null,null,null,null,null,preferences3,null,ListingPromotionType.NOT_PROMOTED);
-		Ad a2 = new Ad(2,"english lessons",null,null,null,null,null,preferences2,null,ListingPromotionType.PROMOTION_LEVEL2);
-		Ad a3 = new Ad(3,"art lessons",null,null,null,null,null,preferences4,null,ListingPromotionType.NOT_PROMOTED);
-		Ad a4 = new Ad(4,"cooking",null,null,null,null,null,preferences5,null,ListingPromotionType.PROMOTION_LEVEL1);
+		Ad a1 = new Ad(1,"shoes sport",null,null,null,null,null,preferences3,null);
+		Ad a2 = new Ad(2,"english lessons",null,null,null,null,null,preferences2,null);
+		Ad a3 = new Ad(3,"art lessons",null,null,null,null,null,preferences4,null);
+		Ad a4 = new Ad(4,"cooking",null,null,null,null,null,preferences5,null);
 	
 		Ads.add(a1);
 		Ads.add(a2);

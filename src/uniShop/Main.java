@@ -30,11 +30,11 @@ public class Main {
 		//Creating Ads
 		ArrayList<Ad> ads = new ArrayList<>(); //from the db on the last version
 		Ad ad1 = new Ad(0,"Product1","Description","https://cdn.wccftech.com/wp-content/uploads/2018/10/Intel-X-Series-1-Custom-2060x1375.jpg",
-				currDate,user1,user2,tags,ListingState.ACTIVE, ListingPromotionType.NOT_PROMOTED);
+				currDate,user1,user2,tags,ListingState.ACTIVE);
 		Ad ad2 = new Ad(1,"Product2","Description","https://cdn.wccftech.com/wp-content/uploads/2018/10/Intel-X-Series-1-Custom-2060x1375.jpg",
-				currDate,user2,user1,tags,ListingState.ACTIVE, ListingPromotionType.PROMOTION_LEVEL1);
+				currDate,user2,user1,tags,ListingState.ACTIVE);
 		Ad ad3 = new Ad(2,"Product3","Description","https://cdn.wccftech.com/wp-content/uploads/2018/10/Intel-X-Series-1-Custom-2060x1375.jpg",
-				currDate,currUser,user2,tags,ListingState.ACTIVE, ListingPromotionType.PROMOTION_LEVEL2);
+				currDate,currUser,user2,tags,ListingState.ACTIVE);
 		ads.add(ad1);
 		ads.add(ad2);
 		ads.add(ad3);
@@ -49,8 +49,9 @@ public class Main {
 		currUser.addToWishlist(ad2);
 		
 		//new HomeScreen_Registered(tags,ads,currUser);
-		new HomeScreen_Guest(tags,ads);
- 
+		//new HomeScreen_Guest(tags,ads);
+		
+		LocalDataBase db = new LocalDataBase();
 	}
 
 }

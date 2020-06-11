@@ -16,7 +16,7 @@ public class Ad implements Comparable{
 	private ListingPromotionType promotionType;//Type of promoted ad
 	
 	public Ad(int id, String name, String description, String link, Date date, Registered seller, 
-			Registered buyer, ArrayList<String> tags, ListingState status, ListingPromotionType type)
+			Registered buyer, ArrayList<String> tags, ListingState status)
 	{
 		tags = new ArrayList<>();
 		
@@ -29,7 +29,17 @@ public class Ad implements Comparable{
 		this.buyer = buyer;
 		this.tags = tags;
 		this.status = status;
-		this.promotionType = type;
+		
+		//Setting up promotion type
+		if(this.seller.getTier() == 0)
+			this.promotionType = ListingPromotionType.NOT_PROMOTED;
+		else if(this.seller.getTier() == 1)
+			this.promotionType = ListingPromotionType.PROMOTION_LEVEL1;
+		else
+			this.promotionType = ListingPromotionType.PROMOTION_LEVEL2;
+		
+		//Adding the add into the seller ads
+		this.seller.addAd(this);
 	}
 	
 	public int getAd_id() 

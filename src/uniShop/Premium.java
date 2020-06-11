@@ -6,10 +6,10 @@ public class Premium extends Registered {
 
 	private int tier;
 	
-	public Premium(int userId, String username, String email, int premium, ArrayList<String> preferences, int tier) 
+	public Premium(int userId, String username, String email, ArrayList<String> preferences, int tier) 
 	{
 		super(userId, username, email);
-		this.premium = premium;
+		this.premium = 1;
 		this.preferences = preferences;
 		this.tier = tier;
 		
@@ -43,9 +43,6 @@ public class Premium extends Registered {
 
 	public void setTier(int tier) {
 		this.tier = tier;
-	}
-	
-	
-	
+	}	
 
 }

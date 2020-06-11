@@ -7,6 +7,7 @@ public abstract class User {
 	protected int userId;
 	protected String username;
 	protected String email;
+	protected String password;
 	protected int premium;
 	protected ArrayList<String> preferences;
 	
@@ -48,6 +49,14 @@ public abstract class User {
 	
 	public void setId(int id) {
 		this.userId = id;
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	//returns a text about int premium value

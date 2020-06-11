@@ -117,7 +117,7 @@ public class MyMessages extends JFrame {
 		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
 		Date currDate = new Date(System.currentTimeMillis());
 		Ad ad = new Ad(0,"Product1","Description","https://cdn.wccftech.com/wp-content/uploads/2018/10/Intel-X-Series-1-Custom-2060x1375.jpg",
-				currDate,currUser,currUser,new ArrayList<String>(),ListingState.ACTIVE, ListingPromotionType.NOT_PROMOTED);
+				currDate,currUser,currUser,new ArrayList<String>(),ListingState.ACTIVE);
 		buyerMessages.add(new Message("Text", currUser, currUser, ad));
 		
 		//Messages Panels
