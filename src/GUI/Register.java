@@ -281,7 +281,6 @@ public class Register extends JFrame {
 			parentFrame.dispose();
 			
 			new HomeScreen_Registered(this.db, newUser);
-			db.printUsers();
 		}
 		else {
 			//if there is not

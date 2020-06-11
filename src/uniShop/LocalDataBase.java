@@ -219,17 +219,16 @@ public class LocalDataBase {
 	//Randomize Users Preferences
 	private ArrayList<String> getSomePreferences(int prefSize){
 		ArrayList<String> currList = new ArrayList<>();
+			
 		
 		int i = 0;
 		while(i < prefSize) {
 			int randNum = new Random().nextInt(this.systemPreferences.size());
-			
+						
 			if(!currList.contains(this.systemPreferences.get(randNum))) {
-				currList.add(this.systemPreferences.get(i));
+				currList.add(this.systemPreferences.get(randNum));
 				i++;
 			}
-			
-			currList.add(this.systemPreferences.get(i));
 		}
 		
 		return currList;
@@ -360,13 +359,6 @@ public class LocalDataBase {
 	
 	public void increaseAdId() {
 		this.nextAdId++;
-	}
-	
-	//testing
-	public void printUsers() {
-		for(Registered user : this.systemUsers) {
-			System.out.println(user.getUsername());
-		}
 	}
 
 }

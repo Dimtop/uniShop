@@ -142,7 +142,7 @@ public class HomeScreen_Registered extends HomeScreen {
 		myProfileButton.setLocation(logoutButton.getX()-myProfileButton.getWidth()-gap, gap);
 		myProfileButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new MyProfile(false, currUser);
+				new MyProfile(db, false, currUser, currFrame);
 			}
 		});
 		this.getContentPane().add(myProfileButton);

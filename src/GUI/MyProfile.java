@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import uniShop.Registered;
+import uniShop.*;
 
 public class MyProfile extends JFrame {
 
@@ -31,10 +31,14 @@ public class MyProfile extends JFrame {
 	private boolean editable;
 	
 	private Registered currUser;
+	private LocalDataBase db;
+	private JFrame parentFrame;
 	
-	public MyProfile(boolean editable, Registered user) {
+	public MyProfile(LocalDataBase db, boolean editable, Registered user, JFrame parent) {
 		this.editable = editable;
 		this.currUser = user;
+		this.db = db;
+		this.parentFrame = parent;
 		
 		//Main Panel
 		setupMainPanel();
@@ -58,7 +62,7 @@ public class MyProfile extends JFrame {
 	}
 	
 	private void setupProfileInfoPanel(){
-		profileInfoPanel = new ProfileInfoPanel(editable, currUser);
+		profileInfoPanel = new ProfileInfoPanel(db, editable, currUser);
 		
 		//Titled Border
 		TitledBorder titledBorder = new TitledBorder(new EtchedBorder(), "Profile Info");
@@ -77,7 +81,7 @@ public class MyProfile extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				editProfileInfo();
 				dispose();
-				new MyProfile(false, currUser);
+				new MyProfile(db, false, currUser, parentFrame);
 			}
 		});
 		mainPanel.add(confirmButton);
@@ -90,7 +94,7 @@ public class MyProfile extends JFrame {
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new MyProfile(true, currUser);
+				new MyProfile(db, true, currUser, parentFrame);
 			}
 		});
 		mainPanel.add(editButton);
@@ -111,12 +115,8 @@ public class MyProfile extends JFrame {
 				int result = JOptionPane.showConfirmDialog(mainPanel,"Are you sure you want to delete your profile?", 
 						"DELETING PROFILE", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if(result == JOptionPane.YES_OPTION) {
-					//to do
-					System.out.println("Yes");
-				}
-				else {
-					//to do
-					System.out.println("No");
+					db.removingUser(currUser);
+					parentFrame.dispose();
 				}
 			}
 		});
@@ -148,7 +148,7 @@ public class MyProfile extends JFrame {
 
 		currUser.setUsername(profileInfoPanel.getNewUsername()); //applying new user name
 		currUser.setEmail(profileInfoPanel.getNewEmail()); //applying new e-mail
-		//to do change on the password
+		currUser.setPassword(profileInfoPanel.getNewPassword()); //applying new password
 	}
 	
 }

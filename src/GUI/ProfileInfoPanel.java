@@ -37,10 +37,14 @@ public class ProfileInfoPanel extends JPanel {
 	private boolean editable;
 	
 	private Registered currUser;
+	private LocalDataBase db;
 	
-	public ProfileInfoPanel(boolean editable, Registered user) {
+	public ProfileInfoPanel(LocalDataBase db, boolean editable, Registered user) {
 		this.editable = editable;
 		this.currUser = user;
+		this.db = db;
+		this.preferences = this.db.getSystemPreferences();
+		this.userPreferences = currUser.getPreferences();
 		
 		//User Name Section
 		setupUsername();
@@ -142,14 +146,6 @@ public class ProfileInfoPanel extends JPanel {
 		prefScroll.getVerticalScrollBar().setUnitIncrement(16); //increases the scroll speed
 		this.add(prefScroll);
 		
-		//Testing
-		preferences.add("Cars");   
-		preferences.add("Tech");   
-		preferences.add("House");  
-		preferences.add("Clothes");
-				
-		userPreferences = currUser.getPreferences();
-		
 		//Preferences Panel
 		preferencesPanel.setLocation(5, 5);
 		preferencesPanel.setLayout(null);
@@ -159,7 +155,6 @@ public class ProfileInfoPanel extends JPanel {
 		if(editable) {
 			preferencesPanel.setPreferredSize(new Dimension(190, preferences.size()*30));
 			
-			//preferences = server.getPreferences;
 			JCheckBox checkbox;
 			JLabel label;
 			int height = 0;
@@ -185,10 +180,8 @@ public class ProfileInfoPanel extends JPanel {
 		else {
 			preferencesPanel.setPreferredSize(new Dimension(190, userPreferences.size()*30));
 			
-			//preferences = user.getPreferences();
 			JLabel label;
 			int height = 0;
-			//for(String str : preferences) {
 			for(String str : userPreferences) {
 				label = new JLabel(str);
 				label.setSize(190, 20);
