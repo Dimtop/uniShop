@@ -157,7 +157,6 @@ public class HomeScreen_Registered extends HomeScreen {
 						"Upgrade to Premium Plan", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if(result == JOptionPane.YES_OPTION) {
 					upgradeToPremiumPlan(currentFrame);
-					//update db
 				}
 			}
 		});

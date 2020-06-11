@@ -21,6 +21,10 @@ public class Premium extends Registered {
 		this.premium = 1; //not sure
 		this.preferences = user.getPreferences();
 		this.tier = 1;
+		this.myMessages = user.getMessages();
+		this.myAds = user.getMyAds();
+		this.wishlist = user.getWishlist();
+		this.preferences = user.getPreferences();
 	}
 	
 	public void  viewPremiumPlan()//Premium Plan GUI 

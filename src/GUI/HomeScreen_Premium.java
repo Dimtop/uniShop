@@ -63,11 +63,10 @@ public class HomeScreen_Premium extends HomeScreen_Registered {
 		
 		currUser.setTier(currUser.getTier()+1);
 		String message = "Your premium plan has update on tier " + currUser.getTier(); 
-		//update db
 		
 		JOptionPane.showMessageDialog(mainPanel, message);
 		
-		if(currUser.getTier() == 3) {
+		if(currUser.getTier() == 2) {
 			this.upgradePremiumPlanButton.setEnabled(false);
 			currentFrame.revalidate();
 		}
