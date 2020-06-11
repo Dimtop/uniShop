@@ -38,6 +38,7 @@ public class HomeScreen_Registered extends HomeScreen {
 	protected ArrayList<Ad> ads = new ArrayList<>();
 	
 	protected Registered currUser;
+	protected JFrame currFrame;
 	
 	public HomeScreen_Registered(LocalDataBase db, Registered user) {
 		super(db);
@@ -45,6 +46,8 @@ public class HomeScreen_Registered extends HomeScreen {
 		this.tags = this.db.getSystemPreferences();
 		this.ads = this.db.randomizeAds();
 		this.currUser = user;
+		user.setStatus(1);
+		this.currFrame = this;
 		
 		//Top Buttons setup
 		setupTopButtons();
@@ -126,8 +129,8 @@ public class HomeScreen_Registered extends HomeScreen {
 				int result = JOptionPane.showConfirmDialog(mainPanel,"Are you sure you want to logout?", 
 						"Upgrade to Premium Plan", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if(result == JOptionPane.YES_OPTION) {
-					//new Ads from db
-					dispose();
+					currUser.setStatus(0);
+					currFrame.dispose();
 					new HomeScreen_Guest(db);
 				}
 			}

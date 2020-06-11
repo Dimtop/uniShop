@@ -5,7 +5,7 @@ import GUI.*;
 
 public class Registered extends User {
 	
-	protected int status=1; //κατασταση χρήστη, συνδεδεμένος/μη συνδεδεμένος
+	protected int status=0; //κατασταση χρήστη, συνδεδεμένος/μη συνδεδεμένος
 	protected String password;
 	protected ArrayList<Ad> myAds;
 	protected ArrayList<Message> myMessages;
@@ -372,5 +372,9 @@ public class Registered extends User {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }
