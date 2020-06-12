@@ -8,8 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import uniShop.Ad;
-import uniShop.Registered;
+import uniShop.*;
 
 public class AdPanelRegistered extends AdPanel {
 
@@ -22,8 +21,8 @@ public class AdPanelRegistered extends AdPanel {
 	
 	private JPanel currPanel;
 	
-	public AdPanelRegistered(Ad ad, Registered user) {
-		super(ad);
+	public AdPanelRegistered(Ad ad, Registered user, LocalDataBase db) {
+		super(ad, db);
 		this.myAd = ad;
 		this.currUser = user;
 		this.onWishlist = currUser.getWishlist().contains(this.myAd);

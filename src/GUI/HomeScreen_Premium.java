@@ -71,10 +71,4 @@ public class HomeScreen_Premium extends HomeScreen_Registered {
 			currentFrame.revalidate();
 		}
 	}
-	
-	@Override
-	protected User getCurrUser() {
-		return this.currUser;
-	}
-
 }

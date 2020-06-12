@@ -110,7 +110,6 @@ public class SearchPanel extends JPanel {
 				if(!searchBar.getText().equals("Type your product")) {
 					if(newTags.isEmpty()) {
 						//Product Name YES, Tags NO
-						System.out.println(db);
 						ArrayList<Ad> newAds = currUser.search(searchBar.getText(),db);
 						System.out.println(newAds);
 						parent.refreshAdsPanel(newAds);

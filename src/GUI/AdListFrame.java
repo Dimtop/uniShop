@@ -23,11 +23,13 @@ public class AdListFrame extends JFrame {
 	private String title;
 	
 	private Registered currUser;
+	private LocalDataBase db;
 	
-	public AdListFrame(ArrayList<Ad> ads, String title, Registered user) {
+	public AdListFrame(ArrayList<Ad> ads, String title, Registered user, LocalDataBase db) {
 		this.ads = ads;
 		this.title = title;
 		this.currUser = user;
+		this.db = db;
 		
 		//Ads Panel
 		setupAdsPanel();
@@ -58,9 +60,9 @@ public class AdListFrame extends JFrame {
 		int height = 0;
 		for(Ad currAd : ads) {
 			if(this.title.equals("My Ads"))
-				adPanel = new AdPanel(currAd);
+				adPanel = new AdPanel(currAd, db);
 			else
-				adPanel = new AdPanelRegistered(currAd, currUser);
+				adPanel = new AdPanelRegistered(currAd, currUser, db);
 			adPanel.setBounds(0, height, adPanel.getWidth(), adPanel.getHeight());
 			adsPanel.add(adPanel);
 			

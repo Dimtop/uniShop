@@ -35,9 +35,12 @@ public abstract class HomeScreen extends JFrame {
 	
 	protected int gap = 10; //gap between subjects
 	
-	public HomeScreen(LocalDataBase db) {
+	protected User currUser;
+	
+	public HomeScreen(LocalDataBase db, User user) {
 		this.db = db;
 		this.ads = this.db.randomizeAds();
+		this.currUser = user;
 		
 		//Main Panel setup
 		setupMainPanel();
@@ -60,7 +63,7 @@ public abstract class HomeScreen extends JFrame {
 	
 	//setting up search panel
 	private void setupSearchPanel(ArrayList<String> tags) {
-		searchPanel = new SearchPanel(gap, tags, this, this.getCurrUser(),this.db);
+		searchPanel = new SearchPanel(gap, tags, this, this.currUser, this.db);
 		searchPanel.setLocation(gap, gap);
 		mainPanel.add(searchPanel);
 	}
@@ -109,8 +112,5 @@ public abstract class HomeScreen extends JFrame {
 		creatingAdsPanel(newAds); //randomize list with ads
 		adsScrollPane.setViewportView(adsPanel);
 	}
-	
-	//getting user of current home page
-	protected abstract User getCurrUser();
 
 }

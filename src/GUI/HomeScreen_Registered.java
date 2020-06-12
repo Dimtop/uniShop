@@ -41,7 +41,7 @@ public class HomeScreen_Registered extends HomeScreen {
 	protected JFrame currFrame;
 	
 	public HomeScreen_Registered(LocalDataBase db, Registered user) {
-		super(db);
+		super(db, user);
 		this.db = db;
 		this.tags = this.db.getSystemPreferences();
 		this.ads = this.db.randomizeAds();
@@ -109,7 +109,7 @@ public class HomeScreen_Registered extends HomeScreen {
 		AdPanel adPanel;
 		int height = 0;
 		for(Ad currAd : ads) {
-			adPanel = new AdPanelRegistered(currAd, currUser);
+			adPanel = new AdPanelRegistered(currAd, currUser, db);
 			adPanel.setBounds(0, height, adPanel.getWidth(), adPanel.getHeight());
 			adsPanel.add(adPanel);
 			
@@ -168,7 +168,7 @@ public class HomeScreen_Registered extends HomeScreen {
 		wishListButton.setLocation(upgradePremiumPlanButton.getX()-wishListButton.getWidth()-gap, gap);
 		wishListButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new AdListFrame(currUser.getWishlist(), "Wishlist", currUser);
+				new AdListFrame(currUser.getWishlist(), "Wishlist", currUser, db);
 			}
 		});
 		this.getContentPane().add(wishListButton);		
@@ -180,10 +180,5 @@ public class HomeScreen_Registered extends HomeScreen {
 		Premium premUser = new Premium(currUser);
 		
 		new HomeScreen_Premium(this.db, premUser);
-	}
-
-	@Override
-	protected User getCurrUser() {
-		return this.currUser;
 	}
 }

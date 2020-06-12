@@ -28,7 +28,7 @@ public class HomeScreen_Guest extends HomeScreen {
 	protected JFrame currFrame;
 	
 	public HomeScreen_Guest(LocalDataBase db) {
-		super(db);
+		super(db, new Guest(db));
 		this.db = db;
 		this.currFrame = this;
 		
@@ -50,7 +50,7 @@ public class HomeScreen_Guest extends HomeScreen {
 		AdPanel adPanel;
 		int height = 0;
 		for(Ad currAd : ads) {
-			adPanel = new AdPanel(currAd);
+			adPanel = new AdPanel(currAd, db);
 			adPanel.setBounds(0, height, adPanel.getWidth(), adPanel.getHeight());
 			adsPanel.add(adPanel);
 			
@@ -83,11 +83,5 @@ public class HomeScreen_Guest extends HomeScreen {
 		});
 		this.getContentPane().add(registerButton);
 		
-	}
-
-	@Override
-	protected User getCurrUser() {
-		Guest user = new Guest(db);
-		return user;
 	}
 }

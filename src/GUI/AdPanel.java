@@ -38,8 +38,11 @@ public class AdPanel extends JPanel {
 	private JLabel tierLabel = new JLabel();
 	private JLabel sellerName = new JLabel();
 	
-	public AdPanel(Ad ad) {
+	private LocalDataBase db;
+	
+	public AdPanel(Ad ad, LocalDataBase db) {
 		this.myAd = ad;
+		this.db = db;
 		
 		//Photo Section
 		setupPhoto();
@@ -87,13 +90,7 @@ public class AdPanel extends JPanel {
 		nameLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//Testing 
-				ArrayList<String> strTest = new ArrayList<>();
-				strTest.add("Test1");
-				strTest.add("Test2");
-				strTest.add("Test3");
-				strTest.add("Test4");
-				//new ProductView(strTest);
+				new ProductView(db);
 			}
 		});
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
