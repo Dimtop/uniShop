@@ -54,7 +54,7 @@ public class HomeScreen_Premium extends HomeScreen_Registered {
 	protected void creatingNewAdListener() {
 		createNewAd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CreateNewAdPrem();
+				//new CreateNewAdPrem();
 			}
 		});
 	}

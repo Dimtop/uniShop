@@ -41,13 +41,14 @@ public class SearchPanel extends JPanel {
 	private JFrame parent;
 	
 	private User currUser;
+	private LocalDataBase db;
 	
-	public SearchPanel(int gap, ArrayList<String> tags, HomeScreen parent, User currUser) {
+	public SearchPanel(int gap, ArrayList<String> tags, HomeScreen parent, User currUser,LocalDataBase db) {
 	
 		this.gap = gap;
 		this.parent = parent;
 		this.currUser = currUser;
-		
+		this.db = db;
 		//Panel Properties
 		this.setLayout(null);
 		this.setSize(250, 260);
@@ -109,13 +110,15 @@ public class SearchPanel extends JPanel {
 				if(!searchBar.getText().equals("Type your product")) {
 					if(newTags.isEmpty()) {
 						//Product Name YES, Tags NO
-						ArrayList<Ad> newAds = currUser.search(searchBar.getText());
+						System.out.println(db);
+						ArrayList<Ad> newAds = currUser.search(searchBar.getText(),db);
+						System.out.println(newAds);
 						parent.refreshAdsPanel(newAds);
 					}
 					else {
 						//Product Name YES, Tags YES
-						ArrayList<Ad> productNameAds = currUser.search(searchBar.getText());
-						ArrayList<Ad> tagsAds = currUser.filter(newTags);
+						ArrayList<Ad> productNameAds = currUser.search(searchBar.getText(),db);
+						ArrayList<Ad> tagsAds = currUser.filter(newTags,db);
 						ArrayList<Ad> newAds = new ArrayList<>();
 						newAds.addAll(productNameAds);
 						for(Ad ad : tagsAds) {
@@ -133,7 +136,7 @@ public class SearchPanel extends JPanel {
 					}
 					else {
 						//Product Name NO, Tags YES
-						ArrayList<Ad> newAds = currUser.filter(newTags);
+						ArrayList<Ad> newAds = currUser.filter(newTags,db);
 						parent.refreshAdsPanel(newAds);
 					}
 				}
@@ -144,7 +147,7 @@ public class SearchPanel extends JPanel {
 		searchButton.setSize(150, 20);
 		searchButton.setLocation((this.getWidth()-searchButton.getWidth())/2, this.getHeight()-searchButton.getHeight());
 		this.add(searchButton);
-
+		
 	}
 	
 	//testing

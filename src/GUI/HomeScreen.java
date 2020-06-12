@@ -60,7 +60,7 @@ public abstract class HomeScreen extends JFrame {
 	
 	//setting up search panel
 	private void setupSearchPanel(ArrayList<String> tags) {
-		searchPanel = new SearchPanel(gap, tags, this, this.getCurrUser());
+		searchPanel = new SearchPanel(gap, tags, this, this.getCurrUser(),this.db);
 		searchPanel.setLocation(gap, gap);
 		mainPanel.add(searchPanel);
 	}

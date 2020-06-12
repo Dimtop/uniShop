@@ -66,10 +66,10 @@ public abstract class User {
 	}
 	
 	//abstract method search
-	public abstract ArrayList<Ad> search(String text);
+	public abstract ArrayList<Ad> search(String text,LocalDataBase db);
 	
 	//abstract method filter
-	public abstract ArrayList<Ad> filter(ArrayList<String> tags);
+	public abstract ArrayList<Ad> filter(ArrayList<String> tags,LocalDataBase db);
 	
 	//abstract method call home page
 	public abstract void callHomePage();

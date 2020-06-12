@@ -103,14 +103,14 @@ public class Registered extends User {
 			
 	}
 	
-	public ArrayList<Ad> search(String text)//Registered HP GUI and database search
+	public ArrayList<Ad> search(String text,LocalDataBase db)//Registered HP GUI and database search
 	{
 		
 		boolean find = false;
 		
 		
 		ArrayList<Ad> foundAds = new ArrayList<Ad>();
-		for(Ad ad: this.db.getSystemAds()) {
+		for(Ad ad: db.getSystemAds()) {
 			if(ad.getName().contains(text)) {
 				foundAds.add(ad);
 				find = true;
@@ -128,7 +128,7 @@ public class Registered extends User {
 		
 	}
 	
-	public ArrayList<Ad> filter(ArrayList<String> tags)//Registered HP GUI and database search 
+	public ArrayList<Ad> filter(ArrayList<String> tags,LocalDataBase db)//Registered HP GUI and database search 
 	{
 		boolean found = false;
 		
@@ -136,7 +136,7 @@ public class Registered extends User {
 		ArrayList<Ad> foundAds = new ArrayList<Ad>();
 			
 		outsideloop:
-		for(Ad ad: this.db.getSystemAds()) {
+		for(Ad ad: db.getSystemAds()) {
 			for(String preference: ad.getTags()) {
 				if(tags.contains(preference)) {
 					found = true;

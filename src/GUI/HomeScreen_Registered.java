@@ -58,6 +58,7 @@ public class HomeScreen_Registered extends HomeScreen {
 		//Adding Ads Panel
 		creatingAdsPanel(ads);
 		//adsScrollPane.setViewportView(adsPanel);
+		
 	}
 	
 	protected void setupLeftButtons() {

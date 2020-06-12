@@ -12,7 +12,7 @@ public class Guest extends User{
 		
 	}	
 	
-	public ArrayList<Ad> filter(ArrayList<String> tags){
+	public ArrayList<Ad> filter(ArrayList<String> tags,LocalDataBase db){
 		
 		boolean find = false;
 		
@@ -42,13 +42,13 @@ public class Guest extends User{
 		return this.db.getSystemAds();
 		
 	}
-	public ArrayList<Ad> search(String text){
+	public ArrayList<Ad> search(String text,LocalDataBase db){
 		
 		boolean find = false;
 		
 		
 		ArrayList<Ad> foundAds = new ArrayList<Ad>();
-		for(Ad ad: this.db.getSystemAds()) {
+		for(Ad ad: db.getSystemAds()) {
 			
 			if(ad.getName().contains(text)) {
 				foundAds.add(ad);
