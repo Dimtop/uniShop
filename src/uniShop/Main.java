@@ -23,7 +23,8 @@ public class Main {
 	 * απο πάνω το ποντίκι εμφανίζονται. Το ίδιο συμβαίνει και στην createNewAd με
 	 * τα tags. Αρκεί να κουνηθεί το scroll και εμφανίζονται.
 	 * 
-	 * 
+	 * Για registered χρηστη username : User 1
+	 * 						 password : user1
 	 */
 
 	public static void main(String[] args) {
