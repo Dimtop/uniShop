@@ -1,6 +1,5 @@
 package GUI;
 
-import java.awt.Checkbox;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -12,8 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -23,7 +22,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -48,7 +46,6 @@ public class CreateNewAd extends JFrame{
 	protected JButton btnCreate,btnPutPhoto;
 	protected JTextArea textArea;
 	private JLabel lblchrLabel;
-	private JTextArea photolinkField;
 	private JFrame frame;
 	private JCheckBox chckbxNewCheckBox_1,chckbxNewCheckBox,chckbxNewCheckBox_2,chckbxNewCheckBox_3,chckbxNewCheckBox_4;
 	private JLabel photodesplayer;
@@ -60,6 +57,8 @@ public class CreateNewAd extends JFrame{
 
 	private LocalDataBase db;
 	private Registered register;
+	private JTextField LinkField;
+	private BufferedImage image;
 	
 	public CreateNewAd(LocalDataBase db,Registered register) {
 		this.db = db;
@@ -82,7 +81,7 @@ public class CreateNewAd extends JFrame{
 	{
 		this.setTitle("Create new add");
 	    this.setVisible(true);
-		this.setSize(650,700);
+		this.setSize(650,635);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dimension.width/2-this.getSize().width/2, dimension.height/2-this.getSize().height/2);
 		this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
@@ -127,10 +126,6 @@ public class CreateNewAd extends JFrame{
 		JLabel lblPhotoLink = new JLabel("Photo Links");
 		lblPhotoLink.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		photolinkField = new JTextArea();
-		photolinkField.setEditable(false);
-		photolinkField.setColumns(10);
-		
 		btnPutPhoto = new JButton("Put Photo");
 		PhotoLink();
 		
@@ -138,6 +133,9 @@ public class CreateNewAd extends JFrame{
 		
 		photodesplayer= new JLabel("");
 		photodesplayer.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		LinkField = new JTextField();
+		LinkField.setColumns(10);
 		
 		//layout
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
@@ -150,13 +148,13 @@ public class CreateNewAd extends JFrame{
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(20)
 									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(lblProductname, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-										.addComponent(lblDercription, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
-									.addPreferredGap(ComponentPlacement.RELATED, 174, Short.MAX_VALUE))
+										.addComponent(lblProductname, GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+										.addComponent(lblDercription, GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE))
+									.addPreferredGap(ComponentPlacement.RELATED, 190, Short.MAX_VALUE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addContainerGap()
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblMaxCharacters, GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+										.addComponent(lblMaxCharacters, GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
 										.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 											.addComponent(textField, GroupLayout.PREFERRED_SIZE, 239, GroupLayout.PREFERRED_SIZE)
 											.addComponent(textArea, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)))
@@ -168,23 +166,26 @@ public class CreateNewAd extends JFrame{
 								.addComponent(lblPhotoLink, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(LinkField, GroupLayout.PREFERRED_SIZE, 368, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED))
 										.addGroup(groupLayout.createSequentialGroup()
 											.addComponent(btnPutPhoto)
 											.addPreferredGap(ComponentPlacement.RELATED))
 										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(photolinkField, GroupLayout.PREFERRED_SIZE, 324, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)))
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+											.addComponent(lblTags, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED))
 										.addGroup(groupLayout.createSequentialGroup()
-											.addPreferredGap(ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-											.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE))
+											.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+											.addPreferredGap(ComponentPlacement.RELATED)))
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 										.addGroup(groupLayout.createSequentialGroup()
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(photodesplayer, GroupLayout.PREFERRED_SIZE, 263, GroupLayout.PREFERRED_SIZE))))))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblTags, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+											.addComponent(photodesplayer, GroupLayout.PREFERRED_SIZE, 263, GroupLayout.PREFERRED_SIZE))
+										.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+											.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
+											.addGap(25))))))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(lblchrLabel, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)))
@@ -210,22 +211,18 @@ public class CreateNewAd extends JFrame{
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(photolinkField, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
+							.addComponent(photodesplayer, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(LinkField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnPutPhoto)
-							.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-							.addComponent(lblTags, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
-						.addComponent(photodesplayer, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-							.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(6)
-							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblTags, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(67, Short.MAX_VALUE))
 		);
 				panel_1.setLayout(new GridLayout(0, 1, 0, 0));
 						
@@ -264,7 +261,7 @@ public class CreateNewAd extends JFrame{
 		return checkBoxes;
 	}
 	
-	//button usage when pressed
+	//CREATE button usage when pressed
 	public void buttonCreateUse(JButton btnCreate) {
 		btnCreate.addActionListener(new ActionListener() {
 			 
@@ -276,7 +273,7 @@ public class CreateNewAd extends JFrame{
 				}
 				Date currDate = new Date(System.currentTimeMillis());
 				
-				Ad ad=new Ad(register.getId(), getProductName(), getDesription(),"https://images-na.ssl-images-amazon.com/images/I/51EJdvzHJeL._AC_US160_.jpg", currDate,register,register, checkBoxes, ListingState.ACTIVE);
+				Ad ad=new Ad(register.getId(), getProductName(), getDesription(),LinkField.getText(), currDate,register,register, checkBoxes, ListingState.ACTIVE);
 				db.addAd(ad);
 				setVisible(false);
 				}
@@ -345,11 +342,23 @@ public class CreateNewAd extends JFrame{
 	
 	public void PhotoLink() {
 		//file chooser and path saver
-		final JLabel label = new JLabel();
+		LinkField=new JTextField("");
+		
+		
 		 btnPutPhoto.addActionListener(new ActionListener() {
 	         @Override
 	         public void actionPerformed(ActionEvent e) {
-	            JFileChooser fileChooser = new JFileChooser();
+	        	 
+	        		try {
+	        			image = ImageIO.read(new URL(LinkField.getText()));  //get url from ad
+	        			Image resizedImage =resizeImage(image);
+	        			photodesplayer = new JLabel(new ImageIcon(resizedImage)); 
+	        		} catch (MalformedURLException i) {
+	        			photodesplayer = new JLabel(new ImageIcon(this.getClass().getResource("/images/no_image_found.png")));
+	        		} catch (IOException i) {
+	        			photodesplayer = new JLabel(new ImageIcon(this.getClass().getResource("/images/no_image_found.png")));
+	        		}
+	           /*/ JFileChooser fileChooser = new JFileChooser();
 	            fileChooser.addChoosableFileFilter(new ImageFilter());
 	            fileChooser.setAcceptAllFileFilterUsed(false);
 
@@ -376,12 +385,31 @@ public class CreateNewAd extends JFrame{
 	            }else{
 	               label.setText("Open command canceled");
 	            }
-	         }
-	      });
+	         }/*/
+	         }});
 	}
 	
-	protected ArrayList<String> getAbsolutePath(){
-		return ImagePath;
+	protected Image resizeImage(BufferedImage img) {
+		Image image;
+		
+		int newHeight;
+		int newWidth;
+		
+		if(img.getHeight()>img.getWidth()) {
+			newHeight = 180;
+			newWidth = (int) (img.getWidth()*(double) newHeight/img.getHeight());
+		}
+		else {
+			newWidth = 180;
+			newHeight = (int) (img.getHeight()*(double) newWidth/img.getWidth());
+		}
+		image = img.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+				
+		return image;
+	}
+	
+	protected String getPhotoLink(){
+		return LinkField.getText();
 	}
 	
 	//abstract methods that extends to premium
