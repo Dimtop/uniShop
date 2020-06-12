@@ -33,15 +33,13 @@ import uniShop.LocalDataBase;
 
 public class ProductView extends JFrame{
 
-	private Image imageFav;
-	private JButton FavButton = new JButton("");
-	private JButton nextBtn = new JButton("Next");
-	private JButton prevBtn = new JButton("Prev.");
-	private BufferedImage img=null;
+
+
+	
 	private JLabel PhotoDesp = new JLabel("");
-	private int nextTP=0,PrevTP=0;
+	
 	private JLabel favlabel = new JLabel("");
-	private boolean fav= false;
+
 	
 	private Ad ad;
 	
@@ -49,7 +47,7 @@ public class ProductView extends JFrame{
 		
 		this.ad=ad;
 		
-		imageFav=new ImageIcon(this.getClass().getResource("/Images/star.png")).getImage();
+		
 		getContentPane().setLayout(null);	
 		
 		

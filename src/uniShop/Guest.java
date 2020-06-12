@@ -66,15 +66,7 @@ public class Guest extends User{
 		return this.db.getSystemAds();
 	}
 	
-	public void viewAds(ArrayList<Ad> ads) {
-		
-		
-		for(Ad ad: ads)
-			System.out.println(ad.getName());
-		
-		//HomeScreen_Guest g = new HomeScreen_Guest(ads);
-		
-	}
+	
 
 	@Override
 	public void callHomePage() {

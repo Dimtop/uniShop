@@ -301,7 +301,6 @@ public class Register extends JFrame {
 			}
 		}
 		
-		System.out.println(list);
 		
 		return list;
 	}

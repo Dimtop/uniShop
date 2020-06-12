@@ -111,7 +111,6 @@ public class SearchPanel extends JPanel {
 					if(newTags.isEmpty()) {
 						//Product Name YES, Tags NO
 						ArrayList<Ad> newAds = currUser.search(searchBar.getText(),db);
-						System.out.println(newAds);
 						parent.refreshAdsPanel(newAds);
 					}
 					else {
@@ -149,14 +148,7 @@ public class SearchPanel extends JPanel {
 		
 	}
 	
-	//testing
-	private void testPrinter(ArrayList<Ad> list) {
-		System.out.println("==========");
-		for(Ad ad : list) {
-			System.out.println(ad.getName());
-		}
-		System.out.println("==========");
-	}
+	
 	
 	private void setupTagsPanel(ArrayList<String> tags) {
 		

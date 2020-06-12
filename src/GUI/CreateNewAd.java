@@ -131,6 +131,7 @@ public class CreateNewAd extends JFrame{
 		
 		JPanel panel_1 = new JPanel();
 		
+		
 		photodesplayer= new JLabel("");
 		photodesplayer.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -226,7 +227,7 @@ public class CreateNewAd extends JFrame{
 		);
 		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
 		int gap =10;
-		JScrollPane scrollPane = new JScrollPane();		
+		JScrollPane scrollPane = new JScrollPane();	
 		
 		panel_1.setLayout(null);
 		panel_1.setSize(230, db.getSystemPreferences().size()*2*gap);
@@ -261,7 +262,7 @@ public class CreateNewAd extends JFrame{
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16); //increases the scroll speed
 		this.add(scrollPane);
 		
-	
+		
 		
 		getContentPane().setLayout(groupLayout);
 	}
