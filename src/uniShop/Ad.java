@@ -28,7 +28,7 @@ public class Ad implements Comparable{
 		this.tags = tags;
 		this.status = status;
 		
-		System.out.println(this.tags);
+		
 		
 		//Setting up promotion type
 		if(this.seller.getTier() == 0)
