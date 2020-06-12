@@ -29,19 +29,10 @@ public class Registered extends User {
 		new Guest(db); 
 	}
 	
-	public void viewProfile()//Profile GUI 
-	{
-		
-	}
+	
 		
 		
-	/*public void createAd()//CreateAd GUI and insert in database
-	{	 
-		ArrayList<String> tags = 
-				new ArrayList<>(Arrays.asList("phone", "samsung", "galaxy"));
-		Ad anAd = new Ad(555, "samsung galaxy", tags);
-		myAds.add(anAd);
-	}*/
+	
 	
 	
 	public void deleteAd(Ad aAd)//??? GUI and delete in database
@@ -54,16 +45,8 @@ public class Registered extends User {
 		myAds.add(ad);
 	}
 	
-	public void readAd(Ad aAd)//ProductView GUI
-	{
-		//dokimi
-	}
 	
 	
-	public void updateAd(Ad aAd)//Profile GUI myAds button and update in database
-	{
-		
-	}
 	
 	public ArrayList<Message> viewMessages()//MyMessages GUI
 	{
@@ -192,10 +175,6 @@ public class Registered extends User {
 		this.wishlist.add(aProduct);
 	}
 	
-	public void viewWishlist()//Registered HP GUI wishList button
-	{
-		
-	}
 	
 	public ArrayList<Ad> getWishlist(){
 		return this.wishlist;
@@ -216,20 +195,6 @@ public class Registered extends User {
 		this.preferences.remove(aPreference);
 	}
 	
-	public void updateProfile()//Profile GUI and change in the database
-	{
-		
-	}
-	
-	public void deleteProfile()//Profile GUI and delete in the database
-	{
-		
-	}
-	
-	public void viewAdsHistory()//Profile GUI and search in database
-	{
-		
-	}
 	
 	public void matchPreferences()//Search in database
 	{
