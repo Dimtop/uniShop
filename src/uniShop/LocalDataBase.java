@@ -17,6 +17,7 @@ public class LocalDataBase {
 	private int adsTier2;
 	private int adsTier1;
 	private String ProductName;
+	private String descriptionText = "This is the Description for Product ";;
 	
 	public LocalDataBase() {
 		
@@ -100,8 +101,7 @@ public class LocalDataBase {
 		//Getting current date
 		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
 		Date currDate = new Date(System.currentTimeMillis());
-		
-		String descriptionText = "This is the Description for Product ";
+
 		
 		String ad1Link = "https://images-na.ssl-images-amazon.com/images/I/51EJdvzHJeL._AC_US160_.jpg";
 		Ad ad1 = new Ad(nextAdId, "Product 1", descriptionText + "1", ad1Link, currDate, 
@@ -363,8 +363,5 @@ public class LocalDataBase {
 		this.nextAdId++;
 	}
 	
-	public String getProductName() {
-		return ProductName;
-	}
 
 }

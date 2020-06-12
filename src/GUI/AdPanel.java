@@ -90,7 +90,7 @@ public class AdPanel extends JPanel {
 		nameLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new ProductView(db);
+				new ProductView(myAd);
 			}
 		});
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
