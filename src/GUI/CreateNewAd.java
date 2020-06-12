@@ -26,6 +26,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -47,12 +48,11 @@ public class CreateNewAd extends JFrame{
 	protected JTextArea textArea;
 	private JLabel lblchrLabel;
 	private JFrame frame;
-	private JCheckBox chckbxNewCheckBox_1,chckbxNewCheckBox,chckbxNewCheckBox_2,chckbxNewCheckBox_3,chckbxNewCheckBox_4;
 	private JLabel photodesplayer;
-	
+	private ArrayList<JCheckBox> tagCheckBoxes = new ArrayList<>();
 	private ArrayList<String> ImagePath= new ArrayList<>();
 	private ArrayList<String>checkBoxes=new ArrayList<>();
-	private	ArrayList<JCheckBox>tagCheckBox= new ArrayList<>();
+	
 	
 
 	private LocalDataBase db;
@@ -81,7 +81,7 @@ public class CreateNewAd extends JFrame{
 	{
 		this.setTitle("Create new add");
 	    this.setVisible(true);
-		this.setSize(650,635);
+		this.setSize(650,700);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dimension.width/2-this.getSize().width/2, dimension.height/2-this.getSize().height/2);
 		this.setIconImage(new ImageIcon(this.getClass().getResource("/images/shopping-bags-512.png")).getImage());
@@ -224,37 +224,49 @@ public class CreateNewAd extends JFrame{
 							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(67, Short.MAX_VALUE))
 		);
-				panel_1.setLayout(new GridLayout(0, 1, 0, 0));
-						
-				//checkBoxes.Returns a string array with the boxes checked
-				chckbxNewCheckBox = new JCheckBox("Car");
-				panel_1.add(chckbxNewCheckBox);
-						
-				chckbxNewCheckBox_1 = new JCheckBox("SmartPhone");
-				panel_1.add(chckbxNewCheckBox_1);
-				
-				chckbxNewCheckBox_2 = new JCheckBox("Service");
-				panel_1.add(chckbxNewCheckBox_2);
-				
-				chckbxNewCheckBox_3 = new JCheckBox("Bike");
-				panel_1.add(chckbxNewCheckBox_3);
-				
-				chckbxNewCheckBox_4 = new JCheckBox("Other");
-				panel_1.add(chckbxNewCheckBox_4);
-				
-				checkBoxesInitialize();
-				
+		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
+		int gap =10;
+		JScrollPane scrollPane = new JScrollPane();		
+		
+		panel_1.setLayout(null);
+		panel_1.setSize(230, db.getSystemPreferences().size()*2*gap);
+		panel_1.setPreferredSize(new Dimension(230, db.getSystemPreferences().size()*2*gap));
+		
+		JCheckBox checkBox;
+		JLabel label;
+		int objHeight = 0;
+		for(String str : db.getSystemPreferences()) {
+			
+			//setup CheckBox
+			checkBox = new JCheckBox();
+			
+			checkBox.setSize(20, 20);
+			checkBox.setLocation(0, objHeight);
+			tagCheckBoxes.add(checkBox);
+			panel_1.add(checkBox);		
+			
+			//setup Label
+			label = new JLabel(str);
+			label.setSize(panel_1.getWidth()-20,20);
+			label.setLocation(20+gap, objHeight);
+			panel_1.add(label);
+			
+			objHeight+=2*gap;
+		}
+		
+		scrollPane.setBounds(0, 30, 250, 270);
+		scrollPane.setSize(220,200);
+		scrollPane.setLocation(20,450);
+		scrollPane.setViewportView(panel_1);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(16); //increases the scroll speed
+		this.add(scrollPane);
+		
+	
+		
 		getContentPane().setLayout(groupLayout);
 	}
 	
-	//utilization of check boxes
-	public void checkBoxesInitialize() { 
-		tagCheckBox.add(chckbxNewCheckBox);
-		tagCheckBox.add(chckbxNewCheckBox_1);
-		tagCheckBox.add(chckbxNewCheckBox_2);
-		tagCheckBox.add(chckbxNewCheckBox_3);
-		tagCheckBox.add(chckbxNewCheckBox_4);
-	}
+	
 	
 	//method that returns the Tag list
 	protected ArrayList<String> GetTagList(){
@@ -264,12 +276,13 @@ public class CreateNewAd extends JFrame{
 	//CREATE button usage when pressed
 	public void buttonCreateUse(JButton btnCreate) {
 		btnCreate.addActionListener(new ActionListener() {
-			 
 			public void actionPerformed(ActionEvent e) {
-				for(JCheckBox box : tagCheckBox) {
+				int i =0;
+				for(JCheckBox box : tagCheckBoxes) {
 					if(box.isSelected()) {
-						checkBoxes.add(box.getText());
+						checkBoxes.add(db.getSystemPreferences().get(i));
 					}
+					i++;
 				}
 				Date currDate = new Date(System.currentTimeMillis());
 				
