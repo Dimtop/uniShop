@@ -11,15 +11,13 @@ public class Ad implements Comparable{
 	private Date date;
 	private Registered seller;
 	private Registered buyer;
-	private ArrayList<String> tags;
+	private ArrayList<String> tags = new ArrayList<>();
 	private ListingState status; //Ad status
 	private ListingPromotionType promotionType;//Type of promoted ad
 	
 	public Ad(int id, String name, String description, String link, Date date, Registered seller, 
 			Registered buyer, ArrayList<String> tags, ListingState status)
-	{
-		tags = new ArrayList<>();
-		
+	{		
 		this.ad_id = id;
 		this.name = name;
 		this.description = description;
@@ -29,6 +27,8 @@ public class Ad implements Comparable{
 		this.buyer = buyer;
 		this.tags = tags;
 		this.status = status;
+		
+		System.out.println(this.tags);
 		
 		//Setting up promotion type
 		if(this.seller.getTier() == 0)
